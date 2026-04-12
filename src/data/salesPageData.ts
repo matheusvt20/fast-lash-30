@@ -258,8 +258,9 @@ export const salesPageData = {
   ],
 
   socialProof: {
-    students: '+500',
+    students: '+5.000',
+    duration: '1h',
     retention: '30+',
-    price: 'R$59',
+    access: '1 ano',
   },
 }

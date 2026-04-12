@@ -6,15 +6,19 @@ export default function SocialProofBar() {
   const items = [
     {
       value: socialProof.students,
-      label: 'profissionais formadas',
+      label: 'alunas formadas',
     },
     {
-      value: `${socialProof.retention} dias`,
-      label: 'de retenção garantida',
+      value: socialProof.duration,
+      label: 'tempo de atendimento',
     },
     {
-      value: socialProof.price,
-      label: 'acesso vitalício',
+      value: socialProof.retention,
+      label: 'dias de retenção',
+    },
+    {
+      value: socialProof.access,
+      label: 'de acesso ao conteúdo',
     },
   ]
 
