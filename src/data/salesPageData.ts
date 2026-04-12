@@ -2,7 +2,7 @@ export const salesPageData = {
   product: {
     name: 'Fast Lash 30+',
     headline:
-      'No meu curso online eu ensino os 3 segredos para fazer cílios em até 53 minutos.',
+      'No meu curso online eu ensino os segredos para fazer cílios em até 53 minutos.',
     subheadline:
       'Atenda mais clientes, cobre mais caro e entregue um resultado que faz sua cliente voltar — sem perder qualidade.',
     price: 59,
