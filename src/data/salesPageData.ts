@@ -7,7 +7,7 @@ export const salesPageData = {
       'Atenda mais clientes, cobre mais caro e entregue um resultado que faz sua cliente voltar — sem perder qualidade.',
     price: 59,
     originalPrice: 529,
-    checkoutUrl: 'https://pay.kiwify.com.br/LINK-AQUI',
+    checkoutUrl: 'https://pay.kiwify.com.br/vNqSK5h',
     mockupImage: '/images/mockup.png',
   },
 
