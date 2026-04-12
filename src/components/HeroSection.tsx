@@ -1,0 +1,283 @@
+import { salesPageData } from '../data/salesPageData'
+
+export default function HeroSection() {
+  const { product, creator } = salesPageData
+
+  return (
+    <section id="hero-section">
+      <style>{`
+        #hero-section {
+          background: #FAF8F5;
+        }
+
+        #hero-section .hero-layout {
+          align-items: center;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: row;
+          gap: 60px;
+          min-height: 100vh;
+          padding: 60px 80px 0;
+        }
+
+        #hero-section .hero-copy {
+          flex: 1.1;
+        }
+
+        #hero-section .hero-badge {
+          align-items: center;
+          background: #F0EAE0;
+          border-radius: 100px;
+          color: #7A6440;
+          display: inline-flex;
+          font-size: 13px;
+          gap: 6px;
+          padding: 6px 16px;
+        }
+
+        #hero-section .hero-badge-dot {
+          font-size: 16px;
+          line-height: 1;
+        }
+
+        #hero-section .hero-headline {
+          color: #1A1A18;
+          font-family: var(--font-display);
+          font-size: 54px;
+          font-weight: 700;
+          line-height: 1.1;
+          margin: 20px 0 0;
+        }
+
+        #hero-section .hero-subheadline {
+          color: #7A7870;
+          font-size: 16px;
+          line-height: 1.7;
+          margin: 16px 0 0;
+          max-width: 500px;
+        }
+
+        #hero-section .hero-actions {
+          display: flex;
+          gap: 12px;
+          margin-top: 36px;
+          flex-wrap: wrap;
+        }
+
+        #hero-section .hero-button {
+          align-items: center;
+          border-radius: 6px;
+          display: inline-flex;
+          font-size: 14px;
+          font-weight: 500;
+          justify-content: center;
+          padding: 14px 28px;
+          text-align: center;
+          text-decoration: none;
+          transition: transform 120ms ease, box-shadow 120ms ease;
+        }
+
+        #hero-section .hero-button:hover {
+          transform: translateY(-1px);
+        }
+
+        #hero-section .hero-button-primary {
+          background: #C9A96E;
+          border: none;
+          color: #1A1A18;
+        }
+
+        #hero-section .hero-button-secondary {
+          background: transparent;
+          border: 1px solid #C9A96E;
+          color: #C9A96E;
+        }
+
+        #hero-section .hero-media {
+          flex: 1;
+          position: relative;
+        }
+
+        #hero-section .hero-image-frame {
+          background: rgba(255, 255, 255, 0.68);
+          border: 1px solid #D8C8B3;
+          border-radius: 24px;
+          box-shadow: 0 18px 40px rgba(78, 58, 33, 0.08);
+          padding: 14px;
+        }
+
+        #hero-section .hero-image {
+          border-radius: 20px;
+          display: block;
+          height: 540px;
+          object-fit: cover;
+          width: 100%;
+        }
+
+        #hero-section .hero-card {
+          background: linear-gradient(
+            to top,
+            rgba(20, 18, 15, 0.95) 0%,
+            rgba(20, 18, 15, 0.6) 60%,
+            transparent 100%
+          );
+          border-radius: 0 0 20px 20px;
+          bottom: 0;
+          left: 0;
+          padding: 32px 24px 28px;
+          position: absolute;
+          right: 0;
+        }
+
+        #hero-section .hero-card-badge {
+          background: #C9A96E;
+          border-radius: 100px;
+          color: #1A1A18;
+          display: inline-block;
+          font-size: 11px;
+          font-weight: 500;
+          padding: 4px 12px;
+        }
+
+        #hero-section .hero-card-name {
+          color: #FFFFFF;
+          font-family: var(--font-display);
+          font-size: 26px;
+          font-weight: 700;
+          margin: 8px 0 0;
+        }
+
+        #hero-section .hero-card-product {
+          color: #C9A96E;
+          font-size: 13px;
+          margin-top: 2px;
+        }
+
+        @media (max-width: 767px) {
+          #hero-section .hero-layout {
+            flex-direction: column;
+            gap: 28px;
+            min-height: auto;
+            padding: 32px 24px 0;
+          }
+
+          #hero-section .hero-copy,
+          #hero-section .hero-media {
+            width: 100%;
+          }
+
+          #hero-section .hero-headline {
+            font-size: 40px;
+          }
+
+          #hero-section .hero-actions {
+            flex-direction: column;
+          }
+
+          #hero-section .hero-button {
+            width: 100%;
+          }
+          #hero-section .hero-image {
+            height: 380px;
+          }
+
+          #hero-section .hero-card {
+            padding: 24px 20px 22px;
+          }
+        }
+      `}</style>
+
+      <div className="hero-layout">
+        <div className="hero-copy">
+          <div className="hero-badge">
+            <span className="hero-badge-dot" aria-hidden="true">
+              •
+            </span>
+            <span>Para lash designers</span>
+          </div>
+
+          <h1 className="hero-headline">{product.headline}</h1>
+          <p className="hero-subheadline">{product.subheadline}</p>
+
+          <div className="hero-actions">
+            <a
+              className="hero-button hero-button-primary"
+              href={product.checkoutUrl}
+            >
+              Quero o Fast Lash 30+ →
+            </a>
+            <a className="hero-button hero-button-secondary" href="#product-section">
+              Ver como funciona
+            </a>
+          </div>
+        </div>
+
+        <div className="hero-media">
+          <div className="hero-image-frame">
+            <img
+              className="hero-image"
+              src={creator.photoHero}
+              alt={`Retrato de ${creator.name}`}
+            />
+          </div>
+
+          <div
+            style={{
+              position: 'absolute',
+              top: '20px',
+              right: '20px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              gap: '8px',
+            }}
+          >
+            <span
+              style={{
+                background: 'white',
+                borderRadius: '100px',
+                padding: '8px 16px',
+                fontSize: '13px',
+                fontWeight: 500,
+                color: '#1A1A18',
+                boxShadow: '0 2px 12px rgba(0,0,0,0.12)',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              ⏱ Atendimento em 1h
+            </span>
+            <span
+              style={{
+                background: 'white',
+                borderRadius: '100px',
+                padding: '8px 16px',
+                fontSize: '13px',
+                fontWeight: 500,
+                color: '#1A1A18',
+                boxShadow: '0 2px 12px rgba(0,0,0,0.12)',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              ✦ Retenção 30+ dias
+            </span>
+          </div>
+
+          <div className="hero-card">
+            <div className="hero-card-badge">Criadora do Método</div>
+            <h2 className="hero-card-name">Tati Cabral</h2>
+            <div className="hero-card-product">Fast Lash 30+</div>
+            <p
+              style={{
+                fontSize: '12px',
+                color: 'rgba(255,255,255,0.6)',
+                marginTop: '6px',
+              }}
+            >
+              +5.000 alunas formadas · Especialista em extensão de cílios
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
