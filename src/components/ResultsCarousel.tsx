@@ -53,6 +53,7 @@ export default function ResultsCarousel() {
         #results-carousel .results-track {
           animation: slideLeft 28s linear infinite;
           display: flex;
+          transform: translate3d(0, 0, 0);
           width: max-content;
           will-change: transform;
         }
@@ -138,7 +139,6 @@ export default function ResultsCarousel() {
                 className="results-photo"
                 src={photo}
                 alt={`Resultado ${index % photos.length + 1}`}
-                loading="lazy"
                 decoding="async"
               />
             ))}
