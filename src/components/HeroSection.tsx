@@ -95,7 +95,9 @@ export default function HeroSection() {
 
         #hero-section .hero-media {
           flex: 1;
-          position: relative;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
         }
 
         #hero-section .hero-image-frame {
@@ -103,7 +105,9 @@ export default function HeroSection() {
           border: 1px solid #D8C8B3;
           border-radius: 24px;
           box-shadow: 0 18px 40px rgba(78, 58, 33, 0.08);
+          overflow: hidden;
           padding: 14px;
+          position: relative;
         }
 
         #hero-section .hero-image {
@@ -213,29 +217,7 @@ export default function HeroSection() {
         </div>
 
         <div className="hero-media">
-          <div className="hero-image-frame">
-            <img
-              className="hero-image"
-              src={creator.photoHero}
-              alt={`Retrato de ${creator.name}`}
-              decoding="async"
-              fetchPriority="high"
-            />
-          </div>
-
-          <div
-            style={{
-              position: 'absolute',
-              top: '24px',
-              left: '24px',
-              right: '24px',
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'flex-start',
-              gap: '16px',
-              flexWrap: 'wrap',
-            }}
-          >
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
             <span
               style={{
                 background: 'white',
@@ -266,19 +248,28 @@ export default function HeroSection() {
             </span>
           </div>
 
-          <div className="hero-card">
-            <div className="hero-card-badge">Criadora do Método</div>
-            <h2 className="hero-card-name">Tati Cabral</h2>
-            <div className="hero-card-product">Fast Lash 30+</div>
-            <p
-              style={{
-                fontSize: '12px',
-                color: 'rgba(255,255,255,0.6)',
-                marginTop: '6px',
-              }}
-            >
-              +5.000 alunas formadas · Especialista em extensão de cílios
-            </p>
+          <div className="hero-image-frame">
+            <img
+              className="hero-image"
+              src={creator.photoHero}
+              alt={`Retrato de ${creator.name}`}
+              decoding="async"
+              fetchPriority="high"
+            />
+            <div className="hero-card">
+              <div className="hero-card-badge">Criadora do Método</div>
+              <h2 className="hero-card-name">Tati Cabral</h2>
+              <div className="hero-card-product">Fast Lash 30+</div>
+              <p
+                style={{
+                  fontSize: '12px',
+                  color: 'rgba(255,255,255,0.6)',
+                  marginTop: '6px',
+                }}
+              >
+                +5.000 alunas formadas · Especialista em extensão de cílios
+              </p>
+            </div>
           </div>
         </div>
       </div>
