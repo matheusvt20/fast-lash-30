@@ -1,11 +1,11 @@
 const photos = [
-  '/images/resultado-1.jpg',
-  '/images/resultado-2.jpg',
-  '/images/resultado-3.jpg',
-  '/images/resultado-4.jpg',
-  '/images/resultado-5.jpg',
-  '/images/resultado-6.jpg',
-  '/images/resultado-7.jpg',
+  '/images/resultado-1.webp',
+  '/images/resultado-2.webp',
+  '/images/resultado-3.webp',
+  '/images/resultado-4.webp',
+  '/images/resultado-5.webp',
+  '/images/resultado-6.webp',
+  '/images/resultado-7.webp',
 ]
 
 const loopedPhotos = [...photos, ...photos]
@@ -139,6 +139,7 @@ export default function ResultsCarousel() {
                 src={photo}
                 alt={`Resultado ${index % photos.length + 1}`}
                 loading="lazy"
+                decoding="async"
               />
             ))}
           </div>

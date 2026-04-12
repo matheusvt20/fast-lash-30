@@ -218,6 +218,8 @@ export default function HeroSection() {
               className="hero-image"
               src={creator.photoHero}
               alt={`Retrato de ${creator.name}`}
+              decoding="async"
+              fetchPriority="high"
             />
           </div>
 

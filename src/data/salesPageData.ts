@@ -14,8 +14,8 @@ export const salesPageData = {
   creator: {
     name: 'Tati Cabral',
     role: 'Especialista em extensão de cílios · Criadora do Fast Lash 30+',
-    photoHero: '/images/tati-hero.jpg',
-    photoBio: '/images/tati-bio.jpg',
+    photoHero: '/images/tati-hero.webp',
+    photoBio: '/images/tati-bio.webp',
     bio: [
       'Ao longo da minha trajetória, formei centenas de profissionais e realizei atendimentos que me ensinaram mais do que qualquer teoria.',
       'Vi de perto o que separa uma lash designer que luta pra terminar um atendimento de uma que fecha a agenda com facilidade e cobra o preço que quer.',
@@ -149,17 +149,17 @@ export const salesPageData = {
     ],
     photos: [
       {
-        image: '/images/depoimento-1.jpg',
+        image: '/images/depoimento-1.webp',
         caption:
           'Mais uma aluna formada pela Tati Cabral, saindo com técnica e certificado em mãos.',
       },
       {
-        image: '/images/depoimento-2.jpg',
+        image: '/images/depoimento-2.webp',
         caption:
           'Turma completa formada no método Fast Lash 30+. Cada uma com sua conquista.',
       },
       {
-        image: '/images/depoimento-3.jpg',
+        image: '/images/depoimento-3.webp',
         caption:
           'Do presencial ao digital — a Tati já formou profissionais de todos os perfis.',
       },

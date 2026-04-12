@@ -118,7 +118,13 @@ export default function TestimonialsCarousel() {
           <div className="testimonials-grid">
             {testimonials.photos.map((photo, index) => (
               <article key={`photo-${index}`} className="testimonial-card">
-                <img className="testimonial-image" src={photo.image} alt={photo.caption} />
+                <img
+                  className="testimonial-image"
+                  src={photo.image}
+                  alt={photo.caption}
+                  loading="lazy"
+                  decoding="async"
+                />
                 <p className="testimonial-caption">{photo.caption}</p>
               </article>
             ))}

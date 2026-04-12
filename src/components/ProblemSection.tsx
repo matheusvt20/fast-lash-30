@@ -2,7 +2,7 @@ import { salesPageData } from '../data/salesPageData'
 
 export default function ProblemSection() {
   const pains = salesPageData.forWho.yes.slice(0, 5)
-  const portraitImage = '/images/problem-section-portrait.jpeg'
+  const portraitImage = '/images/problem-section-portrait.webp'
 
   return (
     <section id="problem-section">
@@ -126,6 +126,8 @@ export default function ProblemSection() {
                 className="problem-image"
                 src={portraitImage}
                 alt="Retrato elegante de uma cliente com cílios destacados"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

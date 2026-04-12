@@ -151,6 +151,8 @@ export default function CreatorSection() {
               className="creator-photo"
               src={creator.photoBio}
               alt={`Retrato de ${creator.name}`}
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
