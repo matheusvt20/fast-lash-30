@@ -226,12 +226,14 @@ export default function HeroSection() {
           <div
             style={{
               position: 'absolute',
-              top: '20px',
-              right: '20px',
+              top: '24px',
+              left: '24px',
+              right: '24px',
               display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-end',
-              gap: '8px',
+              justifyContent: 'space-between',
+              alignItems: 'flex-start',
+              gap: '16px',
+              flexWrap: 'wrap',
             }}
           >
             <span
