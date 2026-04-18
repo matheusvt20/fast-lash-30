@@ -126,6 +126,8 @@ export default function ProblemSection() {
                 className="problem-image"
                 src={portraitImage}
                 alt="Retrato elegante de uma cliente com cílios destacados"
+                width={960}
+                height={1280}
                 loading="lazy"
                 decoding="async"
               />

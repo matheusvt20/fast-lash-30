@@ -104,6 +104,7 @@ export default function TestimonialsCarousel() {
                   className="testimonial-frame"
                   src={video.embedUrl}
                   title={video.title}
+                  loading="lazy"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 />
@@ -122,6 +123,8 @@ export default function TestimonialsCarousel() {
                   className="testimonial-image"
                   src={photo.image}
                   alt={photo.caption}
+                  width={photo.width}
+                  height={photo.height}
                   loading="lazy"
                   decoding="async"
                 />

@@ -1,11 +1,11 @@
 const photos = [
-  '/images/resultado-1.webp',
-  '/images/resultado-2.webp',
-  '/images/resultado-3.webp',
-  '/images/resultado-4.webp',
-  '/images/resultado-5.webp',
-  '/images/resultado-6.webp',
-  '/images/resultado-7.webp',
+  { src: '/images/resultado-1.webp', width: 472, height: 840 },
+  { src: '/images/resultado-2.webp', width: 630, height: 840 },
+  { src: '/images/resultado-3.webp', width: 629, height: 840 },
+  { src: '/images/resultado-4.webp', width: 472, height: 840 },
+  { src: '/images/resultado-5.webp', width: 472, height: 840 },
+  { src: '/images/resultado-6.webp', width: 628, height: 840 },
+  { src: '/images/resultado-7.webp', width: 630, height: 840 },
 ]
 
 const loopedPhotos = [...photos, ...photos]
@@ -135,10 +135,13 @@ export default function ResultsCarousel() {
           <div className="results-track">
             {loopedPhotos.map((photo, index) => (
               <img
-                key={`${photo}-${index}`}
+                key={`${photo.src}-${index}`}
                 className="results-photo"
-                src={photo}
+                src={photo.src}
                 alt={`Resultado ${index % photos.length + 1}`}
+                width={photo.width}
+                height={photo.height}
+                loading="lazy"
                 decoding="async"
               />
             ))}

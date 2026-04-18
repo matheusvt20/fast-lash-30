@@ -151,6 +151,8 @@ export default function CreatorSection() {
               className="creator-photo"
               src={creator.photoBio}
               alt={`Retrato de ${creator.name}`}
+              width={960}
+              height={1280}
               loading="lazy"
               decoding="async"
             />

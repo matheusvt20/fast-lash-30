@@ -8,7 +8,6 @@ export const salesPageData = {
     price: 59,
     originalPrice: 529,
     checkoutUrl: 'https://pay.kiwify.com.br/vNqSK5h',
-    mockupImage: '/images/mockup.png',
   },
 
   creator: {
@@ -150,16 +149,22 @@ export const salesPageData = {
     photos: [
       {
         image: '/images/depoimento-1.webp',
+        width: 780,
+        height: 1387,
         caption:
           'Mais uma aluna formada pela Tati Cabral, saindo com técnica e certificado em mãos.',
       },
       {
         image: '/images/depoimento-2.webp',
+        width: 900,
+        height: 1200,
         caption:
           'Turma completa formada no método Fast Lash 30+. Cada uma com sua conquista.',
       },
       {
         image: '/images/depoimento-3.webp',
+        width: 780,
+        height: 1387,
         caption:
           'Do presencial ao digital — a Tati já formou profissionais de todos os perfis.',
       },
