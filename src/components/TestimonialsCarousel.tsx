@@ -1,7 +1,17 @@
+import { startTransition, useState } from 'react'
 import { salesPageData } from '../data/salesPageData'
 
 export default function TestimonialsCarousel() {
   const { testimonials } = salesPageData
+  const [loadedVideos, setLoadedVideos] = useState<number[]>([])
+
+  const handleLoadVideo = (index: number) => {
+    startTransition(() => {
+      setLoadedVideos((current) =>
+        current.includes(index) ? current : [...current, index],
+      )
+    })
+  }
 
   return (
     <section id="testimonials-carousel">
@@ -61,6 +71,54 @@ export default function TestimonialsCarousel() {
           width: 100%;
         }
 
+        #testimonials-carousel .testimonial-video-trigger {
+          align-items: flex-start;
+          background:
+            linear-gradient(180deg, rgba(201, 169, 110, 0.18), rgba(26, 26, 24, 0.94)),
+            radial-gradient(circle at top right, rgba(255, 255, 255, 0.28), transparent 42%);
+          border: 0;
+          color: #FFFFFF;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          height: 520px;
+          justify-content: flex-end;
+          padding: 24px;
+          text-align: left;
+          width: 100%;
+        }
+
+        #testimonials-carousel .testimonial-video-trigger:hover {
+          filter: brightness(1.03);
+        }
+
+        #testimonials-carousel .testimonial-video-trigger:focus-visible {
+          outline: 2px solid #C9A96E;
+          outline-offset: -2px;
+        }
+
+        #testimonials-carousel .testimonial-video-pill {
+          background: rgba(255, 255, 255, 0.14);
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          border-radius: 999px;
+          font-size: 12px;
+          font-weight: 500;
+          padding: 6px 12px;
+        }
+
+        #testimonials-carousel .testimonial-video-title {
+          font-family: var(--font-display);
+          font-size: 28px;
+          line-height: 1.05;
+        }
+
+        #testimonials-carousel .testimonial-video-copy {
+          color: rgba(255, 255, 255, 0.78);
+          font-size: 14px;
+          line-height: 1.6;
+        }
+
         #testimonials-carousel .testimonial-image {
           display: block;
           height: auto;
@@ -100,14 +158,32 @@ export default function TestimonialsCarousel() {
           <div className="testimonials-grid">
             {testimonials.videos.map((video, index) => (
               <article key={`video-${index}`} className="testimonial-card">
-                <iframe
-                  className="testimonial-frame"
-                  src={video.embedUrl}
-                  title={video.title}
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
+                {loadedVideos.includes(index) ? (
+                  <iframe
+                    className="testimonial-frame"
+                    src={video.embedUrl}
+                    title={video.title}
+                    loading="lazy"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                ) : (
+                  <button
+                    type="button"
+                    className="testimonial-video-trigger"
+                    onClick={() => handleLoadVideo(index)}
+                    aria-label={`Carregar ${video.title}`}
+                  >
+                    <span className="testimonial-video-pill">Depoimento em vídeo</span>
+                    <strong className="testimonial-video-title">
+                      Toque para assistir
+                    </strong>
+                    <span className="testimonial-video-copy">
+                      O player externo so carrega depois do clique, reduzindo o
+                      peso inicial da pagina.
+                    </span>
+                  </button>
+                )}
               </article>
             ))}
           </div>

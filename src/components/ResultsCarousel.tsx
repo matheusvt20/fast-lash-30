@@ -82,6 +82,12 @@ export default function ResultsCarousel() {
           }
         }
 
+        @media (prefers-reduced-motion: reduce) {
+          #results-carousel .results-track {
+            animation: none;
+          }
+        }
+
         @media (max-width: 767px) {
           #results-carousel {
             padding: 0 0 56px;
