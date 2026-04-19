@@ -136,7 +136,7 @@ export default function FinalCTA() {
           </div>
           <div className="final-bullet">
             <span className="final-bullet-icon">✓</span>
-            <span>Acesso vitalício por pagamento único</span>
+            <span>1 ano de acesso com pagamento único</span>
           </div>
         </div>
 

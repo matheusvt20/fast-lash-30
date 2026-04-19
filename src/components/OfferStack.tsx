@@ -167,7 +167,7 @@ export default function OfferStack() {
             </div>
 
             <div className="offer-final-price">R$ {product.price}</div>
-            <div className="offer-note">Pagamento único · Acesso vitalício</div>
+            <div className="offer-note">Pagamento único · 1 ano de acesso</div>
 
             <a className="offer-cta" href={product.checkoutUrl}>
               Garantir meu acesso por R$59

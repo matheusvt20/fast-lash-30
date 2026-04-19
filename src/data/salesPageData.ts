@@ -241,9 +241,8 @@ export const salesPageData = {
         'Depende da sua prática atual, mas a maioria das alunas já percebe redução significativa no tempo nos primeiros atendimentos após aplicar a sequência do método.',
     },
     {
-      question: 'O acesso é para sempre?',
-      answer:
-        'Sim. Você paga uma vez e acessa o conteúdo para sempre, incluindo atualizações futuras.',
+      question: 'Por quanto tempo terei acesso ao curso?',
+      answer: 'Você terá 1 ano de acesso ao conteúdo após a confirmação do pagamento.',
     },
     {
       question: 'Como vou receber o acesso?',
