@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 import HeroSection from './components/HeroSection'
 import LazySection from './components/LazySection'
+import WhatsAppSupportButton from './components/WhatsAppSupportButton'
 
 const ResultsCarousel = lazy(() => import('./components/ResultsCarousel'))
 const SocialProofBar = lazy(() => import('./components/SocialProofBar'))
@@ -59,6 +60,7 @@ export default function App() {
       <LazySection minHeight={540}>
         <FinalCTA />
       </LazySection>
+      <WhatsAppSupportButton />
     </main>
   )
 }
