@@ -51,5 +51,160 @@
       <img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=615875597485992&ev=PageView&noscript=1"/>
     </noscript>
+    <script>
+      (function () {
+        var buyerNames = [
+          'Joana', 'Rosangela', 'Valéria', 'Lidiany', 'Elisangela',
+          'Ione', 'Aline', 'Beatriz', 'Juliane', 'Priscila', 'Joyce',
+          'Verena', 'Suzana', 'Isabel', 'Flavia', 'Rejane', 'Raquel',
+          'Jaqueline', 'Maysa', 'Indianara', 'Luana', 'Samantha',
+          'Eliene', 'Gessica', 'Tatiana', 'Nataly', 'Bruna', 'Fernanda',
+          'Nayara', 'Sheila', 'Suely', 'Mariana', 'Jeniffer', 'Melissa',
+          'Alexandra', 'Vanessa', 'Gabriela', 'Regina', 'Julia', 'Katia',
+          'Maria', 'Lais', 'Gislane', 'Keyty', 'Jisele', 'Lis', 'Mariana',
+          'Rosemeire', 'Deusilene', 'Samantha'
+        ];
+
+        var lastName = '';
+        var hideTimeoutId = null;
+        var repeatIntervalId = null;
+
+        function getNextName() {
+          if (buyerNames.length === 1) {
+            return buyerNames[0];
+          }
+
+          var name = buyerNames[Math.floor(Math.random() * buyerNames.length)];
+
+          while (name === lastName) {
+            name = buyerNames[Math.floor(Math.random() * buyerNames.length)];
+          }
+
+          lastName = name;
+          return name;
+        }
+
+        function createNotification() {
+          var container = document.createElement('div');
+          container.id = 'social-proof-toast';
+          container.setAttribute('aria-live', 'polite');
+          container.setAttribute('aria-atomic', 'true');
+          container.style.position = 'fixed';
+          container.style.left = '24px';
+          container.style.bottom = '24px';
+          container.style.zIndex = '30';
+          container.style.pointerEvents = 'none';
+          container.style.opacity = '0';
+          container.style.transform = 'translate3d(-12px, 18px, 0)';
+          container.style.transition =
+            'opacity 320ms ease, transform 320ms cubic-bezier(0.22, 1, 0.36, 1)';
+          container.style.maxWidth = '320px';
+          container.style.width = 'calc(100vw - 32px)';
+          container.style.boxSizing = 'border-box';
+          container.style.padding = '14px 16px';
+          container.style.borderRadius = '16px';
+          container.style.background = '#FFFFFF';
+          container.style.boxShadow = '0 10px 28px rgba(26, 26, 24, 0.12)';
+          container.style.border = '1px solid rgba(26, 26, 24, 0.08)';
+          container.style.display = 'flex';
+          container.style.alignItems = 'center';
+          container.style.gap = '12px';
+          container.style.fontFamily = '"DM Sans", sans-serif';
+          container.style.color = '#1A1A18';
+
+          var iconWrap = document.createElement('span');
+          iconWrap.setAttribute('aria-hidden', 'true');
+          iconWrap.style.width = '36px';
+          iconWrap.style.height = '36px';
+          iconWrap.style.borderRadius = '999px';
+          iconWrap.style.display = 'inline-flex';
+          iconWrap.style.alignItems = 'center';
+          iconWrap.style.justifyContent = 'center';
+          iconWrap.style.flex = '0 0 auto';
+          iconWrap.style.background = 'rgba(39, 174, 96, 0.12)';
+          iconWrap.style.color = '#27AE60';
+          iconWrap.innerHTML =
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.2 16.6 5.9 13.3a1 1 0 0 0-1.4 1.4l4 4a1 1 0 0 0 1.4 0l8-8a1 1 0 1 0-1.4-1.4l-7.3 7.3Z" fill="currentColor"/></svg>';
+
+          var copy = document.createElement('div');
+          copy.style.fontSize = '14px';
+          copy.style.fontWeight = '600';
+          copy.style.lineHeight = '1.45';
+          copy.style.margin = '0';
+          copy.style.padding = '0';
+
+          var emphasis = document.createElement('strong');
+          emphasis.style.fontWeight = '700';
+
+          copy.appendChild(emphasis);
+          copy.appendChild(document.createTextNode(' acabou de garantir o curso!'));
+          container.appendChild(iconWrap);
+          container.appendChild(copy);
+
+          if (window.matchMedia('(max-width: 767px)').matches) {
+            container.style.left = '16px';
+            container.style.right = '16px';
+            container.style.bottom = '16px';
+            container.style.width = 'auto';
+            container.style.maxWidth = 'none';
+            container.style.padding = '13px 14px';
+          }
+
+          document.body.appendChild(container);
+
+          return {
+            container: container,
+            emphasis: emphasis
+          };
+        }
+
+        function bootSocialProof() {
+          if (!document.body || document.getElementById('social-proof-toast')) {
+            return;
+          }
+
+          var elements = createNotification();
+          var container = elements.container;
+          var emphasis = elements.emphasis;
+
+          function hideNotification() {
+            container.style.opacity = '0';
+            container.style.transform = 'translate3d(-12px, 18px, 0)';
+          }
+
+          function showNotification() {
+            emphasis.textContent = getNextName();
+            container.style.opacity = '1';
+            container.style.transform = 'translate3d(0, 0, 0)';
+
+            window.clearTimeout(hideTimeoutId);
+            hideTimeoutId = window.setTimeout(hideNotification, 4000);
+          }
+
+          window.setTimeout(function () {
+            showNotification();
+            repeatIntervalId = window.setInterval(showNotification, 60000);
+          }, 10000);
+
+          document.addEventListener('visibilitychange', function () {
+            if (document.hidden) {
+              hideNotification();
+              return;
+            }
+
+            if (repeatIntervalId === null) {
+              return;
+            }
+          });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', bootSocialProof, { once: true });
+          return;
+        }
+
+        bootSocialProof();
+      })();
+    </script>
   </body>
 </html>
