@@ -92,6 +92,25 @@ export default function HeroSection() {
           background: #C9A96E;
           border: none;
           color: #1A1A18;
+          flex-direction: column;
+          gap: 4px;
+          min-width: 260px;
+          padding: 12px 28px;
+        }
+
+        #hero-section .hero-button-price {
+          font-family: var(--font-display);
+          font-size: 30px;
+          font-weight: 700;
+          line-height: 1;
+        }
+
+        #hero-section .hero-button-note {
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          line-height: 1.1;
+          text-transform: uppercase;
         }
 
         #hero-section .hero-button-secondary {
@@ -239,7 +258,8 @@ export default function HeroSection() {
               className="hero-button hero-button-primary"
               href={product.checkoutUrl}
             >
-              Quero o Fast Lash 30+ →
+              <span className="hero-button-price">59,00</span>
+              <span className="hero-button-note">Pagamento unico</span>
             </a>
             <a className="hero-button hero-button-secondary" href="#product-section">
               Ver como funciona

@@ -32,9 +32,14 @@ export default function LazySection({
       return
     }
 
-    if (!('IntersectionObserver' in window)) {
-      setShouldRender(true)
-      return
+    if (!('IntersectionObserver' in globalThis)) {
+      const timeoutId = globalThis.setTimeout(() => {
+        startTransition(() => {
+          setShouldRender(true)
+        })
+      }, 0)
+
+      return () => globalThis.clearTimeout(timeoutId)
     }
 
     const observer = new IntersectionObserver(
