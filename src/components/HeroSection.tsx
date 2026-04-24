@@ -66,9 +66,10 @@ export default function HeroSection() {
 
         #hero-section .hero-actions {
           display: flex;
-          gap: 12px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
           margin-top: 36px;
-          flex-wrap: wrap;
         }
 
         #hero-section .hero-button {
@@ -92,10 +93,8 @@ export default function HeroSection() {
           background: #C9A96E;
           border: none;
           color: #1A1A18;
-          flex-direction: column;
-          gap: 4px;
           min-width: 260px;
-          padding: 12px 28px;
+          padding: 14px 28px;
         }
 
         #hero-section .hero-button-label {
@@ -105,16 +104,12 @@ export default function HeroSection() {
           line-height: 1.2;
         }
 
-        #hero-section .hero-button-meta {
+        #hero-section .hero-price {
+          color: #7A6440;
           font-size: 12px;
           font-weight: 600;
-          line-height: 1.2;
-        }
-
-        #hero-section .hero-button-secondary {
-          background: transparent;
-          border: 1px solid #C9A96E;
-          color: #C9A96E;
+          line-height: 1.4;
+          padding-left: 4px;
         }
 
         #hero-section .hero-media {
@@ -275,12 +270,9 @@ export default function HeroSection() {
               className="hero-button hero-button-primary"
               href={product.checkoutUrl}
             >
-              <span className="hero-button-label">Eu quero o Fast Lash 30+</span>
-              <span className="hero-button-meta">59,00 Pagamento unico</span>
+              <span className="hero-button-label">Inscreva-se agora</span>
             </a>
-            <a className="hero-button hero-button-secondary" href="#product-section">
-              Ver como funciona
-            </a>
+            <span className="hero-price">12x de R$ 6,08 ou R$ 59,00 à vista</span>
           </div>
         </div>
 

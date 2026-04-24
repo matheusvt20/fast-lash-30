@@ -1,7 +1,25 @@
+import { useEffect, useState } from 'react'
+
 const whatsappLink =
   'https://wa.me/5521990481222?text=Ol%C3%A1%2C%20tenho%20uma%20d%C3%BAvida%20sobre%20o%20Fast%20Lash%2030%2B.'
 
 export default function WhatsAppSupportButton() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const timerId = window.setTimeout(() => {
+      setIsVisible(true)
+    }, 60000)
+
+    return () => {
+      window.clearTimeout(timerId)
+    }
+  }, [])
+
+  if (!isVisible) {
+    return null
+  }
+
   return (
     <>
       <style>{`
