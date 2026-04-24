@@ -206,7 +206,8 @@ export default function HeroSection() {
 
         @media (max-width: 767px) {
           #hero-section .hero-layout {
-            flex-direction: column;
+            align-items: stretch;
+            display: grid;
             gap: 28px;
             min-height: auto;
             padding: 32px 24px 0;
@@ -215,6 +216,24 @@ export default function HeroSection() {
           #hero-section .hero-copy,
           #hero-section .hero-media {
             width: 100%;
+          }
+
+          #hero-section .hero-copy {
+            display: contents;
+          }
+
+          #hero-section .hero-badge,
+          #hero-section .hero-headline,
+          #hero-section .hero-subheadline {
+            order: 1;
+          }
+
+          #hero-section .hero-media {
+            order: 2;
+          }
+
+          #hero-section .hero-actions {
+            order: 3;
           }
 
           #hero-section .hero-headline {
