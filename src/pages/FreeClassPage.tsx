@@ -693,10 +693,10 @@ export default function FreeClassPage() {
               <div className="free-class-image-wrap">
                 <img
                   className="free-class-image"
-                  src="/images/vitor-aula-gratuita.png"
+                  src="/images/vitor-aula-gratuita-optimized.jpg"
                   alt="Vitor sentado em uma escada com quadros de premiação"
-                  width="1254"
-                  height="1254"
+                  width="960"
+                  height="960"
                   loading="eager"
                   decoding="sync"
                   fetchPriority="high"
