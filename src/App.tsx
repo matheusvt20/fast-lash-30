@@ -3,6 +3,7 @@ import HeroSection from './components/HeroSection'
 import LazySection from './components/LazySection'
 import TestimonialsCarousel from './components/TestimonialsCarousel'
 import WhatsAppSupportButton from './components/WhatsAppSupportButton'
+import FreeClassPage from './pages/FreeClassPage'
 
 const ResultsCarousel = lazy(() => import('./components/ResultsCarousel'))
 const SocialProofBar = lazy(() => import('./components/SocialProofBar'))
@@ -17,7 +18,7 @@ const GuaranteeSection = lazy(() => import('./components/GuaranteeSection'))
 const FAQAccordion = lazy(() => import('./components/FAQAccordion'))
 const FinalCTA = lazy(() => import('./components/FinalCTA'))
 
-export default function App() {
+function SalesPage() {
   return (
     <main>
       <HeroSection />
@@ -63,4 +64,14 @@ export default function App() {
       <WhatsAppSupportButton />
     </main>
   )
+}
+
+export default function App() {
+  const pathname = window.location.pathname.replace(/\/$/, '')
+
+  if (pathname === '/aula-gratuita') {
+    return <FreeClassPage />
+  }
+
+  return <SalesPage />
 }

@@ -53,6 +53,10 @@
     </noscript>
     <script>
       (function () {
+        if (window.location.pathname.replace(/\/$/, '') === '/aula-gratuita') {
+          return;
+        }
+
         var buyerNames = [
           'Joana', 'Rosangela', 'Valéria', 'Lidiany', 'Elisangela',
           'Ione', 'Aline', 'Beatriz', 'Juliane', 'Priscila', 'Joyce',
