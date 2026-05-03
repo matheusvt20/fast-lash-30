@@ -25,7 +25,6 @@ declare global {
 }
 
 const META_CAPI_ENDPOINT = '/api/meta-capi'
-const FALLBACK_TEST_EVENT_CODE = import.meta.env.VITE_META_TEST_EVENT_CODE
 
 function createEventId(eventName: string) {
   const prefix = eventName.toLowerCase()
@@ -65,14 +64,10 @@ function getFbcFromUrl() {
 
 function getTestEventCode() {
   if (typeof window === 'undefined') {
-    return FALLBACK_TEST_EVENT_CODE || undefined
+    return undefined
   }
 
-  return (
-    new URLSearchParams(window.location.search).get('test_event_code') ||
-    FALLBACK_TEST_EVENT_CODE ||
-    undefined
-  )
+  return new URLSearchParams(window.location.search).get('test_event_code') || undefined
 }
 
 function sendCapiEvent(payload: Record<string, unknown>) {
