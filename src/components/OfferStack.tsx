@@ -1,8 +1,19 @@
 import { salesPageData } from '../data/salesPageData'
+import { trackMetaEvent } from '../lib/metaEvents'
 
 export default function OfferStack() {
   const { product, bonuses } = salesPageData
   const totalValue = product.originalPrice
+
+  function handleCheckoutClick() {
+    trackMetaEvent('InitiateCheckout', {
+      customData: {
+        content_name: product.name,
+        currency: 'BRL',
+        value: product.price,
+      },
+    })
+  }
 
   return (
     <section id="offer-stack">
@@ -169,7 +180,11 @@ export default function OfferStack() {
             <div className="offer-final-price">R$ {product.price}</div>
             <div className="offer-note">Pagamento único · 1 ano de acesso</div>
 
-            <a className="offer-cta" href={product.checkoutUrl}>
+            <a
+              className="offer-cta"
+              href={product.checkoutUrl}
+              onClick={handleCheckoutClick}
+            >
               Garantir meu acesso por R$59
             </a>
           </div>

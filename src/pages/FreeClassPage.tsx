@@ -1,17 +1,9 @@
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
 
-const WHATSAPP_GROUP_URL = 'https://chat.whatsapp.com/IVUfy9P4ndLBXGq6kq8x4C'
+import { trackMetaEvent } from '../lib/metaEvents'
 
-declare global {
-  interface Window {
-    fbq?: (
-      command: 'trackCustom',
-      eventName: string,
-      parameters?: Record<string, string>,
-    ) => void
-  }
-}
+const WHATSAPP_GROUP_URL = 'https://chat.whatsapp.com/IVUfy9P4ndLBXGq6kq8x4C'
 
 const learningPoints = [
   'Como posicionar seu serviço para atrair clientes que valorizam seu trabalho',
@@ -58,13 +50,14 @@ export default function FreeClassPage() {
   function handleLeadSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    if (typeof window !== 'undefined' && typeof window.fbq === 'function') {
-      window.fbq('trackCustom', 'LeadAulaGratuita', {
+    trackMetaEvent('LeadAulaGratuita', {
+      customData: {
         content_name: 'Aula Gratuita Lash Designer',
         destination: 'Grupo WhatsApp',
         form_name: 'Captacao Aula Gratuita',
-      })
-    }
+      },
+      pixelMethod: 'trackCustom',
+    })
 
     window.location.href = WHATSAPP_GROUP_URL
   }

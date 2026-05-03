@@ -1,7 +1,18 @@
 import { salesPageData } from '../data/salesPageData'
+import { trackMetaEvent } from '../lib/metaEvents'
 
 export default function FinalCTA() {
   const { product } = salesPageData
+
+  function handleCheckoutClick() {
+    trackMetaEvent('InitiateCheckout', {
+      customData: {
+        content_name: product.name,
+        currency: 'BRL',
+        value: product.price,
+      },
+    })
+  }
 
   return (
     <section id="final-cta">
@@ -145,7 +156,11 @@ export default function FinalCTA() {
           <span className="final-price">R${product.price}</span>
         </div>
 
-        <a className="final-cta" href={product.checkoutUrl}>
+        <a
+          className="final-cta"
+          href={product.checkoutUrl}
+          onClick={handleCheckoutClick}
+        >
           Quero o Fast Lash 30+ agora
         </a>
 

@@ -1,8 +1,10 @@
-import { lazy } from 'react'
+import { lazy, useEffect } from 'react'
 import HeroSection from './components/HeroSection'
 import LazySection from './components/LazySection'
 import TestimonialsCarousel from './components/TestimonialsCarousel'
 import WhatsAppSupportButton from './components/WhatsAppSupportButton'
+import { salesPageData } from './data/salesPageData'
+import { trackMetaEvent } from './lib/metaEvents'
 import FreeClassPage from './pages/FreeClassPage'
 
 const ResultsCarousel = lazy(() => import('./components/ResultsCarousel'))
@@ -19,6 +21,16 @@ const FAQAccordion = lazy(() => import('./components/FAQAccordion'))
 const FinalCTA = lazy(() => import('./components/FinalCTA'))
 
 function SalesPage() {
+  useEffect(() => {
+    trackMetaEvent('ViewContent', {
+      customData: {
+        content_name: salesPageData.product.name,
+        currency: 'BRL',
+        value: salesPageData.product.price,
+      },
+    })
+  }, [])
+
   return (
     <main>
       <HeroSection />
@@ -68,6 +80,10 @@ function SalesPage() {
 
 export default function App() {
   const pathname = window.location.pathname.replace(/\/$/, '')
+
+  useEffect(() => {
+    trackMetaEvent('PageView')
+  }, [pathname])
 
   if (pathname === '/aula-gratuita') {
     return <FreeClassPage />
