@@ -1,7 +1,17 @@
 import { salesPageData } from '../data/salesPageData'
 
-export default function CreatorSection() {
-  const { creator } = salesPageData
+type CreatorSectionProps = {
+  data?: typeof salesPageData
+  copy?: {
+    badge?: string
+  }
+}
+
+export default function CreatorSection({
+  data = salesPageData,
+  copy = {},
+}: CreatorSectionProps) {
+  const { creator } = data
 
   return (
     <section id="creator-section">
@@ -123,7 +133,9 @@ export default function CreatorSection() {
 
       <div className="creator-shell">
         <div className="creator-copy">
-          <div className="creator-badge">Quem vai te ensinar</div>
+          <div className="creator-badge">
+            {copy.badge ?? 'Quem vai te ensinar'}
+          </div>
           <h2 className="creator-name">{creator.name}</h2>
           <div className="creator-role">{creator.role}</div>
 

@@ -1,8 +1,27 @@
 import { salesPageData } from '../data/salesPageData'
 import { trackMetaEvent } from '../lib/metaEvents'
 
-export default function FinalCTA() {
-  const { product } = salesPageData
+type FinalCTAProps = {
+  data?: typeof salesPageData
+  copy?: {
+    bullets?: string[]
+    cta?: string
+    security?: string
+    title?: string
+  }
+}
+
+export default function FinalCTA({
+  data = salesPageData,
+  copy = {},
+}: FinalCTAProps) {
+  const { product } = data
+  const bullets =
+    copy.bullets ?? [
+      '12 módulos + 7 bônus exclusivos',
+      'Garantia incondicional de 7 dias',
+      '1 ano de acesso com pagamento único',
+    ]
 
   function handleCheckoutClick() {
     trackMetaEvent('InitiateCheckout', {
@@ -133,22 +152,16 @@ export default function FinalCTA() {
 
       <div className="final-shell">
         <h2 className="final-title">
-          Pronta para atender mais rápido e cobrar melhor?
+          {copy.title ?? 'Pronta para atender mais rápido e cobrar melhor?'}
         </h2>
 
         <div className="final-bullets">
-          <div className="final-bullet">
-            <span className="final-bullet-icon">✓</span>
-            <span>12 módulos + 7 bônus exclusivos</span>
-          </div>
-          <div className="final-bullet">
-            <span className="final-bullet-icon">✓</span>
-            <span>Garantia incondicional de 7 dias</span>
-          </div>
-          <div className="final-bullet">
-            <span className="final-bullet-icon">✓</span>
-            <span>1 ano de acesso com pagamento único</span>
-          </div>
+          {bullets.map((bullet) => (
+            <div className="final-bullet" key={bullet}>
+              <span className="final-bullet-icon">✓</span>
+              <span>{bullet}</span>
+            </div>
+          ))}
         </div>
 
         <div className="final-pricing">
@@ -161,10 +174,12 @@ export default function FinalCTA() {
           href={product.checkoutUrl}
           onClick={handleCheckoutClick}
         >
-          Quero o Fast Lash 30+ agora
+          {copy.cta ?? 'Quero o Fast Lash 30+ agora'}
         </a>
 
-        <div className="final-security">🔒 Compra 100% segura via Kiwify</div>
+        <div className="final-security">
+          {copy.security ?? '🔒 Compra 100% segura via Kiwify'}
+        </div>
       </div>
     </section>
   )

@@ -1,7 +1,15 @@
 import { salesPageData } from '../data/salesPageData'
 
-export default function ProblemSection() {
-  const pains = salesPageData.forWho.yes.slice(0, 5)
+type ProblemSectionProps = {
+  copy?: {
+    badge?: string
+    pains?: string[]
+    title?: string
+  }
+}
+
+export default function ProblemSection({ copy = {} }: ProblemSectionProps) {
+  const pains = copy.pains ?? salesPageData.forWho.yes.slice(0, 5)
   const portraitImage = '/images/problem-section-portrait.webp'
 
   return (
@@ -105,10 +113,12 @@ export default function ProblemSection() {
       <div className="problem-shell">
         <div className="problem-layout">
           <div>
-            <div className="problem-badge">Você se identifica?</div>
+            <div className="problem-badge">
+              {copy.badge ?? 'Você se identifica?'}
+            </div>
             <h2 className="problem-title">
-              Sua agenda está cheia — mas seus atendimentos ainda demoram
-              demais.
+              {copy.title ??
+                'Sua agenda está cheia — mas seus atendimentos ainda demoram demais.'}
             </h2>
 
             <div className="problem-list">

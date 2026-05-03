@@ -1,9 +1,20 @@
 import { useState } from 'react'
 import { salesPageData } from '../data/salesPageData'
 
-export default function ProductSection() {
+type ProductSectionProps = {
+  data?: typeof salesPageData
+  copy?: {
+    badge?: string
+    subtitle?: string
+  }
+}
+
+export default function ProductSection({
+  data = salesPageData,
+  copy = {},
+}: ProductSectionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
-  const { product, modules } = salesPageData
+  const { product, modules } = data
 
   return (
     <section id="product-section">
@@ -136,9 +147,13 @@ export default function ProductSection() {
       `}</style>
 
       <div className="product-shell">
-        <div className="product-badge">O que você vai aprender</div>
+        <div className="product-badge">
+          {copy.badge ?? 'O que você vai aprender'}
+        </div>
         <h2 className="product-title">{product.name}</h2>
-        <div className="product-subtitle">{product.headline}</div>
+        <div className="product-subtitle">
+          {copy.subtitle ?? product.headline}
+        </div>
 
         <div className="product-grid">
           {modules.map((module, index) => {

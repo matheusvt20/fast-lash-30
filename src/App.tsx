@@ -5,6 +5,7 @@ import TestimonialsCarousel from './components/TestimonialsCarousel'
 import WhatsAppSupportButton from './components/WhatsAppSupportButton'
 import { salesPageData } from './data/salesPageData'
 import { trackMetaEvent } from './lib/metaEvents'
+import AgendaCheiaPage from './pages/AgendaCheiaPage'
 import FreeClassPage from './pages/FreeClassPage'
 
 const ResultsCarousel = lazy(() => import('./components/ResultsCarousel'))
@@ -87,6 +88,10 @@ export default function App() {
 
   if (pathname === '/aula-gratuita') {
     return <FreeClassPage />
+  }
+
+  if (pathname === '/agenda-cheia') {
+    return <AgendaCheiaPage />
   }
 
   return <SalesPage />

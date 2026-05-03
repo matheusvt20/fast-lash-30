@@ -1,29 +1,49 @@
 import { salesPageData } from '../data/salesPageData'
 
-export default function SocialProofBar() {
-  const { socialProof } = salesPageData
+type SocialProofBarProps = {
+  data?: typeof salesPageData
+  labels?: {
+    access?: string
+    duration?: string
+    retention?: string
+    students?: string
+  }
+  variant?: 'default' | 'compactMobile'
+}
+
+export default function SocialProofBar({
+  data = salesPageData,
+  labels,
+  variant = 'default',
+}: SocialProofBarProps) {
+  const { socialProof } = data
 
   const items = [
     {
       value: socialProof.students,
-      label: 'alunas formadas',
+      label: labels?.students ?? 'alunas formadas',
     },
     {
       value: socialProof.duration,
-      label: 'tempo de atendimento',
+      label: labels?.duration ?? 'tempo de atendimento',
     },
     {
       value: socialProof.retention,
-      label: 'dias de retenção',
+      label: labels?.retention ?? 'dias de retenção',
     },
     {
       value: socialProof.access,
-      label: 'de acesso ao conteúdo',
+      label: labels?.access ?? 'de acesso ao conteúdo',
     },
   ]
 
   return (
-    <section id="social-proof-bar">
+    <section
+      id="social-proof-bar"
+      className={
+        variant === 'compactMobile' ? 'social-proof-compact-mobile' : undefined
+      }
+    >
       <style>{`
         #social-proof-bar {
           background: #1A1A18;
@@ -94,6 +114,33 @@ export default function SocialProofBar() {
 
           #social-proof-bar .social-proof-divider {
             height: 32px;
+          }
+
+          #social-proof-bar.social-proof-compact-mobile {
+            padding: 28px 20px;
+          }
+
+          #social-proof-bar.social-proof-compact-mobile .social-proof-shell {
+            display: grid;
+            gap: 24px 16px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          #social-proof-bar.social-proof-compact-mobile .social-proof-item {
+            padding: 0;
+          }
+
+          #social-proof-bar.social-proof-compact-mobile .social-proof-value {
+            font-size: 30px;
+          }
+
+          #social-proof-bar.social-proof-compact-mobile .social-proof-label {
+            font-size: 12px;
+            letter-spacing: 0.03em;
+          }
+
+          #social-proof-bar.social-proof-compact-mobile .social-proof-divider {
+            display: none;
           }
         }
       `}</style>

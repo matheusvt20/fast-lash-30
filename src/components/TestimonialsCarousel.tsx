@@ -32,12 +32,32 @@ function warmPandaPlayer() {
   })
 }
 
-export default function TestimonialsCarousel() {
-  const { testimonials } = salesPageData
+type TestimonialsCarouselProps = {
+  data?: typeof salesPageData
+  proofCards?: Array<{
+    description: string
+    title: string
+  }>
+  copy?: {
+    badge?: string
+    photoBadge?: string
+    photoTitle?: string
+    title?: string
+  }
+}
+
+export default function TestimonialsCarousel({
+  data = salesPageData,
+  proofCards,
+  copy = {},
+}: TestimonialsCarouselProps) {
+  const { testimonials } = data
 
   useEffect(() => {
-    warmPandaPlayer()
-  }, [])
+    if (!proofCards) {
+      warmPandaPlayer()
+    }
+  }, [proofCards])
 
   return (
     <section id="testimonials-carousel">
@@ -119,6 +139,25 @@ export default function TestimonialsCarousel() {
           padding: 12px 16px;
         }
 
+        #testimonials-carousel .testimonial-proof-card {
+          padding: 24px;
+        }
+
+        #testimonials-carousel .testimonial-proof-title {
+          color: #1A1A18;
+          font-family: var(--font-display);
+          font-size: 20px;
+          font-weight: 700;
+          line-height: 1.2;
+        }
+
+        #testimonials-carousel .testimonial-proof-copy {
+          color: #7A7870;
+          font-size: 14px;
+          line-height: 1.7;
+          margin-top: 10px;
+        }
+
         @media (max-width: 767px) {
           #testimonials-carousel {
             padding: 56px 24px;
@@ -136,46 +175,68 @@ export default function TestimonialsCarousel() {
 
       <div className="testimonials-shell">
         <section className="testimonial-section">
-          <div className="testimonials-badge">Clientes atendidas</div>
-          <h2 className="testimonials-title">Veja o que as clientes da Tati dizem</h2>
+          <div className="testimonials-badge">
+            {copy.badge ?? 'Clientes atendidas'}
+          </div>
+          <h2 className="testimonials-title">
+            {copy.title ?? 'Veja o que as clientes da Tati dizem'}
+          </h2>
           <div className="testimonials-grid">
-            {testimonials.videos.map((video, index) => (
-              <article key={`video-${index}`} className="testimonial-card">
-                <div className="testimonial-frame-shell">
-                  <iframe
-                    className="testimonial-frame"
-                    src={video.embedUrl}
-                    title={video.title}
-                    loading="lazy"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                </div>
-              </article>
-            ))}
+            {proofCards
+              ? proofCards.map((card) => (
+                  <article
+                    key={card.title}
+                    className="testimonial-card testimonial-proof-card"
+                  >
+                    <div className="testimonial-proof-title">{card.title}</div>
+                    <div className="testimonial-proof-copy">
+                      {card.description}
+                    </div>
+                  </article>
+                ))
+              : testimonials.videos.map((video, index) => (
+                  <article key={`video-${index}`} className="testimonial-card">
+                    <div className="testimonial-frame-shell">
+                      <iframe
+                        className="testimonial-frame"
+                        src={video.embedUrl}
+                        title={video.title}
+                        loading="lazy"
+                        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                      />
+                    </div>
+                  </article>
+                ))}
           </div>
         </section>
 
-        <section className="testimonial-section">
-          <div className="testimonials-badge">Alunas formadas</div>
-          <h2 className="testimonials-title">Profissionais que já passaram pelo método</h2>
-          <div className="testimonials-grid">
-            {testimonials.photos.map((photo, index) => (
-              <article key={`photo-${index}`} className="testimonial-card">
-                <img
-                  className="testimonial-image"
-                  src={photo.image}
-                  alt={photo.caption}
-                  width={photo.width}
-                  height={photo.height}
-                  loading="lazy"
-                  decoding="async"
-                />
-                <p className="testimonial-caption">{photo.caption}</p>
-              </article>
-            ))}
-          </div>
-        </section>
+        {!proofCards ? (
+          <section className="testimonial-section">
+            <div className="testimonials-badge">
+              {copy.photoBadge ?? 'Alunas formadas'}
+            </div>
+            <h2 className="testimonials-title">
+              {copy.photoTitle ?? 'Profissionais que já passaram pelo método'}
+            </h2>
+            <div className="testimonials-grid">
+              {testimonials.photos.map((photo, index) => (
+                <article key={`photo-${index}`} className="testimonial-card">
+                  <img
+                    className="testimonial-image"
+                    src={photo.image}
+                    alt={photo.caption}
+                    width={photo.width}
+                    height={photo.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <p className="testimonial-caption">{photo.caption}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
       </div>
     </section>
   )

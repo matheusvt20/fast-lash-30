@@ -1,7 +1,20 @@
 import { salesPageData } from '../data/salesPageData'
 
-export default function ForWhoSection() {
-  const { forWho } = salesPageData
+type ForWhoSectionProps = {
+  data?: typeof salesPageData
+  copy?: {
+    badge?: string
+    noTitle?: string
+    title?: string
+    yesTitle?: string
+  }
+}
+
+export default function ForWhoSection({
+  data = salesPageData,
+  copy = {},
+}: ForWhoSectionProps) {
+  const { forWho } = data
 
   return (
     <section id="for-who-section">
@@ -109,12 +122,16 @@ export default function ForWhoSection() {
       `}</style>
 
       <div className="for-who-shell">
-        <div className="for-who-badge">Para quem é</div>
-        <h2 className="for-who-title">Esse método foi feito para você se...</h2>
+        <div className="for-who-badge">{copy.badge ?? 'Para quem é'}</div>
+        <h2 className="for-who-title">
+          {copy.title ?? 'Esse método foi feito para você se...'}
+        </h2>
 
         <div className="for-who-grid">
           <div>
-            <div className="for-who-column-title">Para você se...</div>
+            <div className="for-who-column-title">
+              {copy.yesTitle ?? 'Para você se...'}
+            </div>
             <div className="for-who-list">
               {forWho.yes.map((item) => (
                 <div key={item} className="for-who-item for-who-item-yes">
@@ -126,7 +143,9 @@ export default function ForWhoSection() {
           </div>
 
           <div>
-            <div className="for-who-column-title">Não é pra você se...</div>
+            <div className="for-who-column-title">
+              {copy.noTitle ?? 'Não é pra você se...'}
+            </div>
             <div className="for-who-list">
               {forWho.no.map((item) => (
                 <div key={item} className="for-who-item for-who-item-no">

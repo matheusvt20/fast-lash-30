@@ -1,8 +1,23 @@
 import { salesPageData } from '../data/salesPageData'
 import { trackMetaEvent } from '../lib/metaEvents'
 
-export default function OfferStack() {
-  const { product, bonuses } = salesPageData
+type OfferStackProps = {
+  data?: typeof salesPageData
+  copy?: {
+    badge?: string
+    cta?: string
+    items?: string[]
+    note?: string
+    title?: string
+    totalLabel?: string
+  }
+}
+
+export default function OfferStack({
+  data = salesPageData,
+  copy = {},
+}: OfferStackProps) {
+  const { product, bonuses } = data
   const totalValue = product.originalPrice
 
   function handleCheckoutClick() {
@@ -156,36 +171,44 @@ export default function OfferStack() {
       `}</style>
 
       <div className="offer-shell">
-        <div className="offer-badge">O que está incluído</div>
-        <h2 className="offer-title">Tudo que você recebe hoje</h2>
+        <div className="offer-badge">
+          {copy.badge ?? 'O que está incluído'}
+        </div>
+        <h2 className="offer-title">
+          {copy.title ?? 'Tudo que você recebe hoje'}
+        </h2>
 
         <div className="offer-card">
           <div className="offer-product-title">{product.name}</div>
 
           <div style={{ marginTop: 20 }}>
-            {bonuses.map((bonus) => (
-              <div key={bonus.name} className="offer-line">
-                <span>{bonus.name}</span>
-                <span className="offer-line-value">R$ {bonus.value}</span>
+            {(copy.items ?? bonuses.map((bonus) => bonus.name)).map((item, index) => (
+              <div key={item} className="offer-line">
+                <span>{item}</span>
+                <span className="offer-line-value">
+                  {copy.items ? 'Incluso' : `R$ ${bonuses[index]?.value ?? 0}`}
+                </span>
               </div>
             ))}
           </div>
 
           <div className="offer-total">
             <div className="offer-total-row">
-              <span>Valor total:</span>
+              <span>{copy.totalLabel ?? 'Valor total:'}</span>
               <span className="offer-line-value">R$ {totalValue}</span>
             </div>
 
             <div className="offer-final-price">R$ {product.price}</div>
-            <div className="offer-note">Pagamento único · 1 ano de acesso</div>
+            <div className="offer-note">
+              {copy.note ?? 'Pagamento único · 1 ano de acesso'}
+            </div>
 
             <a
               className="offer-cta"
               href={product.checkoutUrl}
               onClick={handleCheckoutClick}
             >
-              Garantir meu acesso por R$59
+              {copy.cta ?? 'Garantir meu acesso por R$59'}
             </a>
           </div>
         </div>

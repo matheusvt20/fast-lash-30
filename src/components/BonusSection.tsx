@@ -1,7 +1,19 @@
 import { salesPageData } from '../data/salesPageData'
 
-export default function BonusSection() {
-  const { bonuses } = salesPageData
+type BonusSectionProps = {
+  data?: typeof salesPageData
+  copy?: {
+    badge?: string
+    title?: string
+    valueLabel?: string
+  }
+}
+
+export default function BonusSection({
+  data = salesPageData,
+  copy = {},
+}: BonusSectionProps) {
+  const { bonuses } = data
 
   return (
     <section id="bonus-section">
@@ -100,8 +112,10 @@ export default function BonusSection() {
       `}</style>
 
       <div className="bonus-shell">
-        <div className="bonus-badge">Bônus exclusivos</div>
-        <h2 className="bonus-title">Você ainda recebe</h2>
+        <div className="bonus-badge">
+          {copy.badge ?? 'Bônus exclusivos'}
+        </div>
+        <h2 className="bonus-title">{copy.title ?? 'Você ainda recebe'}</h2>
 
         <div className="bonus-grid">
           {bonuses.map((bonus) => (
@@ -109,7 +123,9 @@ export default function BonusSection() {
               <div className="bonus-pill">Bônus</div>
               <div className="bonus-name">{bonus.name}</div>
               <div className="bonus-description">{bonus.description}</div>
-              <div className="bonus-value">Valor: R$ {bonus.value}</div>
+              <div className="bonus-value">
+                {copy.valueLabel ?? `Valor: R$ ${bonus.value}`}
+              </div>
             </article>
           ))}
         </div>

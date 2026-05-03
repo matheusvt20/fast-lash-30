@@ -2,8 +2,19 @@ import { useState } from 'react'
 
 import { salesPageData } from '../data/salesPageData'
 
-export default function FAQAccordion() {
-  const { faq } = salesPageData
+type FAQAccordionProps = {
+  data?: typeof salesPageData
+  copy?: {
+    badge?: string
+    title?: string
+  }
+}
+
+export default function FAQAccordion({
+  data = salesPageData,
+  copy = {},
+}: FAQAccordionProps) {
+  const { faq } = data
   const [openIndex, setOpenIndex] = useState(0)
 
   return (
@@ -89,8 +100,10 @@ export default function FAQAccordion() {
       `}</style>
 
       <div className="faq-shell">
-        <div className="faq-badge">Dúvidas frequentes</div>
-        <h2 className="faq-title">Perguntas frequentes</h2>
+        <div className="faq-badge">
+          {copy.badge ?? 'Dúvidas frequentes'}
+        </div>
+        <h2 className="faq-title">{copy.title ?? 'Perguntas frequentes'}</h2>
 
         <div className="faq-list">
           {faq.map((item, index) => {

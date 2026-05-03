@@ -1,7 +1,17 @@
 import { salesPageData } from '../data/salesPageData'
 
-export default function GuaranteeSection() {
-  const { guarantee } = salesPageData
+type GuaranteeSectionProps = {
+  data?: typeof salesPageData
+  copy?: {
+    badge?: string
+  }
+}
+
+export default function GuaranteeSection({
+  data = salesPageData,
+  copy = {},
+}: GuaranteeSectionProps) {
+  const { guarantee } = data
 
   return (
     <section id="guarantee-section">
@@ -71,7 +81,7 @@ export default function GuaranteeSection() {
       `}</style>
 
       <div className="guarantee-shell">
-        <div className="guarantee-badge">Sem risco</div>
+        <div className="guarantee-badge">{copy.badge ?? 'Sem risco'}</div>
         <div className="guarantee-icon" aria-hidden="true">
           🛡️
         </div>

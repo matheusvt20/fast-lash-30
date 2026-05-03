@@ -1,4 +1,10 @@
-const photos = [
+type ResultPhoto = {
+  src: string
+  width: number
+  height: number
+}
+
+const defaultPhotos: ResultPhoto[] = [
   { src: '/images/resultado-1.webp', width: 472, height: 840 },
   { src: '/images/resultado-2.webp', width: 630, height: 840 },
   { src: '/images/resultado-3.webp', width: 629, height: 840 },
@@ -8,11 +14,33 @@ const photos = [
   { src: '/images/resultado-7.webp', width: 630, height: 840 },
 ]
 
-const loopedPhotos = [...photos, ...photos]
+type ResultsCarouselProps = {
+  copy?: {
+    badge?: string
+    titleAccent?: string
+    subtitle?: string
+    title?: string
+  }
+  photos?: ResultPhoto[]
+  variant?: 'default' | 'dark'
+}
 
-export default function ResultsCarousel() {
+export default function ResultsCarousel({
+  copy = {},
+  photos = defaultPhotos,
+  variant = 'default',
+}: ResultsCarouselProps) {
+  const title =
+    copy.title ?? 'Veja o resultado: cílios impecáveis em até 1 hora'
+  const titleAccent = copy.titleAccent
+  const titleAccentIndex = titleAccent ? title.indexOf(titleAccent) : -1
+  const loopedPhotos = [...photos, ...photos]
+
   return (
-    <section id="results-carousel">
+    <section
+      id="results-carousel"
+      className={variant === 'dark' ? 'results-carousel-dark' : undefined}
+    >
       <style>{`
         #results-carousel {
           background: #F0EBE3;
@@ -45,6 +73,18 @@ export default function ResultsCarousel() {
           max-width: 720px;
         }
 
+        #results-carousel .results-badge {
+          background: #E8DDD0;
+          border: 1px solid #D4C4B0;
+          border-radius: 100px;
+          color: #7A6440;
+          display: inline-block;
+          font-size: 13px;
+          font-weight: 500;
+          margin-bottom: 16px;
+          padding: 6px 16px;
+        }
+
         #results-carousel .results-marquee {
           margin-top: 0;
           overflow: hidden;
@@ -70,6 +110,47 @@ export default function ResultsCarousel() {
           margin-right: 20px;
           object-fit: cover;
           width: auto;
+        }
+
+        #results-carousel.results-carousel-dark {
+          background: #F0EBE3;
+        }
+
+        #results-carousel.results-carousel-dark .results-badge {
+          background: transparent;
+          border: 1px solid #C9944A;
+          border-radius: 999px;
+          color: #C9944A;
+          font-size: 12px;
+          padding: 5px 14px;
+        }
+
+        #results-carousel.results-carousel-dark .results-title {
+          color: #1A1A18;
+          font-family: var(--font-display), Georgia, serif;
+          font-size: 40px;
+          font-weight: 500;
+          white-space: normal;
+        }
+
+        #results-carousel.results-carousel-dark .results-title-accent {
+          color: #C9944A;
+        }
+
+        #results-carousel.results-carousel-dark .results-subtitle {
+          color: #7A7870;
+          font-family: Inter, var(--font-body);
+          font-size: 16px;
+          max-width: 640px;
+        }
+
+        #results-carousel.results-carousel-dark .results-track {
+          animation-duration: 35s;
+        }
+
+        #results-carousel.results-carousel-dark .results-photo {
+          height: 420px;
+          margin-right: 16px;
         }
 
         @keyframes slideLeft {
@@ -109,31 +190,40 @@ export default function ResultsCarousel() {
           #results-carousel .results-photo {
             height: 320px;
           }
+
+          #results-carousel.results-carousel-dark .results-title {
+            font-size: 28px;
+          }
+
+          #results-carousel.results-carousel-dark .results-photo {
+            height: 380px;
+          }
+
+          #results-carousel.results-carousel-dark .results-track {
+            animation-duration: 55s;
+          }
         }
       `}</style>
 
       <div className="results-shell">
         <div className="results-copy">
-          <span
-            style={{
-              display: 'inline-block',
-              background: '#E8DDD0',
-              color: '#7A6440',
-              border: '1px solid #D4C4B0',
-              fontSize: '13px',
-              fontWeight: 500,
-              borderRadius: '100px',
-              padding: '6px 16px',
-              marginBottom: '16px',
-            }}
-          >
-            Resultados reais
+          <span className="results-badge">
+            {copy.badge ?? 'Resultados reais'}
           </span>
           <h2 className="results-title">
-            Veja o resultado: cílios impecáveis em até 1 hora
+            {titleAccent && titleAccentIndex >= 0 ? (
+              <>
+                {title.slice(0, titleAccentIndex)}
+                <span className="results-title-accent">{titleAccent}</span>
+                {title.slice(titleAccentIndex + titleAccent.length)}
+              </>
+            ) : (
+              title
+            )}
           </h2>
           <p className="results-subtitle">
-            Cada par de cílios aplicado com o método Fast Lash 30+
+            {copy.subtitle ??
+              'Cada par de cílios aplicado com o método Fast Lash 30+'}
           </p>
         </div>
 

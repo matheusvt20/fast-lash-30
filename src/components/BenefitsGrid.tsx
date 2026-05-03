@@ -1,7 +1,18 @@
 import { salesPageData } from '../data/salesPageData'
 
-export default function BenefitsGrid() {
-  const { benefits } = salesPageData
+type BenefitsGridProps = {
+  data?: typeof salesPageData
+  copy?: {
+    badge?: string
+    title?: string
+  }
+}
+
+export default function BenefitsGrid({
+  data = salesPageData,
+  copy = {},
+}: BenefitsGridProps) {
+  const { benefits } = data
 
   return (
     <section id="benefits-grid">
@@ -80,9 +91,11 @@ export default function BenefitsGrid() {
       `}</style>
 
       <div className="benefits-shell">
-        <div className="benefits-badge">O que muda pra você</div>
+        <div className="benefits-badge">
+          {copy.badge ?? 'O que muda pra você'}
+        </div>
         <h2 className="benefits-title">
-          O que você ganha quando domina o método
+          {copy.title ?? 'O que você ganha quando domina o método'}
         </h2>
 
         <div className="benefits-grid">
