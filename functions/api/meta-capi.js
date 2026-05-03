@@ -122,10 +122,15 @@ export async function onRequestPost({ request, env }) {
       user_data: await buildUserData(request, body),
     }
 
+    const metaPayload = {
+      data: [event],
+      test_event_code: body.test_event_code,
+    }
+
     const response = await fetch(
       `${META_EVENTS_URL}/${pixelId}/events?access_token=${accessToken}`,
       {
-        body: JSON.stringify({ data: [event] }),
+        body: JSON.stringify(metaPayload),
         headers: {
           'Content-Type': 'application/json',
         },
