@@ -51,12 +51,13 @@ export default function AgendaCheiaHero() {
 
         #agenda-cheia-hero .agenda-hero-title {
           color: #FFFFFF;
-          font-family: var(--font-display);
-          font-size: 52px;
+          font-family: var(--font-display), Georgia, serif;
+          font-size: 48px;
           font-weight: 700;
           letter-spacing: 0;
-          line-height: 1.08;
+          line-height: 1.15;
           margin: 24px 0 0;
+          max-width: 620px;
         }
 
         #agenda-cheia-hero .agenda-hero-title-accent {
@@ -177,7 +178,7 @@ export default function AgendaCheiaHero() {
           }
 
           #agenda-cheia-hero .agenda-hero-title {
-            font-size: 34px;
+            font-size: 32px;
           }
 
           #agenda-cheia-hero .agenda-hero-subtitle {
@@ -197,11 +198,8 @@ export default function AgendaCheiaHero() {
             • Exclusivo para Lash Designers
           </div>
           <h1 className="agenda-hero-title">
-            Pare de esperar cliente. Construa uma{' '}
-            <span className="agenda-hero-title-accent">
-              máquina que os atrai
-            </span>{' '}
-            toda semana.
+            Os <span className="agenda-hero-title-accent">8 passos</span> que
+            vão encher sua agenda sem depender de indicação.
           </h1>
           <p className="agenda-hero-subtitle">
             O método passo a passo para transformar sua agenda vazia em uma

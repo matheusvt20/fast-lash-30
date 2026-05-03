@@ -9,6 +9,7 @@ export const agendaCheiaPageData = {
       'Aprenda a atrair mais clientes, vender melhor seus horários e construir uma agenda mais previsível como lash designer.',
     price: 30,
     originalPrice: 30,
+    checkoutUrl: 'https://pay.kiwify.com.br/u4b1hcT',
   },
 
   creator: {

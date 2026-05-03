@@ -36,6 +36,7 @@ type TestimonialsCarouselProps = {
   data?: typeof salesPageData
   proofCards?: Array<{
     description: string
+    icon?: string
     title: string
   }>
   copy?: {
@@ -44,12 +45,14 @@ type TestimonialsCarouselProps = {
     photoTitle?: string
     title?: string
   }
+  variant?: 'default' | 'painPoints'
 }
 
 export default function TestimonialsCarousel({
   data = salesPageData,
   proofCards,
   copy = {},
+  variant = 'default',
 }: TestimonialsCarouselProps) {
   const { testimonials } = data
 
@@ -60,7 +63,10 @@ export default function TestimonialsCarousel({
   }, [proofCards])
 
   return (
-    <section id="testimonials-carousel">
+    <section
+      id="testimonials-carousel"
+      className={variant === 'painPoints' ? 'testimonials-pain-points' : undefined}
+    >
       <style>{`
         #testimonials-carousel {
           background: #FAF8F5;
@@ -158,6 +164,80 @@ export default function TestimonialsCarousel({
           margin-top: 10px;
         }
 
+        #testimonials-carousel.testimonials-pain-points {
+          background: #0D0D0D;
+          padding: 80px;
+        }
+
+        #testimonials-carousel.testimonials-pain-points .testimonials-badge {
+          background: transparent;
+          border: 1px solid #C9944A;
+          border-radius: 999px;
+          color: #C9944A;
+          display: inline-block;
+          font-size: 12px;
+          margin-bottom: 16px;
+          padding: 5px 14px;
+        }
+
+        #testimonials-carousel.testimonials-pain-points .testimonials-title {
+          color: #FFFFFF;
+          font-family: var(--font-display), Georgia, serif;
+          font-size: 36px;
+          font-weight: 700;
+          max-width: 680px;
+        }
+
+        #testimonials-carousel.testimonials-pain-points .testimonials-grid {
+          gap: 16px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          margin-top: 40px;
+        }
+
+        #testimonials-carousel.testimonials-pain-points .testimonial-card {
+          background: #161616;
+          border: 1px solid rgba(201, 148, 74, 0.2);
+          border-radius: 12px;
+        }
+
+        #testimonials-carousel.testimonials-pain-points .testimonial-proof-card {
+          padding: 24px;
+        }
+
+        #testimonials-carousel .testimonial-proof-icon {
+          align-items: center;
+          background: rgba(201, 148, 74, 0.1);
+          border: 1px solid rgba(201, 148, 74, 0.3);
+          border-radius: 50%;
+          color: #C9944A;
+          display: none;
+          font-size: 16px;
+          height: 36px;
+          justify-content: center;
+          margin-bottom: 16px;
+          width: 36px;
+        }
+
+        #testimonials-carousel.testimonials-pain-points .testimonial-proof-icon {
+          display: flex;
+        }
+
+        #testimonials-carousel.testimonials-pain-points .testimonial-proof-title {
+          color: #FFFFFF;
+          font-family: Inter, var(--font-body);
+          font-size: 16px;
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
+
+        #testimonials-carousel.testimonials-pain-points .testimonial-proof-copy {
+          color: #888888;
+          font-family: Inter, var(--font-body);
+          font-size: 14px;
+          line-height: 1.6;
+          margin-top: 0;
+        }
+
         @media (max-width: 767px) {
           #testimonials-carousel {
             padding: 56px 24px;
@@ -168,6 +248,18 @@ export default function TestimonialsCarousel({
           }
 
           #testimonials-carousel .testimonials-grid {
+            grid-template-columns: 1fr;
+          }
+
+          #testimonials-carousel.testimonials-pain-points {
+            padding: 56px 24px;
+          }
+
+          #testimonials-carousel.testimonials-pain-points .testimonials-title {
+            font-size: 26px;
+          }
+
+          #testimonials-carousel.testimonials-pain-points .testimonials-grid {
             grid-template-columns: 1fr;
           }
         }
@@ -188,6 +280,11 @@ export default function TestimonialsCarousel({
                     key={card.title}
                     className="testimonial-card testimonial-proof-card"
                   >
+                    {card.icon ? (
+                      <div className="testimonial-proof-icon" aria-hidden="true">
+                        {card.icon}
+                      </div>
+                    ) : null}
                     <div className="testimonial-proof-title">{card.title}</div>
                     <div className="testimonial-proof-copy">
                       {card.description}

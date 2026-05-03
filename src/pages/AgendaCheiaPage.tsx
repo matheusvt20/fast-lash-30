@@ -82,6 +82,43 @@ export default function AgendaCheiaPage() {
           copy={{ badge: 'Quem vai te guiar' }}
         />
       </LazySection>
+      <SectionDivider />
+      <LazySection minHeight={1240} rootMargin="1600px 0px">
+        <TestimonialsCarousel
+          variant="painPoints"
+          copy={{
+            badge: '• Por que isso acontece',
+            title:
+              'Por que muitas lash designers não conseguem encher a agenda?',
+          }}
+          proofCards={[
+            {
+              icon: '📱',
+              title: 'Dependem só do orgânico',
+              description:
+                'Postam todo dia esperando o algoritmo trabalhar por elas — sem nenhum controle sobre quantos clientes chegam.',
+            },
+            {
+              icon: '💸',
+              title: 'Não investem em tráfego pago',
+              description:
+                'Ficam reféns da indicação enquanto poderiam ter anúncios trazendo clientes toda semana com R$10 por dia.',
+            },
+            {
+              icon: '💬',
+              title: 'Não conduzem o WhatsApp',
+              description:
+                'Respondem interessadas de forma solta, sem roteiro, e perdem o agendamento na conversa.',
+            },
+            {
+              icon: '🎯',
+              title: 'Não têm sistema de captação',
+              description:
+                'Não têm posicionamento, oferta clara nem rotina de atrair clientes — dependem da sorte.',
+            },
+          ]}
+        />
+      </LazySection>
       <LazySection minHeight={780}>
         <BenefitsGrid
           data={agendaCheiaPageData}
@@ -90,37 +127,6 @@ export default function AgendaCheiaPage() {
             title:
               'O que muda quando você aprende a vender seus horários',
           }}
-        />
-      </LazySection>
-      <LazySection minHeight={1240} rootMargin="1600px 0px">
-        <TestimonialsCarousel
-          copy={{
-            badge: 'Ponto de virada',
-            title:
-              'Por que muitas lash designers não conseguem encher a agenda?',
-          }}
-          proofCards={[
-            {
-              title: 'Postam sem estratégia',
-              description:
-                'Mostram resultado, mas não comunicam desejo, dor e transformação.',
-            },
-            {
-              title: 'Falam só de preço',
-              description:
-                'Quando a comunicação é fraca, a cliente compara apenas valor.',
-            },
-            {
-              title: 'Não conduzem o WhatsApp',
-              description:
-                'Respondem interessadas de forma solta e perdem oportunidades.',
-            },
-            {
-              title: 'Não têm oferta clara',
-              description:
-                'A cliente não entende por que deveria agendar agora.',
-            },
-          ]}
         />
       </LazySection>
       <LazySection minHeight={680}>
