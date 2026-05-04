@@ -135,14 +135,21 @@ export function trackMetaEvent(
   const customData = options.customData ?? {}
   const userData = options.userData ?? {}
   const pixelMethod = options.pixelMethod ?? 'track'
-  const fbp = readCookie('_fbp')
+  const shouldDelayServerCookieRead = eventName === 'PageView'
+  const initialFbp = shouldDelayServerCookieRead ? undefined : readCookie('_fbp')
   const fbc = readCookie('_fbc') ?? getFbcFromUrl()
   const testEventCode = getTestEventCode()
 
-  void getServerEventId(eventName).then((eventId) => {
+  void getServerEventId(eventName).then(async (eventId) => {
     if (typeof window.fbq === 'function') {
       window.fbq(pixelMethod, eventName, customData, { eventID: eventId })
     }
+
+    if (shouldDelayServerCookieRead) {
+      await new Promise((resolve) => setTimeout(resolve, 300))
+    }
+
+    const fbp = shouldDelayServerCookieRead ? readCookie('_fbp') : initialFbp
 
     sendCapiEvent({
       custom_data: customData,
