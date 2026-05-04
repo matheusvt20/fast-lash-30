@@ -15,6 +15,7 @@ type MetaEventOptions = {
 
 declare global {
   interface Window {
+    __META_EVENT_IDS__?: Record<string, string>
     fbq?: (
       method: MetaPixelMethod,
       eventName: string,
@@ -26,14 +27,44 @@ declare global {
 
 const META_CAPI_ENDPOINT = '/api/meta-capi'
 
-function createEventId(eventName: string) {
-  const prefix = eventName.toLowerCase()
-
+function createBrowserEventId() {
   if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
-    return `${prefix}.${crypto.randomUUID()}`
+    return crypto.randomUUID()
   }
 
-  return `${prefix}.${Date.now()}.${Math.random().toString(36).slice(2)}`
+  return `${Date.now()}.${Math.random().toString(36).slice(2)}`
+}
+
+async function getServerEventId(eventName: MetaEventName) {
+  if (eventName !== 'ViewContent') {
+    return createBrowserEventId()
+  }
+
+  const storedEventId = window.__META_EVENT_IDS__?.[eventName]
+
+  if (storedEventId) {
+    delete window.__META_EVENT_IDS__?.[eventName]
+    return storedEventId
+  }
+
+  try {
+    const response = await fetch(META_CAPI_ENDPOINT, {
+      headers: {
+        Accept: 'application/json',
+      },
+      method: 'GET',
+    })
+    const data = await response.json().catch(() => ({}))
+    const eventId = typeof data.event_id === 'string' ? data.event_id : undefined
+
+    if (response.ok && eventId) {
+      return eventId
+    }
+  } catch (error) {
+    console.error('[Meta CAPI] Failed to create server event_id', error)
+  }
+
+  return createBrowserEventId()
 }
 
 function readCookie(name: string) {
@@ -101,7 +132,6 @@ export function trackMetaEvent(
     return
   }
 
-  const eventId = createEventId(eventName)
   const customData = options.customData ?? {}
   const userData = options.userData ?? {}
   const pixelMethod = options.pixelMethod ?? 'track'
@@ -109,18 +139,20 @@ export function trackMetaEvent(
   const fbc = readCookie('_fbc') ?? getFbcFromUrl()
   const testEventCode = getTestEventCode()
 
-  if (typeof window.fbq === 'function') {
-    window.fbq(pixelMethod, eventName, customData, { eventID: eventId })
-  }
+  void getServerEventId(eventName).then((eventId) => {
+    if (typeof window.fbq === 'function') {
+      window.fbq(pixelMethod, eventName, customData, { eventID: eventId })
+    }
 
-  sendCapiEvent({
-    custom_data: customData,
-    event_id: eventId,
-    event_name: eventName,
-    event_source_url: window.location.href,
-    fbc,
-    fbp,
-    test_event_code: testEventCode,
-    user_data: userData,
+    sendCapiEvent({
+      custom_data: customData,
+      event_id: eventId,
+      event_name: eventName,
+      event_source_url: window.location.href,
+      fbc,
+      fbp,
+      test_event_code: testEventCode,
+      user_data: userData,
+    })
   })
 }

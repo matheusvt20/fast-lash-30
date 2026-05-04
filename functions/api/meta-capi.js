@@ -4,6 +4,7 @@ const META_EVENTS_URL = `https://graph.facebook.com/${GRAPH_API_VERSION}`
 function jsonResponse(body, status = 200) {
   return new Response(JSON.stringify(body), {
     headers: {
+      'Cache-Control': 'no-store',
       'Content-Type': 'application/json',
     },
     status,
@@ -90,9 +91,15 @@ function buildCustomData(body) {
 export async function onRequestOptions() {
   return new Response(null, {
     headers: {
-      Allow: 'POST, OPTIONS',
+      Allow: 'GET, POST, OPTIONS',
     },
     status: 204,
+  })
+}
+
+export async function onRequestGet() {
+  return jsonResponse({
+    event_id: crypto.randomUUID(),
   })
 }
 
@@ -108,14 +115,16 @@ export async function onRequestPost({ request, env }) {
   try {
     const body = await request.json()
 
-    if (!body.event_name || !body.event_id) {
-      return jsonResponse({ error: 'event_name and event_id are required' }, 400)
+    if (!body.event_name) {
+      return jsonResponse({ error: 'event_name is required' }, 400)
     }
+
+    const eventId = body.event_id || crypto.randomUUID()
 
     const event = {
       action_source: 'website',
       custom_data: buildCustomData(body),
-      event_id: body.event_id,
+      event_id: eventId,
       event_name: body.event_name,
       event_source_url: body.event_source_url,
       event_time: Math.floor(Date.now() / 1000),
