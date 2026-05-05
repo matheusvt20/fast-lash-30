@@ -7,6 +7,7 @@ import { salesPageData } from './data/salesPageData'
 import { trackMetaEvent } from './lib/metaEvents'
 import AgendaCheiaPage from './pages/AgendaCheiaPage'
 import FreeClassPage from './pages/FreeClassPage'
+import LashLifting4DPage from './pages/LashLifting4DPage'
 
 const ResultsCarousel = lazy(() => import('./components/ResultsCarousel'))
 const SocialProofBar = lazy(() => import('./components/SocialProofBar'))
@@ -92,6 +93,10 @@ export default function App() {
 
   if (pathname === '/agenda-cheia') {
     return <AgendaCheiaPage />
+  }
+
+  if (pathname === '/lash-lifting-4d') {
+    return <LashLifting4DPage />
   }
 
   return <SalesPage />
