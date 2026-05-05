@@ -149,14 +149,14 @@ const methodPillars = [
   {
     number: '04',
     title: 'Durabilidade',
-    text: 'Aplicação e cuidados pós-procedimento',
+    text: 'Resultado com duração média de 4 a 8 semanas',
   },
 ]
 
 const offerBenefits = [
   'Como identificar o tipo de cílio e nunca mais errar no molde',
   'Prática real em cílios curtos, longos e claros',
-  'Aplicação segura passo a passo, do diagnóstico ao pós',
+  'Aplicação segura com durabilidade de 4 a 8 semanas',
   'Como cobrar, apresentar e conseguir as primeiras clientes',
   'Como divulgar e montar oferta no WhatsApp e Instagram',
 ]
@@ -185,6 +185,10 @@ export default function LashLifting4DPage() {
   const [loadingCopyIndex, setLoadingCopyIndex] = useState(0)
   const [missingAssets, setMissingAssets] = useState<Record<string, boolean>>({})
   const [promoSecondsLeft, setPromoSecondsLeft] = useState(PROMO_SECONDS)
+  const [pendingSelection, setPendingSelection] = useState<{
+    answerKey: AnswerKey
+    questionId: QuestionId
+  } | null>(null)
 
   const screen = screenFlow[screenIndex]
   const progress = screen in questions ? questions[screen as QuestionId].progress : 0
@@ -295,12 +299,14 @@ export default function LashLifting4DPage() {
   }, [promoSecondsLeft, screen])
 
   function goNext() {
+    setPendingSelection(null)
     setScreenIndex((currentIndex) =>
       Math.min(currentIndex + 1, screenFlow.length - 1),
     )
   }
 
   function goBack() {
+    setPendingSelection(null)
     setScreenIndex((currentIndex) => {
       if (screenFlow[currentIndex] === 'loading' || screenFlow[currentIndex] === 'result') {
         return screenFlow.indexOf('q7')
@@ -311,6 +317,7 @@ export default function LashLifting4DPage() {
   }
 
   function selectAnswer(questionId: QuestionId, answerKey: AnswerKey) {
+    setPendingSelection({ answerKey, questionId })
     setAnswers((currentAnswers) => ({
       ...currentAnswers,
       [questionId]: answerKey,
@@ -1035,16 +1042,15 @@ body.lash-lifting-4d-active #social-proof-toast {
         >
           {screen === 'intro' && (
             <div className="ll4d-shell ll4d-intro">
-              <span className="ll4d-kicker">Diagnóstico Lash Lifting 4D</span>
+              <span className="ll4d-kicker">Método de 4 Passos · Lash Lifting</span>
               <h1 className="ll4d-title">
-                Descubra se o{' '}
-                <span className="ll4d-title-highlight">Lash Lifting 4D</span> é
-                o próximo serviço da sua agenda
+                Aprenda o Método de 4 Passos para dominar o{' '}
+                <span className="ll4d-title-highlight">Lash Lifting</span> e lotar
+                sua agenda
               </h1>
               <p className="ll4d-copy">
-                Responda algumas perguntas e veja se você está pronta para
-                aprender uma técnica que valoriza os cílios naturais, sem extensão
-                de fios.
+                Aprenda a diagnosticar, curvar, direcionar e garantir a durabilidade
+                — um protocolo completo para resultados que a cliente posta e indica.
               </p>
               <div className="ll4d-actions">
                 <button className="ll4d-button" type="button" onClick={goNext}>
@@ -1075,7 +1081,8 @@ body.lash-lifting-4d-active #social-proof-toast {
                   {questions[screen as QuestionId].options.map((option) => (
                     <button
                       className={`ll4d-option ${
-                        answers[screen as QuestionId] === option.key
+                        pendingSelection?.questionId === screen &&
+                        pendingSelection.answerKey === option.key
                           ? 'll4d-option-selected'
                           : ''
                       }`}
