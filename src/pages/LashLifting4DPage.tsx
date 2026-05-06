@@ -797,7 +797,7 @@ body.lash-lifting-4d-active #social-proof-toast {
                   Começar diagnóstico
                 </button>
               </div>
-              <p className="ll4d-hint">Leva menos de 2 minutos</p>
+              <p className="ll4d-hint">Leva menos de 40 segundos</p>
             </div>
           )}
 
