@@ -75,15 +75,15 @@ const offerBenefits = [
   'Como identificar o tipo de cílio e nunca mais errar no molde',
   'Prática real em cílios curtos, longos e claros',
   'Aplicação segura com durabilidade de 4 a 8 semanas',
-  'Como cobrar, apresentar e conseguir as primeiras clientes',
-  'Como divulgar e montar oferta no WhatsApp e Instagram',
+  'Como trabalhar cílios finos e sensíveis sem danificar o fio natural',
+  'Direcionamento dos fios para um resultado uniforme e natural',
 ]
 
 const resultCopy: Record<AnswerKey, string> = {
-  A: 'Seu principal bloqueio é o medo de errar. O Método 4D foi estruturado exatamente para isso: cada etapa é ensinada com clareza e práticas reais, para que você nunca fique em dúvida na mesa de atendimento.',
-  B: 'Sua maior dúvida é sobre os moldes — e essa é a decisão mais crítica do lifting. O Método 4D tem módulo dedicado ao diagnóstico do fio e escolha de molde para cílios curtos, longos e claros.',
-  C: 'Você ainda não tem clareza sobre os materiais. O Método 4D ensina o kit completo, o que cada produto faz e como usar corretamente para um resultado seguro e duradouro.',
-  D: 'Você quer aprender a técnica e também conseguir clientes. O Método 4D inclui módulo de precificação, como apresentar o serviço e como atrair clientes no Instagram e WhatsApp.',
+  A: 'Seu principal bloqueio é o medo de errar. O método foi estruturado exatamente para isso: cada etapa é ensinada com clareza e práticas reais, para que você nunca fique em dúvida na mesa de atendimento.',
+  B: 'Sua maior dúvida é sobre os moldes — e essa é a decisão mais crítica do lifting. O método tem módulo dedicado ao diagnóstico do fio e escolha de molde para cílios curtos, longos e claros.',
+  C: 'Você ainda não tem clareza sobre os materiais. O método ensina o kit completo, o que cada produto faz e como usar corretamente para um resultado seguro e duradouro.',
+  D: 'Você quer aprender a técnica e também conseguir clientes. O método inclui módulo de precificação, como apresentar o serviço e como atrair clientes no Instagram e WhatsApp.',
 }
 
 const loadingCopy = [
@@ -118,11 +118,11 @@ export default function LashLifting4DPage() {
   useEffect(() => {
     document.body.classList.add('lash-lifting-4d-active')
     const previousTitle = document.title
-    document.title = 'Diagnóstico Lash Lifting 4D'
+    document.title = 'Diagnóstico Lash Lifting'
 
     trackMetaEvent('ViewContent', {
       customData: {
-        content_name: 'Método Lash Lifting 4D',
+        content_name: 'Método Lash Lifting',
         currency: 'BRL',
         value: OFFER_PRICE,
       },
@@ -218,7 +218,7 @@ export default function LashLifting4DPage() {
   function handleCheckoutClick() {
     trackMetaEvent('InitiateCheckout', {
       customData: {
-        content_name: 'Método Lash Lifting 4D',
+        content_name: 'Método Lash Lifting',
         currency: 'BRL',
         value: OFFER_PRICE,
       },
@@ -568,8 +568,7 @@ body.lash-lifting-4d-active #social-proof-toast {
   margin-top: 24px;
 }
 
-#lash-lifting-4d-page .ll4d-offer-card,
-#lash-lifting-4d-page .ll4d-guarantee {
+#lash-lifting-4d-page .ll4d-offer-card {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--ll4d-border);
   border-radius: 10px;
@@ -657,14 +656,6 @@ body.lash-lifting-4d-active #social-proof-toast {
   font-variant-numeric: tabular-nums;
   font-weight: 900;
   line-height: 1;
-}
-
-#lash-lifting-4d-page .ll4d-guarantee {
-  color: var(--ll4d-text);
-  font-size: 14px;
-  font-weight: 800;
-  line-height: 1.45;
-  margin-top: 12px;
 }
 
 #lash-lifting-4d-page .ll4d-cta-stack {
@@ -856,7 +847,7 @@ body.lash-lifting-4d-active #social-proof-toast {
               <div className="ll4d-card">
                 <span className="ll4d-kicker">Diagnóstico concluído</span>
                 <h2 className="ll4d-title ll4d-title-compact">
-                  O Lash Lifting 4D é o próximo serviço estratégico para a sua agenda
+                  O Lash Lifting é o próximo serviço estratégico para a sua agenda
                 </h2>
                 <p className="ll4d-copy">{resultParagraph}</p>
                 <div className="ll4d-result-grid">
@@ -866,14 +857,11 @@ body.lash-lifting-4d-active #social-proof-toast {
                       allowFullScreen
                       className="ll4d-result-video"
                       src={RESULT_VIDEO_URL}
-                      title="Vídeo de resultado do Lash Lifting 4D"
+                      title="Vídeo de resultado do Lash Lifting"
                     />
-                    <div className="ll4d-guarantee">
-                      Garantia de 7 dias — 100% devolvido sem perguntas
-                    </div>
                   </div>
                   <div className="ll4d-offer-card">
-                    <h3 className="ll4d-offer-name">Método Lash Lifting 4D</h3>
+                    <h3 className="ll4d-offer-name">Método Lash Lifting</h3>
                     <ul className="ll4d-benefits">
                       {offerBenefits.map((benefit) => (
                         <li className="ll4d-benefit" key={benefit}>
