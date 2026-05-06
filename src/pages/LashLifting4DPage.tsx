@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { trackMetaEvent } from '../lib/metaEvents'
 
@@ -8,34 +8,20 @@ const KIWIFY_URL =
 
 const PROMO_SECONDS = 15 * 60
 const OFFER_PRICE = 69
-const PANDA_PLAYER_BASE = 'https://player-vz-db0cd809-911.tv.pandavideo.com.br/embed/'
-const PANDA_HORIZONTAL_VIDEO_ID = '4386be42-2ab3-4b25-99ec-290eb752fdfd'
-const PANDA_VERTICAL_VIDEO_ID = 'd9b430b9-8661-4a20-8b86-ae96a7e93850'
-const PANDA_AUTOPLAY_PARAMS =
-  'autoplay=true&muted=true&mutedIndicatorIcon=true&mutedIndicatorClickRestart=true&mutedIndicatorTextTop=Toque%20para%20ouvir&mutedIndicatorTextBottom=&saveProgress=false&controls=play-large'
-
-function getPandaSrc(videoId: string) {
-  return `${PANDA_PLAYER_BASE}?v=${videoId}&${PANDA_AUTOPLAY_PARAMS}`
-}
+const RESULT_VIDEO_URL =
+  'https://player-vz-db0cd809-911.tv.pandavideo.com.br/embed/?v=c4d11f20-25e4-4a27-a1d9-9bf86b929f3e'
 
 const screenFlow = [
   'intro',
-  'q1',
-  'q2',
-  'media1',
-  'q3',
   'q4',
-  'media2',
-  'method',
   'q5',
   'q6',
-  'q7',
   'loading',
   'result',
 ] as const
 
 type ScreenId = (typeof screenFlow)[number]
-type QuestionId = Extract<ScreenId, 'q1' | 'q2' | 'q3' | 'q4' | 'q5' | 'q6' | 'q7'>
+type QuestionId = Extract<ScreenId, 'q4' | 'q5' | 'q6'>
 type AnswerKey = 'A' | 'B' | 'C' | 'D'
 type Answers = Partial<Record<QuestionId, AnswerKey>>
 
@@ -50,43 +36,9 @@ type Question = {
 }
 
 const questions: Record<QuestionId, Question> = {
-  q1: {
-    id: 'q1',
-    progress: 14,
-    title: 'Hoje você já trabalha na área da beleza?',
-    options: [
-      { key: 'A', text: 'Sim, trabalho com cílios' },
-      { key: 'B', text: 'Sim, mas em outra área da beleza' },
-      { key: 'C', text: 'Ainda não, quero começar' },
-      { key: 'D', text: 'Já fiz cursos, mas não atendo com segurança' },
-    ],
-  },
-  q2: {
-    id: 'q2',
-    progress: 28,
-    title: 'O que você mais busca em um novo serviço hoje?',
-    options: [
-      { key: 'A', text: 'Ter mais opções para oferecer às clientes' },
-      { key: 'B', text: 'Começar a atender com uma técnica procurada' },
-      { key: 'C', text: 'Aumentar meus ganhos na beleza' },
-      { key: 'D', text: 'Me diferenciar e ter mais segurança' },
-    ],
-  },
-  q3: {
-    id: 'q3',
-    progress: 42,
-    title:
-      'Você já percebeu clientes pedindo algo mais natural do que extensão de cílios?',
-    options: [
-      { key: 'A', text: 'Sim, muitas já pediram algo mais leve' },
-      { key: 'B', text: 'Algumas já comentaram' },
-      { key: 'C', text: 'Ainda não tenho clientes' },
-      { key: 'D', text: 'Nunca parei para observar isso' },
-    ],
-  },
   q4: {
     id: 'q4',
-    progress: 56,
+    progress: 33,
     title: 'O que mais te impede de oferecer Lash Lifting hoje?',
     options: [
       { key: 'A', text: 'Medo de errar na aplicação' },
@@ -97,7 +49,7 @@ const questions: Record<QuestionId, Question> = {
   },
   q5: {
     id: 'q5',
-    progress: 70,
+    progress: 66,
     title: 'Qual parte você sente que mais precisaria aprender com clareza?',
     options: [
       { key: 'A', text: 'Como identificar o tipo de fio' },
@@ -108,7 +60,7 @@ const questions: Record<QuestionId, Question> = {
   },
   q6: {
     id: 'q6',
-    progress: 84,
+    progress: 98,
     title: 'Você se sentiria mais segura com práticas em diferentes tipos de cílios?',
     options: [
       { key: 'A', text: 'Sim, principalmente cílios curtos e espessos' },
@@ -117,41 +69,7 @@ const questions: Record<QuestionId, Question> = {
       { key: 'D', text: 'Sim, preciso praticar nos três tipos' },
     ],
   },
-  q7: {
-    id: 'q7',
-    progress: 98,
-    title: 'Além da técnica, você quer aprender como cobrar e vender o Lash Lifting?',
-    options: [
-      { key: 'A', text: 'Sim, quero técnica e venda completas' },
-      { key: 'B', text: 'Quero principalmente dominar a técnica' },
-      { key: 'C', text: 'Quero saber como conseguir as primeiras clientes' },
-      { key: 'D', text: 'Quero aprender tudo do zero' },
-    ],
-  },
 }
-
-const methodPillars = [
-  {
-    number: '01',
-    title: 'Diagnóstico do fio',
-    text: 'Curtos, longos, claros, resistentes',
-  },
-  {
-    number: '02',
-    title: 'Design de curvatura',
-    text: 'Molde certo para cada tipo de cílio',
-  },
-  {
-    number: '03',
-    title: 'Direcionamento',
-    text: 'Resultado alinhado e natural',
-  },
-  {
-    number: '04',
-    title: 'Durabilidade',
-    text: 'Resultado com duração média de 4 a 8 semanas',
-  },
-]
 
 const offerBenefits = [
   'Como identificar o tipo de cílio e nunca mais errar no molde',
@@ -181,9 +99,7 @@ const resultIndex = screenFlow.indexOf('result')
 export default function LashLifting4DPage() {
   const [screenIndex, setScreenIndex] = useState(0)
   const [answers, setAnswers] = useState<Answers>({})
-  const [unlockedMediaScreen, setUnlockedMediaScreen] = useState<ScreenId | null>(null)
   const [loadingCopyIndex, setLoadingCopyIndex] = useState(0)
-  const [missingAssets, setMissingAssets] = useState<Record<string, boolean>>({})
   const [promoSecondsLeft, setPromoSecondsLeft] = useState(PROMO_SECONDS)
   const [pendingSelection, setPendingSelection] = useState<{
     answerKey: AnswerKey
@@ -194,24 +110,10 @@ export default function LashLifting4DPage() {
   const progress = screen in questions ? questions[screen as QuestionId].progress : 0
   const resultParagraph = resultCopy[answers.q4 || 'A']
   const shouldShowBackButton = screenIndex > 0
-  const shouldShowStickyContinue = screen === 'method'
   const isResultScreen = screen === 'result'
   const isPromoExpired = promoSecondsLeft <= 0
   const promoMinutes = Math.floor(promoSecondsLeft / 60)
   const promoSeconds = promoSecondsLeft % 60
-
-  const mediaDelay = useMemo(() => {
-    if (screen === 'media1') {
-      return 4000
-    }
-
-    if (screen === 'media2') {
-      return 3000
-    }
-
-    return 0
-  }, [screen])
-  const canContinue = mediaDelay === 0 || unlockedMediaScreen === screen
 
   useEffect(() => {
     document.body.classList.add('lash-lifting-4d-active')
@@ -235,19 +137,6 @@ export default function LashLifting4DPage() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [screenIndex])
-
-  useEffect(() => {
-    if (!mediaDelay) {
-      return
-    }
-
-    const timeoutId = window.setTimeout(
-      () => setUnlockedMediaScreen(screen),
-      mediaDelay,
-    )
-
-    return () => window.clearTimeout(timeoutId)
-  }, [mediaDelay, screen])
 
   useEffect(() => {
     if (screen !== 'loading') {
@@ -309,7 +198,7 @@ export default function LashLifting4DPage() {
     setPendingSelection(null)
     setScreenIndex((currentIndex) => {
       if (screenFlow[currentIndex] === 'loading' || screenFlow[currentIndex] === 'result') {
-        return screenFlow.indexOf('q7')
+        return screenFlow.indexOf('q6')
       }
 
       return Math.max(currentIndex - 1, 0)
@@ -324,13 +213,6 @@ export default function LashLifting4DPage() {
     }))
 
     window.setTimeout(goNext, 500)
-  }
-
-  function markAssetMissing(assetKey: string) {
-    setMissingAssets((currentAssets) => ({
-      ...currentAssets,
-      [assetKey]: true,
-    }))
   }
 
   function handleCheckoutClick() {
@@ -417,10 +299,6 @@ body.lash-lifting-4d-active #social-proof-toast {
   color: var(--ll4d-accent-2);
   font-size: 18px;
   line-height: 1;
-}
-
-#lash-lifting-4d-page .ll4d-sticky-next {
-  display: none;
 }
 
 #lash-lifting-4d-page .ll4d-screen {
@@ -594,11 +472,11 @@ body.lash-lifting-4d-active #social-proof-toast {
 
 #lash-lifting-4d-page .ll4d-question {
   color: var(--ll4d-text);
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(28px, 5.2vw, 42px);
-  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(26px, 3.8vw, 36px);
+  font-weight: 800;
   letter-spacing: 0;
-  line-height: 1.08;
+  line-height: 1.16;
   margin: 0;
 }
 
@@ -649,136 +527,21 @@ body.lash-lifting-4d-active #social-proof-toast {
   width: 38px;
 }
 
-#lash-lifting-4d-page .ll4d-media-wrap {
-  margin-top: 24px;
-}
-
-#lash-lifting-4d-page .ll4d-panda-wrap {
+#lash-lifting-4d-page .ll4d-result-video {
   background: #00083A;
   border: 1px solid var(--ll4d-border);
   border-radius: 10px;
+  display: block;
   overflow: hidden;
-  position: relative;
   width: 100%;
 }
 
-#lash-lifting-4d-page .ll4d-panda-horizontal {
-  aspect-ratio: 16 / 9;
-}
-
-#lash-lifting-4d-page .ll4d-panda-vertical {
+#lash-lifting-4d-page .ll4d-result-video {
   aspect-ratio: 9 / 16;
+  border: 0;
   margin-left: auto;
   margin-right: auto;
   max-width: 360px;
-}
-
-#lash-lifting-4d-page .ll4d-panda-frame {
-  border: 0;
-  display: block;
-  height: 100%;
-  inset: 0;
-  position: absolute;
-  width: 100%;
-}
-
-#lash-lifting-4d-page .ll4d-video,
-#lash-lifting-4d-page .ll4d-image,
-#lash-lifting-4d-page .ll4d-result-photo,
-#lash-lifting-4d-page .ll4d-placeholder {
-  background: #00083A;
-  border: 1px solid var(--ll4d-border);
-  border-radius: 10px;
-  display: block;
-  overflow: hidden;
-  width: 100%;
-}
-
-#lash-lifting-4d-page .ll4d-video {
-  aspect-ratio: 16 / 9;
-  object-fit: cover;
-}
-
-#lash-lifting-4d-page .ll4d-image {
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-}
-
-#lash-lifting-4d-page .ll4d-result-photo {
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-}
-
-#lash-lifting-4d-page .ll4d-placeholder {
-  align-items: center;
-  aspect-ratio: 16 / 9;
-  background:
-    linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(255, 209, 102, 0.11)),
-    repeating-linear-gradient(135deg, #020B4A 0 12px, #00083A 12px 24px);
-  color: var(--ll4d-text);
-  display: flex;
-  justify-content: center;
-  min-height: 190px;
-  padding: 24px;
-  text-align: center;
-}
-
-#lash-lifting-4d-page .ll4d-placeholder-image {
-  aspect-ratio: 3 / 2;
-}
-
-#lash-lifting-4d-page .ll4d-media-labels {
-  color: var(--ll4d-muted);
-  display: flex;
-  font-size: 13px;
-  font-weight: 800;
-  justify-content: space-between;
-  line-height: 1;
-  margin-top: 12px;
-}
-
-#lash-lifting-4d-page .ll4d-caption {
-  color: var(--ll4d-muted);
-  font-size: 14px;
-  line-height: 1.5;
-  margin-top: 12px;
-}
-
-#lash-lifting-4d-page .ll4d-pillar-grid {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  margin-top: 26px;
-}
-
-#lash-lifting-4d-page .ll4d-pillar {
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid var(--ll4d-border);
-  border-radius: 10px;
-  min-height: 142px;
-  padding: 18px;
-}
-
-#lash-lifting-4d-page .ll4d-pillar-number {
-  color: var(--ll4d-accent-2);
-  font-size: 12px;
-  font-weight: 900;
-  line-height: 1;
-}
-
-#lash-lifting-4d-page .ll4d-pillar-title {
-  color: var(--ll4d-text);
-  font-size: 17px;
-  font-weight: 800;
-  line-height: 1.2;
-  margin-top: 12px;
-}
-
-#lash-lifting-4d-page .ll4d-pillar-text {
-  color: var(--ll4d-muted);
-  font-size: 14px;
-  line-height: 1.48;
-  margin-top: 8px;
 }
 
 #lash-lifting-4d-page .ll4d-loading {
@@ -945,10 +708,6 @@ body.lash-lifting-4d-active #social-proof-toast {
     padding-bottom: 170px;
   }
 
-  #lash-lifting-4d-page .ll4d-screen-with-sticky {
-    padding-bottom: 114px;
-  }
-
   #lash-lifting-4d-page .ll4d-shell,
   #lash-lifting-4d-page .ll4d-shell-wide {
     align-self: center;
@@ -963,22 +722,6 @@ body.lash-lifting-4d-active #social-proof-toast {
     font-size: 13px;
     min-height: 38px;
     padding: 0 14px;
-  }
-
-  #lash-lifting-4d-page .ll4d-sticky-next {
-    background: linear-gradient(180deg, rgba(0, 5, 61, 0), #00053D 28%);
-    bottom: 0;
-    display: flex;
-    left: 0;
-    padding: 30px 16px 16px;
-    position: absolute;
-    right: 0;
-    z-index: 6;
-  }
-
-  #lash-lifting-4d-page .ll4d-sticky-next .ll4d-button {
-    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
-    width: 100%;
   }
 
   #lash-lifting-4d-page .ll4d-card {
@@ -1013,13 +756,12 @@ body.lash-lifting-4d-active #social-proof-toast {
     width: 34px;
   }
 
-  #lash-lifting-4d-page .ll4d-pillar-grid,
   #lash-lifting-4d-page .ll4d-result-grid {
     grid-template-columns: 1fr;
   }
 
-  #lash-lifting-4d-page .ll4d-result-photo {
-    aspect-ratio: 3 / 2;
+  #lash-lifting-4d-page .ll4d-result-video {
+    max-width: min(100%, 360px);
   }
 }
       `}</style>
@@ -1036,9 +778,7 @@ body.lash-lifting-4d-active #social-proof-toast {
           key={screen}
           className={`ll4d-screen ${
             shouldShowBackButton ? 'll4d-screen-with-back' : ''
-          } ${shouldShowStickyContinue ? 'll4d-screen-with-sticky' : ''} ${
-            isResultScreen ? 'll4d-screen-result' : ''
-          }`}
+          } ${isResultScreen ? 'll4d-screen-result' : ''}`}
         >
           {screen === 'intro' && (
             <div className="ll4d-shell ll4d-intro">
@@ -1099,111 +839,6 @@ body.lash-lifting-4d-active #social-proof-toast {
             </div>
           )}
 
-          {screen === 'media1' && (
-            <div className="ll4d-shell">
-              <div className="ll4d-card">
-                <h2 className="ll4d-title ll4d-title-compact">
-                  Veja o que o Lash Lifting faz nos cílios naturais
-                </h2>
-                <p className="ll4d-copy">
-                  Sem fios artificiais — ele trabalha os próprios cílios da cliente.
-                </p>
-                <div className="ll4d-media-wrap">
-                  <div className="ll4d-panda-wrap ll4d-panda-horizontal">
-                    <iframe
-                      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-                      allowFullScreen
-                      className="ll4d-panda-frame"
-                      id={`panda-${PANDA_HORIZONTAL_VIDEO_ID}`}
-                      src={getPandaSrc(PANDA_HORIZONTAL_VIDEO_ID)}
-                      title="Vídeo antes e depois do Lash Lifting 4D"
-                    />
-                  </div>
-                  <div className="ll4d-media-labels">
-                    <span>Antes</span>
-                    <span>Depois</span>
-                  </div>
-                </div>
-                <div className="ll4d-actions">
-                  <button
-                    className="ll4d-button"
-                    disabled={!canContinue}
-                    type="button"
-                    onClick={goNext}
-                  >
-                    Continuar
-                  </button>
-                </div>
-                {!canContinue && (
-                  <p className="ll4d-hint">Assista antes de continuar</p>
-                )}
-              </div>
-            </div>
-          )}
-
-          {screen === 'media2' && (
-            <div className="ll4d-shell">
-              <div className="ll4d-card">
-                <h2 className="ll4d-title ll4d-title-compact">
-                  Quando a técnica é certa, o resultado fala sozinho
-                </h2>
-                <div className="ll4d-media-wrap">
-                  <div className="ll4d-panda-wrap ll4d-panda-vertical">
-                    <iframe
-                      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-                      allowFullScreen
-                      className="ll4d-panda-frame"
-                      id={`panda-${PANDA_VERTICAL_VIDEO_ID}`}
-                      src={getPandaSrc(PANDA_VERTICAL_VIDEO_ID)}
-                      title="Vídeo vertical de resultado do Lash Lifting 4D"
-                    />
-                  </div>
-                  <p className="ll4d-caption">
-                    Resultado real. Cílios naturais valorizados, olhar aberto.
-                  </p>
-                </div>
-                <div className="ll4d-actions">
-                  <button
-                    className="ll4d-button"
-                    disabled={!canContinue}
-                    type="button"
-                    onClick={goNext}
-                  >
-                    Continuar
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {screen === 'method' && (
-            <div className="ll4d-shell-wide">
-              <div className="ll4d-card">
-                <h2 className="ll4d-title ll4d-title-compact">
-                  Por que algumas profissionais não conseguem um bom resultado?
-                </h2>
-                <p className="ll4d-copy">
-                  Porque Lash Lifting não é só aplicar produto. O resultado depende
-                  de técnica, diagnóstico e escolhas certas em cada etapa.
-                </p>
-                <div className="ll4d-pillar-grid">
-                  {methodPillars.map((pillar) => (
-                    <article className="ll4d-pillar" key={pillar.number}>
-                      <span className="ll4d-pillar-number">{pillar.number}</span>
-                      <h3 className="ll4d-pillar-title">{pillar.title}</h3>
-                      <p className="ll4d-pillar-text">{pillar.text}</p>
-                    </article>
-                  ))}
-                </div>
-                <div className="ll4d-actions ll4d-actions-mobile-hidden">
-                  <button className="ll4d-button" type="button" onClick={goNext}>
-                    Continuar
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
           {screen === 'loading' && (
             <div className="ll4d-shell">
               <div className="ll4d-card ll4d-loading">
@@ -1226,18 +861,13 @@ body.lash-lifting-4d-active #social-proof-toast {
                 <p className="ll4d-copy">{resultParagraph}</p>
                 <div className="ll4d-result-grid">
                   <div>
-                    {missingAssets.result ? (
-                      <div className="ll4d-placeholder ll4d-placeholder-image">
-                        Placeholder da foto final
-                      </div>
-                    ) : (
-                      <img
-                        alt="Resultado final de Lash Lifting 4D"
-                        className="ll4d-result-photo"
-                        src="/assets/foto-resultado-2.jpg"
-                        onError={() => markAssetMissing('result')}
-                      />
-                    )}
+                    <iframe
+                      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                      allowFullScreen
+                      className="ll4d-result-video"
+                      src={RESULT_VIDEO_URL}
+                      title="Vídeo de resultado do Lash Lifting 4D"
+                    />
                     <div className="ll4d-guarantee">
                       Garantia de 7 dias — 100% devolvido sem perguntas
                     </div>
@@ -1289,13 +919,6 @@ body.lash-lifting-4d-active #social-proof-toast {
             </div>
           )}
         </section>
-        {shouldShowStickyContinue && (
-          <div className="ll4d-sticky-next">
-            <button className="ll4d-button" type="button" onClick={goNext}>
-              Continuar
-            </button>
-          </div>
-        )}
       </div>
     </main>
   )
