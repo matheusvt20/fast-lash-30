@@ -6,6 +6,7 @@ import WhatsAppSupportButton from './components/WhatsAppSupportButton'
 import { salesPageData } from './data/salesPageData'
 import { trackMetaEvent } from './lib/metaEvents'
 import AgendaCheiaPage from './pages/AgendaCheiaPage'
+import AgendaCheiaQuizPage from './pages/AgendaCheiaQuizPage'
 import FreeClassPage from './pages/FreeClassPage'
 import LashLiftingPage from './pages/LashLiftingPage'
 
@@ -82,10 +83,19 @@ function SalesPage() {
 
 export default function App() {
   const pathname = window.location.pathname.replace(/\/$/, '')
+  const isAgendaCheiaQuiz = pathname.startsWith('/agenda-cheia-quiz')
 
   useEffect(() => {
+    if (isAgendaCheiaQuiz) {
+      return
+    }
+
     trackMetaEvent('PageView')
-  }, [pathname])
+  }, [isAgendaCheiaQuiz, pathname])
+
+  if (isAgendaCheiaQuiz) {
+    return <AgendaCheiaQuizPage />
+  }
 
   if (pathname === '/aula-gratuita') {
     return <FreeClassPage />
