@@ -56,35 +56,27 @@ const profiles = [
   {
     title: 'A Iniciante Invisível',
     headline: 'Sua agenda está vazia porque ninguém ainda sabe que você existe.',
-    happening:
-      'No início é assim para quase todas. Você aprendeu a técnica, investiu no curso, comprou o material — mas ninguém te ensinou a conseguir clientes. Indicação demora. Instagram orgânico demora mais ainda. E enquanto você espera, a agenda fica vazia e a dúvida aumenta: será que é para mim?',
-    blocker:
-      'Não é falta de habilidade. É falta de um sistema para aparecer para as pessoas certas todos os dias — mesmo sem ter seguidores, mesmo sem ter indicação, mesmo sendo nova no mercado.',
+    happening: 'Ninguém sabe que você existe ainda',
+    blocker: 'Falta um sistema para aparecer todo dia',
   },
   {
     title: 'A Refém da Indicação',
     headline:
       'Sua agenda depende de outras pessoas — e isso é um risco que você não pode ignorar.',
-    happening:
-      'Indicação é ótima quando chega. O problema é que você não controla quando chega. Um mês a agenda lota, no outro esvazia. Você fica refém do humor, da memória e da generosidade dos outros.',
-    blocker:
-      'Você provou que é boa — as clientes que têm voltam e indicam. Mas você nunca aprendeu a gerar demanda por conta própria. Nunca teve um sistema que trouxesse clientes novos todo dia, independente de indicação.',
+    happening: 'Sua agenda depende da indicação chegar',
+    blocker: 'Falta gerar clientes novas por conta própria',
   },
   {
     title: 'A que Posta mas não Converte',
     headline: 'Seu Instagram atrai curiosas. Não clientes.',
-    happening:
-      'Você posta, recebe curtidas, às vezes elogio nos comentários — mas agendamento quase nunca. Seguidores não pagam boleto. O problema não é o seu trabalho. É que o Instagram orgânico foi feito para engajamento, não para venda.',
-    blocker:
-      'Conteúdo orgânico constrói autoridade no longo prazo. Mas se você precisa de clientes agora, precisa de tráfego pago — que coloca seu serviço na frente de quem já quer agendar.',
+    happening: 'Seu conteúdo atrai atenção, mas não agenda',
+    blocker: 'Falta tráfego para alcançar quem quer agendar',
   },
   {
     title: 'A que já Tentou de Tudo',
     headline: 'Você tentou. Mas tentou sem método.',
-    happening:
-      'Você não é acomodada — já tentou impulsionar post, já tentou anúncio, já tentou stories todo dia. Mas nada funcionou de forma consistente. E isso é frustrante porque você colocou dinheiro e tempo.',
-    blocker:
-      'Impulsionar post não é tráfego pago de verdade. Anúncio sem estrutura queima dinheiro sem aprender. O que faltou não foi esforço — foi um método testado, com passo a passo claro.',
+    happening: 'Você já tentou, mas nada ficou consistente',
+    blocker: 'Falta método para anunciar sem queimar dinheiro',
   },
 ] as const
 
@@ -208,9 +200,18 @@ function QuizPage() {
 function ResultPage() {
   const { answers } = useQuiz()
   const sourceAnswer = answers.source
+  const [remainingSeconds, setRemainingSeconds] = useState(15 * 60)
 
   useEffect(() => {
     window.fbq?.('track', 'ViewContent')
+  }, [])
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setRemainingSeconds((seconds) => Math.max(0, seconds - 1))
+    }, 1000)
+
+    return () => window.clearInterval(intervalId)
   }, [])
 
   if (sourceAnswer === undefined) {
@@ -218,6 +219,9 @@ function ResultPage() {
   }
 
   const profile = profiles[sourceAnswer]
+  const minutes = Math.floor(remainingSeconds / 60)
+  const seconds = remainingSeconds % 60
+  const countdown = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
 
   function handleCheckoutClick() {
     window.fbq?.('track', 'InitiateCheckout')
@@ -229,31 +233,59 @@ function ResultPage() {
         <span className="agenda-quiz-tag">DIAGNÓSTICO DA SUA AGENDA</span>
         <h1>{profile.title}</h1>
         <h2>{profile.headline}</h2>
-        <p>{profile.happening}</p>
-        <p>{profile.blocker}</p>
+        <div className="agenda-quiz-diagnosis-grid">
+          <article className="agenda-quiz-diagnosis-card">
+            <span aria-hidden="true">❌</span>
+            <small>O que está acontecendo</small>
+            <strong>{profile.happening}</strong>
+          </article>
+          <article className="agenda-quiz-diagnosis-card">
+            <span aria-hidden="true">⚠️</span>
+            <small>O que está travando</small>
+            <strong>{profile.blocker}</strong>
+          </article>
+        </div>
         <div className="agenda-quiz-divider" />
 
         <div className="agenda-quiz-transition">
           <p>
-            Você acabou de entender o que está travando sua agenda. Agora existe
-            um caminho.
-          </p>
-          <p>
             Foi pensando nisso que criamos um método de 8 passos para lash
-            designers lotarem a agenda usando tráfego pago a partir de R$10 por
-            dia — sem depender de indicação e sem precisar de milhares de
-            seguidores.
+            designers lotarem a agenda — sem depender de indicação e sem
+            precisar ser famosa no Instagram.
           </p>
+        </div>
+
+        <div className="agenda-quiz-product-card">
+          <span aria-hidden="true">🎯</span>
+          <strong>Agenda Cheia Lash</strong>
+          <small>Método completo em 8 passos</small>
+          <ul>
+            <li>Acesso imediato após a compra</li>
+            <li>Suporte incluso</li>
+            <li>Garantia de 7 dias</li>
+          </ul>
         </div>
 
         <div className="agenda-quiz-offer">
           <strong>Agenda Cheia Lash</strong>
           <ul>
-            <li>8 passos do zero para lotar sua agenda com tráfego pago</li>
-            <li>Como atrair clientes que já querem agendar agora</li>
-            <li>Funciona gastando a partir de R$10 por dia</li>
+            <li>Do básico ao avançado: como criar e rodar tráfego pago do zero</li>
+            <li>
+              Como vender pelo Instagram — stories, posicionamento e conteúdo
+              que converte
+            </li>
+            <li>Como criar imagens de alto impacto usando IA gratuitamente</li>
+            <li>E muito mais...</li>
           </ul>
-          <span className="agenda-quiz-price">R$30,00</span>
+          <div className="agenda-quiz-price-stack">
+            <span className="agenda-quiz-old-price">De R$30,00</span>
+            <span className="agenda-quiz-price">R$14,00</span>
+            <span className="agenda-quiz-price-note">Oferta por tempo limitado</span>
+          </div>
+          <div className="agenda-quiz-countdown-wrap">
+            <span>⚠️ Esta oferta expira em:</span>
+            <strong>{countdown}</strong>
+          </div>
           <a
             className="agenda-quiz-primary"
             href={CHECKOUT_URL}

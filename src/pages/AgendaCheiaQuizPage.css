@@ -4,7 +4,7 @@
   color: #FFFFFF;
   display: flex;
   justify-content: center;
-  padding: 28px 18px;
+  padding: 28px 16px;
 }
 
 .agenda-quiz-page--center {
@@ -12,13 +12,23 @@
 }
 
 .agenda-quiz-card {
-  width: min(100%, 560px);
+  width: min(100%, 620px);
 }
 
 .agenda-quiz-landing,
 .agenda-quiz-flow {
   display: flex;
   flex-direction: column;
+}
+
+.agenda-quiz-landing {
+  background:
+    linear-gradient(145deg, rgba(201, 168, 76, 0.13), rgba(201, 168, 76, 0) 42%),
+    #101010;
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  border-radius: 18px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+  padding: 30px 22px 24px;
 }
 
 .agenda-quiz-brand {
@@ -40,9 +50,9 @@
 }
 
 .agenda-quiz-landing h1 {
-  font-size: clamp(2.35rem, 12vw, 4.6rem);
+  font-size: clamp(2.05rem, 10vw, 4.1rem);
   font-weight: 800;
-  line-height: 0.96;
+  line-height: 1;
   margin-bottom: 18px;
 }
 
@@ -205,6 +215,40 @@
   margin-bottom: 16px;
 }
 
+.agenda-quiz-diagnosis-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.agenda-quiz-diagnosis-card {
+  background: #1A1A1A;
+  border-left: 3px solid #C9A84C;
+  border-radius: 8px;
+  display: grid;
+  gap: 8px;
+  padding: 16px;
+}
+
+.agenda-quiz-diagnosis-card span {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.agenda-quiz-diagnosis-card small {
+  color: #FFFFFF;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.agenda-quiz-diagnosis-card strong {
+  color: #C9A84C;
+  font-size: 1.04rem;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
 .agenda-quiz-divider {
   background: #C9A84C;
   height: 1px;
@@ -228,7 +272,59 @@
 .agenda-quiz-offer {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
+}
+
+.agenda-quiz-product-card {
+  align-items: center;
+  background: #1A1400;
+  border: 1px solid #C9A84C;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  padding: 24px;
+  text-align: center;
+}
+
+.agenda-quiz-product-card span {
+  font-size: 2.5rem;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.agenda-quiz-product-card strong {
+  color: #C9A84C;
+  font-size: 1.35rem;
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 6px;
+}
+
+.agenda-quiz-product-card small {
+  color: #FFFFFF;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin-bottom: 18px;
+}
+
+.agenda-quiz-product-card ul {
+  display: grid;
+  gap: 8px;
+  list-style: none;
+}
+
+.agenda-quiz-product-card li {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.agenda-quiz-product-card li::before {
+  color: #C9A84C;
+  content: '✓ ';
+  font-weight: 900;
 }
 
 .agenda-quiz-offer strong {
@@ -261,11 +357,56 @@
   top: 0;
 }
 
+.agenda-quiz-price-stack {
+  display: grid;
+  gap: 5px;
+}
+
+.agenda-quiz-old-price {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: line-through;
+}
+
 .agenda-quiz-price {
   color: #C9A84C;
   font-size: clamp(2.35rem, 11vw, 4rem);
   font-weight: 900;
   line-height: 1;
+}
+
+.agenda-quiz-price-note {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.agenda-quiz-countdown-wrap {
+  display: grid;
+  gap: 8px;
+}
+
+.agenda-quiz-countdown-wrap span {
+  color: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.agenda-quiz-countdown-wrap strong {
+  background: #3D0000;
+  border-radius: 8px;
+  color: #FFFFFF;
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+  padding: 12px;
+  text-align: center;
 }
 
 @keyframes agendaQuizFade {
@@ -283,6 +424,14 @@
 @media (min-width: 720px) {
   .agenda-quiz-page {
     padding: 48px 24px;
+  }
+
+  .agenda-quiz-landing {
+    padding: 46px 46px 34px;
+  }
+
+  .agenda-quiz-diagnosis-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .agenda-quiz-flow {

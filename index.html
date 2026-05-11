@@ -70,7 +70,12 @@
     </noscript>
     <script>
       (function () {
-        if (window.location.pathname.replace(/\/$/, '') === '/aula-gratuita') {
+        var pathname = window.location.pathname.replace(/\/$/, '');
+
+        if (
+          pathname === '/aula-gratuita' ||
+          pathname.indexOf('/agenda-cheia-quiz') === 0
+        ) {
           return;
         }
 
