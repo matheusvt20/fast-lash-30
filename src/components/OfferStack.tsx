@@ -29,7 +29,7 @@ export default function OfferStack({
   const totalValue = product.originalPrice
   const isDefaultOffer = product.name === salesPageData.product.name
   const finalPrice = product.price
-  const installmentText = isDefaultOffer ? '5x de R$ 10,41 / ano' : '5x no cartão'
+  const installmentText = isDefaultOffer ? '5x de R$ 10,41' : '5x no cartão'
   const [secondsLeft, setSecondsLeft] = useState(9 * 60 + 39)
   const bonusItems =
     copy.items ?? (isDefaultOffer ? defaultOfferBonuses : bonuses.map((bonus) => bonus.name))
@@ -101,6 +101,8 @@ export default function OfferStack({
           border: 1px solid rgba(228, 202, 136, 0.56);
           border-radius: 18px;
           box-shadow: 0 34px 90px rgba(0, 0, 0, 0.24);
+          display: flex;
+          flex-direction: column;
           margin: 42px auto 0;
           max-width: 720px;
           padding: 48px;
@@ -326,6 +328,14 @@ export default function OfferStack({
             padding: 28px 20px;
           }
 
+          #offer-stack .offer-total {
+            order: 4;
+          }
+
+          #offer-stack .offer-summary {
+            order: 3;
+          }
+
           #offer-stack .offer-product-title {
             font-size: 28px;
           }
@@ -343,13 +353,45 @@ export default function OfferStack({
           }
 
           #offer-stack .offer-line {
+            align-items: center;
+            flex-direction: row;
+            gap: 12px;
+            padding: 16px 0;
+          }
+
+          #offer-stack .offer-line-name {
             align-items: flex-start;
-            flex-direction: column;
-            gap: 8px;
+            flex: 1 1 auto;
+            min-width: 0;
+          }
+
+          #offer-stack .offer-line-name span:last-child {
+            overflow-wrap: anywhere;
+          }
+
+          #offer-stack .offer-free {
+            align-self: flex-start;
+            flex: 0 0 auto;
+            font-size: 10px;
+            letter-spacing: 0.06em;
+            padding: 5px 9px;
           }
 
           #offer-stack .offer-final-price {
             font-size: 42px;
+          }
+
+          #offer-stack .offer-cta {
+            font-size: 12.5px;
+            line-height: 1.35;
+            min-height: 58px;
+            padding: 14px 18px;
+          }
+
+          #offer-stack .offer-countdown {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 10px;
           }
 
           #offer-stack .offer-countdown-time {
@@ -374,7 +416,7 @@ export default function OfferStack({
             </div>
             <div className="offer-coupon-copy">
               Sua condição especial já está aplicada: {installmentText} ou R${' '}
-              {finalPrice},00 / ano.
+              {finalPrice},00 à vista.
             </div>
           </div>
 
@@ -386,10 +428,9 @@ export default function OfferStack({
 
             <div className="offer-final-price">
               R$ {finalPrice},00
-              <span className="offer-price-period">/ ano</span>
             </div>
             <div className="offer-note">
-              {copy.note ?? 'Pagamento anual · 1 ano de acesso'}
+              {copy.note ?? '5x de R$ 10,41 ou R$ 47,00 à vista'}
             </div>
 
             <a
@@ -397,7 +438,7 @@ export default function OfferStack({
               href={product.checkoutUrl}
               onClick={handleCheckoutClick}
             >
-              {copy.cta ?? `Garantir meu acesso por R$${finalPrice},00 / ano`}
+              {copy.cta ?? `Garantir meu acesso por R$${finalPrice},00`}
             </a>
 
             <div className="offer-countdown" aria-live="polite">

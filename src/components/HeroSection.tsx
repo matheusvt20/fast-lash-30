@@ -782,7 +782,7 @@ export default function HeroSection({
             <span className="hero-price">
                 {copy.priceText ?? (
                   <>
-                    5x de R$ 10,41 ou <strong>R$ 47,00 / ano</strong>
+                    5x de R$ 10,41 ou <strong>R$ 47,00 à vista</strong>
                   </>
                 )}
             </span>

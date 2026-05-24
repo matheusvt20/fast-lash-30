@@ -166,7 +166,7 @@ export default function FinalCTA({
 
         <div className="final-pricing">
           <span className="final-original-price">R${product.originalPrice}</span>
-          <span className="final-price">R${product.price},00 / ano</span>
+          <span className="final-price">R${product.price},00</span>
         </div>
 
         <a
@@ -174,7 +174,7 @@ export default function FinalCTA({
           href={product.checkoutUrl}
           onClick={handleCheckoutClick}
         >
-          {copy.cta ?? 'Quero o Cílios em 1 Hora por R$47,00 / ano'}
+          {copy.cta ?? 'Quero o Cílios em 1 Hora por R$47,00'}
         </a>
 
         <div className="final-security">
