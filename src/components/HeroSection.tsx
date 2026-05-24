@@ -792,11 +792,11 @@ export default function HeroSection({
               </span>
             </a>
             <span className="hero-price">
-              {copy.priceText ?? (
-                <>
-                  12x de R$ 6,08 ou <strong>R$ 59,00 à vista</strong>
-                </>
-              )}
+                {copy.priceText ?? (
+                  <>
+                    5x de R$ 10,41 ou <strong>R$ 47,00 / ano</strong>
+                  </>
+                )}
             </span>
             <span className="hero-trust">Acesso imediato e 100% seguro</span>
           </div>

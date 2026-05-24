@@ -20,7 +20,7 @@ export default function FinalCTA({
     copy.bullets ?? [
       '12 módulos + 7 bônus exclusivos',
       'Garantia incondicional de 7 dias',
-      '1 ano de acesso com pagamento único',
+      '1 ano de acesso com pagamento anual',
     ]
 
   function handleCheckoutClick() {
@@ -166,7 +166,7 @@ export default function FinalCTA({
 
         <div className="final-pricing">
           <span className="final-original-price">R${product.originalPrice}</span>
-          <span className="final-price">R${product.price}</span>
+          <span className="final-price">R${product.price},00 / ano</span>
         </div>
 
         <a
@@ -174,7 +174,7 @@ export default function FinalCTA({
           href={product.checkoutUrl}
           onClick={handleCheckoutClick}
         >
-          {copy.cta ?? 'Quero o Cílios em 1 Hora agora'}
+          {copy.cta ?? 'Quero o Cílios em 1 Hora por R$47,00 / ano'}
         </a>
 
         <div className="final-security">

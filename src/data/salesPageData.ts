@@ -5,9 +5,9 @@ export const salesPageData = {
       'No meu curso online eu ensino os segredos para fazer cílios em até 53 minutos.',
     subheadline:
       'Atenda mais clientes, cobre mais caro e entregue um resultado que faz sua cliente voltar — sem perder qualidade.',
-    price: 59,
+    price: 47,
     originalPrice: 529,
-    checkoutUrl: 'https://pay.kiwify.com.br/vNqSK5h',
+    checkoutUrl: 'https://pay.kiwify.com.br/6hqttVr',
   },
 
   creator: {

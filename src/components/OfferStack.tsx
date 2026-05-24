@@ -28,8 +28,8 @@ export default function OfferStack({
   const { product, bonuses } = data
   const totalValue = product.originalPrice
   const isDefaultOffer = product.name === salesPageData.product.name
-  const finalPrice = isDefaultOffer ? 27 : product.price
-  const installmentText = isDefaultOffer ? '6x de R$ 5,07' : '12x no cartão'
+  const finalPrice = product.price
+  const installmentText = isDefaultOffer ? '5x de R$ 10,41 / ano' : '5x no cartão'
   const [secondsLeft, setSecondsLeft] = useState(9 * 60 + 39)
   const bonusItems =
     copy.items ?? (isDefaultOffer ? defaultOfferBonuses : bonuses.map((bonus) => bonus.name))
@@ -243,6 +243,14 @@ export default function OfferStack({
           margin-top: 14px;
         }
 
+        #offer-stack .offer-price-period {
+          color: rgba(255, 248, 236, 0.56);
+          font-family: var(--font-body);
+          font-size: 15px;
+          font-weight: 600;
+          margin-left: 8px;
+        }
+
         #offer-stack .offer-note {
           color: rgba(255, 248, 236, 0.38);
           font-size: 12px;
@@ -365,7 +373,7 @@ export default function OfferStack({
             </div>
             <div className="offer-coupon-copy">
               Sua condição especial já está aplicada: {installmentText} ou R${' '}
-              {finalPrice},00 à vista.
+              {finalPrice},00 / ano.
             </div>
           </div>
 
@@ -395,9 +403,12 @@ export default function OfferStack({
               <span className="offer-line-value">R$ {totalValue}</span>
             </div>
 
-            <div className="offer-final-price">R$ {finalPrice},00</div>
+            <div className="offer-final-price">
+              R$ {finalPrice},00
+              <span className="offer-price-period">/ ano</span>
+            </div>
             <div className="offer-note">
-              {copy.note ?? 'Pagamento único · 1 ano de acesso'}
+              {copy.note ?? 'Pagamento anual · 1 ano de acesso'}
             </div>
 
             <a
@@ -405,7 +416,7 @@ export default function OfferStack({
               href={product.checkoutUrl}
               onClick={handleCheckoutClick}
             >
-              {copy.cta ?? `Garantir meu acesso por R$${finalPrice},00`}
+              {copy.cta ?? `Garantir meu acesso por R$${finalPrice},00 / ano`}
             </a>
 
             <div className="offer-countdown" aria-live="polite">
