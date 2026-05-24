@@ -312,9 +312,11 @@ function SalesPage() {
       <LazySection minHeight={680}>
         <ForWhoSection />
       </LazySection>
-      <LazySection minHeight={720}>
-        <OfferStack />
-      </LazySection>
+      <div id="offer-stack-anchor" style={{ scrollMarginTop: 24 }}>
+        <LazySection minHeight={720}>
+          <OfferStack />
+        </LazySection>
+      </div>
       <LazySection minHeight={760}>
         <BonusSection />
       </LazySection>
