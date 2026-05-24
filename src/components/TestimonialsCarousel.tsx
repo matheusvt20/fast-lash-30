@@ -271,7 +271,7 @@ export default function TestimonialsCarousel({
             {copy.badge ?? 'Clientes atendidas'}
           </div>
           <h2 className="testimonials-title">
-            {copy.title ?? 'Veja o que as clientes da Tati dizem'}
+            {copy.title ?? 'Veja o que as clientes da Evelyn dizem'}
           </h2>
           <div className="testimonials-grid">
             {proofCards

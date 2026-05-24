@@ -108,9 +108,9 @@ export default function ProblemSection({ copy = {} }: ProblemSectionProps) {
           }
 
           #problem-section .problem-image {
-            min-height: 420px;
-            object-position: center 12%;
-            transform: scale(1.03);
+            min-height: 470px;
+            object-position: center 16%;
+            transform: scale(1.22);
           }
         }
       `}</style>

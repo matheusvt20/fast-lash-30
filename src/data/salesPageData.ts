@@ -13,7 +13,7 @@ export const salesPageData = {
   creator: {
     name: 'Evelyn Senna',
     role: 'Especialista em extensão de cílios · Criadora do Cílios em 1 Hora',
-    photoHero: '/images/evelyn-senna.png',
+    photoHero: '/images/evelyn-senna-1086.webp',
     photoBio: '/images/evelyn-studio.webp',
     bio: [
       'Ao longo da minha trajetória, formei centenas de profissionais e realizei atendimentos que me ensinaram mais do que qualquer teoria.',
@@ -137,25 +137,25 @@ export const salesPageData = {
     ],
     photos: [
       {
-        image: '/images/depoimento-1.webp',
-        width: 780,
-        height: 1387,
+        image: '/images/resultado-1.webp',
+        width: 1200,
+        height: 1600,
         caption:
-          'Mais uma aluna formada pela Tati Cabral, saindo com técnica e certificado em mãos.',
+          'Resultado real de cliente com acabamento fio a fio e retenção pensada desde a aplicação.',
       },
       {
-        image: '/images/depoimento-2.webp',
-        width: 900,
+        image: '/images/resultado-5.webp',
+        width: 1600,
         height: 1200,
         caption:
-          'Turma completa formada no método Cílios em 1 Hora. Cada uma com sua conquista.',
+          'Aplicação organizada para entregar presença, acabamento e previsibilidade em menos tempo.',
       },
       {
-        image: '/images/depoimento-3.webp',
-        width: 780,
-        height: 1387,
+        image: '/images/resultado-7.webp',
+        width: 1280,
+        height: 960,
         caption:
-          'Do presencial ao digital — a Tati já formou profissionais de todos os perfis.',
+          'Cílios em 1 hora com técnica, controle de tempo e resultado que valoriza o atendimento.',
       },
     ],
   },
