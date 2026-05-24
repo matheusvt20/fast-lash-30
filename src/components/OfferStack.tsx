@@ -65,6 +65,7 @@ export default function OfferStack({
             radial-gradient(circle at 82% 10%, rgba(213, 181, 113, 0.13), transparent 28%),
             linear-gradient(180deg, #1B1814, #11100E);
           padding: 82px 80px;
+          scroll-margin-top: 24px;
         }
 
         #offer-stack .offer-shell {
@@ -377,26 +378,6 @@ export default function OfferStack({
             </div>
           </div>
 
-          <div className="offer-summary">
-            <div className="offer-box-kicker">Resumo</div>
-            <div className="offer-summary-copy">
-              Curso online Cílios em 1 hora com aulas práticas.
-            </div>
-
-            <div className="offer-bonus-title">Bônus liberados no acesso</div>
-            {bonusItems.map((item) => (
-              <div key={item} className="offer-line">
-                <span className="offer-line-name">
-                  <span className="offer-line-icon" aria-hidden="true">
-                    +
-                  </span>
-                  <span>{item}</span>
-                </span>
-                <span className="offer-free">Gratuito</span>
-              </div>
-            ))}
-          </div>
-
           <div className="offer-total">
             <div className="offer-total-row">
               <span>{copy.totalLabel ?? 'Valor total:'}</span>
@@ -425,6 +406,26 @@ export default function OfferStack({
               </span>
               <span className="offer-countdown-time">{countdown}</span>
             </div>
+          </div>
+
+          <div className="offer-summary">
+            <div className="offer-box-kicker">Resumo</div>
+            <div className="offer-summary-copy">
+              Curso online Cílios em 1 hora com aulas práticas.
+            </div>
+
+            <div className="offer-bonus-title">Bônus liberados no acesso</div>
+            {bonusItems.map((item) => (
+              <div key={item} className="offer-line">
+                <span className="offer-line-name">
+                  <span className="offer-line-icon" aria-hidden="true">
+                    +
+                  </span>
+                  <span>{item}</span>
+                </span>
+                <span className="offer-free">Gratuito</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

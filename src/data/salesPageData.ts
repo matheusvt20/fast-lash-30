@@ -137,21 +137,21 @@ export const salesPageData = {
     ],
     photos: [
       {
-        image: '/images/resultado-1.webp',
+        image: '/images/cliente-resultado-1.webp',
         width: 1200,
         height: 1600,
         caption:
           'Resultado real de cliente com acabamento fio a fio e retenção pensada desde a aplicação.',
       },
       {
-        image: '/images/resultado-5.webp',
+        image: '/images/cliente-resultado-5.webp',
         width: 1600,
         height: 1200,
         caption:
           'Aplicação organizada para entregar presença, acabamento e previsibilidade em menos tempo.',
       },
       {
-        image: '/images/resultado-7.webp',
+        image: '/images/cliente-resultado-7.webp',
         width: 1280,
         height: 960,
         caption:

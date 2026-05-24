@@ -1,5 +1,4 @@
 import { salesPageData } from '../data/salesPageData'
-import { trackMetaEvent } from '../lib/metaEvents'
 
 type HeroSectionProps = {
   data?: typeof salesPageData
@@ -37,16 +36,6 @@ export default function HeroSection({
     sizes: '(max-width: 767px) 100vw, 46vw',
     width: isDefaultHeroImage ? 1086 : 1448,
     height: isDefaultHeroImage ? 1448 : 1086,
-  }
-
-  function handleCheckoutClick() {
-    trackMetaEvent('InitiateCheckout', {
-      customData: {
-        content_name: product.name,
-        currency: 'BRL',
-        value: product.price,
-      },
-    })
   }
 
   return (
@@ -781,8 +770,7 @@ export default function HeroSection({
           <div className="hero-actions">
             <a
               className="hero-button hero-button-primary"
-              href={product.checkoutUrl}
-              onClick={handleCheckoutClick}
+              href="#offer-stack"
             >
               <span className="hero-button-label">
                 {copy.buttonLabel ?? 'Inscreva-se agora'}

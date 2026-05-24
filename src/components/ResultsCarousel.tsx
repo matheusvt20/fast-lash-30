@@ -5,13 +5,13 @@ type ResultPhoto = {
 }
 
 const defaultPhotos: ResultPhoto[] = [
-  { src: '/images/resultado-1.webp', width: 1200, height: 1600 },
-  { src: '/images/resultado-2.webp', width: 1200, height: 1600 },
-  { src: '/images/resultado-3.webp', width: 1200, height: 1188 },
-  { src: '/images/resultado-4.webp', width: 1600, height: 900 },
-  { src: '/images/resultado-5.webp', width: 1600, height: 1200 },
-  { src: '/images/resultado-6.webp', width: 1600, height: 1200 },
-  { src: '/images/resultado-7.webp', width: 1280, height: 960 },
+  { src: '/images/cliente-resultado-1.webp', width: 1200, height: 1600 },
+  { src: '/images/cliente-resultado-2.webp', width: 1200, height: 1600 },
+  { src: '/images/cliente-resultado-3.webp', width: 1200, height: 1188 },
+  { src: '/images/cliente-resultado-4.webp', width: 1600, height: 900 },
+  { src: '/images/cliente-resultado-5.webp', width: 1600, height: 1200 },
+  { src: '/images/cliente-resultado-6.webp', width: 1600, height: 1200 },
+  { src: '/images/cliente-resultado-7.webp', width: 1280, height: 960 },
 ]
 
 type ResultsCarouselProps = {
