@@ -59,18 +59,19 @@ export default function HeroSection({
       <style>{`
         #hero-section {
           background:
-            linear-gradient(115deg, rgba(255, 255, 255, 0.72) 0%, rgba(247, 241, 230, 0.44) 52%, rgba(235, 221, 196, 0.26) 100%),
-            #FAF7F0;
-          color: #171513;
+            radial-gradient(ellipse at 74% 33%, rgba(177, 157, 118, 0.08), transparent 36%),
+            radial-gradient(ellipse at 18% 24%, rgba(255, 255, 255, 0.035), transparent 34%),
+            linear-gradient(118deg, #141414 0%, #080808 48%, #151311 100%);
+          color: #FFF8EC;
           overflow: hidden;
           position: relative;
         }
 
         #hero-section::before {
-          background: linear-gradient(180deg, rgba(190, 151, 76, 0.38), rgba(190, 151, 76, 0));
+          background: linear-gradient(180deg, rgba(197, 176, 132, 0.24), rgba(197, 176, 132, 0));
           content: '';
-          height: 180px;
-          opacity: 0.24;
+          height: 220px;
+          opacity: 0.2;
           position: absolute;
           right: 9%;
           top: 0;
@@ -78,16 +79,16 @@ export default function HeroSection({
         }
 
         #hero-section::after {
-          background: rgba(186, 145, 70, 0.16);
+          background: radial-gradient(circle, rgba(185, 165, 124, 0.07), transparent 68%);
           border-radius: 999px;
-          box-shadow: 0 0 92px rgba(186, 145, 70, 0.18);
+          box-shadow: 0 0 120px rgba(185, 165, 124, 0.08);
           content: '';
-          height: 230px;
-          opacity: 0.28;
+          height: 340px;
+          opacity: 0.22;
           position: absolute;
-          right: 13%;
-          top: 19%;
-          width: 230px;
+          right: 12%;
+          top: 18%;
+          width: 340px;
         }
 
         #hero-section .hero-layout {
@@ -109,11 +110,11 @@ export default function HeroSection({
 
         #hero-section .hero-badge {
           align-items: center;
-          background: rgba(255, 252, 246, 0.66);
-          border: 1px solid rgba(180, 139, 67, 0.34);
+          background: rgba(255, 248, 236, 0.055);
+          border: 1px solid rgba(205, 183, 137, 0.24);
           border-radius: 100px;
-          box-shadow: 0 12px 28px rgba(61, 43, 21, 0.05);
-          color: #6F572E;
+          box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+          color: #C8B27C;
           display: inline-flex;
           font-size: 12px;
           font-weight: 700;
@@ -124,34 +125,35 @@ export default function HeroSection({
         }
 
         #hero-section .hero-badge-dot {
-          color: #B48B43;
+          color: #C8B27C;
           font-size: 13px;
           line-height: 1;
         }
 
         #hero-section .hero-headline {
-          color: #1B1814;
+          color: #FFF8EC;
           font-family: var(--font-display);
           font-size: 51px;
           font-weight: 600;
           line-height: 1.15;
           margin: 30px 0 0;
           max-width: 940px;
+          text-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
         }
 
         #hero-section .hero-headline em {
-          color: #9A7435;
+          color: #C8A967;
           display: inline-block;
           font-style: italic;
           font-weight: 500;
           position: relative;
-          text-shadow: 0 10px 24px rgba(167, 122, 46, 0.1);
+          text-shadow: 0 10px 28px rgba(200, 169, 103, 0.1);
         }
 
         #hero-section .hero-headline em::before {
-          background: #D8B66D;
+          background: #C8A967;
           border-radius: 999px;
-          box-shadow: 0 0 14px rgba(216, 182, 109, 0.34);
+          box-shadow: 0 0 14px rgba(200, 169, 103, 0.22);
           content: '';
           height: 5px;
           position: absolute;
@@ -161,7 +163,7 @@ export default function HeroSection({
         }
 
         #hero-section .hero-headline em::after {
-          background: linear-gradient(90deg, transparent, rgba(184, 142, 67, 0.48), transparent);
+          background: linear-gradient(90deg, transparent, rgba(200, 169, 103, 0.34), transparent);
           bottom: 3px;
           content: '';
           height: 1px;
@@ -171,8 +173,8 @@ export default function HeroSection({
         }
 
         #hero-section .hero-subheadline {
-          border-left: 1px solid rgba(180, 139, 67, 0.38);
-          color: #635D54;
+          border-left: 1px solid rgba(200, 169, 103, 0.34);
+          color: rgba(255, 248, 236, 0.72);
           font-size: 15.5px;
           line-height: 1.82;
           margin: 24px 0 0;
@@ -210,11 +212,12 @@ export default function HeroSection({
 
         #hero-section .hero-button-primary {
           background:
-            linear-gradient(180deg, rgba(255, 250, 235, 0.42), rgba(255, 250, 235, 0) 52%),
-            linear-gradient(135deg, #C3A05C 0%, #E4CA88 48%, #B88D45 100%);
-          border: 1px solid rgba(143, 105, 47, 0.28);
+            linear-gradient(180deg, rgba(255, 252, 242, 0.34), rgba(255, 252, 242, 0) 52%),
+            linear-gradient(135deg, #A88445 0%, #D5BD78 48%, #9C7435 100%);
+          border: 1px solid rgba(213, 189, 120, 0.32);
           box-shadow:
-            0 14px 26px rgba(123, 87, 34, 0.13),
+            0 18px 34px rgba(0, 0, 0, 0.26),
+            0 0 24px rgba(213, 189, 120, 0.06),
             inset 0 1px 0 rgba(255, 255, 255, 0.58),
             inset 0 -1px 0 rgba(85, 54, 14, 0.14);
           color: #211A11;
@@ -235,7 +238,7 @@ export default function HeroSection({
 
         #hero-section .hero-price {
           align-items: center;
-          color: #6A5633;
+          color: rgba(255, 248, 236, 0.72);
           display: inline-flex;
           font-size: 13px;
           font-weight: 600;
@@ -246,10 +249,10 @@ export default function HeroSection({
 
         #hero-section .hero-price::before {
           align-items: center;
-          background: rgba(180, 139, 67, 0.1);
-          border: 1px solid rgba(180, 139, 67, 0.18);
+          background: rgba(200, 169, 103, 0.08);
+          border: 1px solid rgba(200, 169, 103, 0.2);
           border-radius: 999px;
-          color: #9B7433;
+          color: #C8A967;
           content: '✓';
           display: inline-flex;
           font-size: 9px;
@@ -259,12 +262,12 @@ export default function HeroSection({
         }
 
         #hero-section .hero-price strong {
-          color: #241B10;
+          color: #FFF8EC;
           font-weight: 800;
         }
 
         #hero-section .hero-trust {
-          color: #7F7669;
+          color: rgba(255, 248, 236, 0.54);
           font-size: 11.5px;
           font-weight: 500;
           line-height: 1.4;
@@ -281,7 +284,7 @@ export default function HeroSection({
         }
 
         #hero-section .hero-media::before {
-          background: radial-gradient(circle, rgba(207, 170, 96, 0.16), transparent 70%);
+          background: radial-gradient(circle, rgba(185, 165, 124, 0.08), transparent 70%);
           content: '';
           height: 360px;
           left: 50%;
@@ -301,11 +304,11 @@ export default function HeroSection({
         }
 
         #hero-section .hero-pill {
-          background: rgba(255, 252, 246, 0.76);
-          border: 1px solid rgba(180, 139, 67, 0.24);
+          background: rgba(255, 248, 236, 0.07);
+          border: 1px solid rgba(205, 183, 137, 0.22);
           border-radius: 100px;
-          box-shadow: 0 10px 24px rgba(45, 34, 20, 0.06);
-          color: #28221A;
+          box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
+          color: #FFF8EC;
           font-size: 12px;
           font-weight: 700;
           letter-spacing: 0.04em;
@@ -316,9 +319,12 @@ export default function HeroSection({
 
         #hero-section .hero-image-frame {
           background: #151413;
-          border: 1px solid rgba(198, 158, 82, 0.48);
+          border: 1px solid rgba(205, 183, 137, 0.32);
           border-radius: 30px;
-          box-shadow: 0 26px 64px rgba(44, 31, 17, 0.12), 0 0 0 7px rgba(255, 250, 240, 0.38);
+          box-shadow:
+            0 30px 74px rgba(0, 0, 0, 0.38),
+            0 0 0 1px rgba(205, 183, 137, 0.07),
+            0 0 58px rgba(185, 165, 124, 0.05);
           overflow: hidden;
           padding: 10px;
           position: relative;
@@ -331,7 +337,7 @@ export default function HeroSection({
         }
 
         #hero-section .hero-image-frame::before {
-          background: radial-gradient(circle, rgba(225, 190, 117, 0.2), transparent 66%);
+          background: radial-gradient(circle, rgba(205, 183, 137, 0.1), transparent 66%);
           content: '';
           height: 200px;
           right: -80px;
