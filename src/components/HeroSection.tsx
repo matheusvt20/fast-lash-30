@@ -8,7 +8,6 @@ type HeroSectionProps = {
   agendaStyle?: boolean
   copy?: {
     buttonLabel?: string
-    cardBadge?: string
     cardCopy?: string
     cardName?: string
     cardProduct?: string
@@ -398,24 +397,13 @@ export default function HeroSection({
           width: 62px;
         }
 
-        #hero-section .hero-card-badge {
-          background: linear-gradient(135deg, #C09A51, #E4C785);
-          border-radius: 100px;
-          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
-          color: #15110B;
-          display: inline-block;
-          font-size: 12px;
-          font-weight: 700;
-          padding: 7px 14px;
-        }
-
         #hero-section .hero-card-name {
           color: #FFFFFF;
           font-family: var(--font-display);
           font-size: 32px;
           font-weight: 600;
           line-height: 1;
-          margin: 14px 0 0;
+          margin: 0;
         }
 
         #hero-section .hero-card-product {
@@ -592,16 +580,6 @@ export default function HeroSection({
           padding: 92px 28px 28px;
         }
 
-        #hero-section.is-agenda-style .hero-card-badge {
-          background: rgba(255, 255, 255, 0.92);
-          color: #9F7A36;
-          font-size: 13px;
-          left: 28px;
-          padding: 10px 16px;
-          position: absolute;
-          top: -388px;
-        }
-
         #hero-section.is-agenda-style .hero-card-name {
           font-size: 32px;
           margin-top: 0;
@@ -774,10 +752,6 @@ export default function HeroSection({
             height: 360px;
           }
 
-          #hero-section.is-agenda-style .hero-card-badge {
-            left: 20px;
-            top: -278px;
-          }
         }
       `}</style>
 
@@ -844,9 +818,6 @@ export default function HeroSection({
               fetchPriority="high"
             />
             <div className="hero-card">
-              <div className="hero-card-badge">
-                {copy.cardBadge ?? 'Criadora do Método'}
-              </div>
               <h2 className="hero-card-name">
                 {copy.cardName ?? creator.name}
               </h2>
