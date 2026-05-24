@@ -1,7 +1,14 @@
 import { lazy, useEffect } from 'react'
 import HeroSection from './components/HeroSection'
+import BenefitsGrid from './components/BenefitsGrid'
+import CreatorSection from './components/CreatorSection'
+import ForWhoSection from './components/ForWhoSection'
 import LazySection from './components/LazySection'
 import OfferStack from './components/OfferStack'
+import ProblemSection from './components/ProblemSection'
+import ProductSection from './components/ProductSection'
+import ResultsCarousel from './components/ResultsCarousel'
+import SocialProofBar from './components/SocialProofBar'
 import SpeedMethodSection from './components/SpeedMethodSection'
 import { salesPageData } from './data/salesPageData'
 import { trackMetaEvent } from './lib/metaEvents'
@@ -10,13 +17,6 @@ import AgendaCheiaQuizPage from './pages/AgendaCheiaQuizPage'
 import FreeClassPage from './pages/FreeClassPage'
 import LashLiftingPage from './pages/LashLiftingPage'
 
-const ResultsCarousel = lazy(() => import('./components/ResultsCarousel'))
-const SocialProofBar = lazy(() => import('./components/SocialProofBar'))
-const ProblemSection = lazy(() => import('./components/ProblemSection'))
-const CreatorSection = lazy(() => import('./components/CreatorSection'))
-const ProductSection = lazy(() => import('./components/ProductSection'))
-const BenefitsGrid = lazy(() => import('./components/BenefitsGrid'))
-const ForWhoSection = lazy(() => import('./components/ForWhoSection'))
 const BonusSection = lazy(() => import('./components/BonusSection'))
 const GuaranteeSection = lazy(() => import('./components/GuaranteeSection'))
 const FAQAccordion = lazy(() => import('./components/FAQAccordion'))
@@ -291,27 +291,13 @@ function SalesPage() {
     <main>
       <HeroSection />
       <SpeedMethodSection />
-      <LazySection minHeight={680}>
-        <ResultsCarousel />
-      </LazySection>
-      <LazySection minHeight={120}>
-        <SocialProofBar />
-      </LazySection>
-      <LazySection minHeight={760}>
-        <ProblemSection />
-      </LazySection>
-      <LazySection minHeight={760}>
-        <CreatorSection />
-      </LazySection>
-      <LazySection minHeight={980}>
-        <ProductSection />
-      </LazySection>
-      <LazySection minHeight={780}>
-        <BenefitsGrid />
-      </LazySection>
-      <LazySection minHeight={680}>
-        <ForWhoSection />
-      </LazySection>
+      <ResultsCarousel />
+      <SocialProofBar />
+      <ProblemSection />
+      <CreatorSection />
+      <ProductSection />
+      <BenefitsGrid />
+      <ForWhoSection />
       <OfferStack />
       <LazySection minHeight={760}>
         <BonusSection />

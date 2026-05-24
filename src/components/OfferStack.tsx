@@ -106,6 +106,7 @@ export default function OfferStack({
           margin: 42px auto 0;
           max-width: 720px;
           padding: 48px;
+          scroll-margin-top: 24px;
         }
 
         #offer-stack .offer-product-title {
@@ -407,7 +408,7 @@ export default function OfferStack({
           {copy.title ?? 'Tudo que você recebe hoje'}
         </h2>
 
-        <div className="offer-card">
+        <div className="offer-card" id="offer-coupon-area">
           <div className="offer-product-title">{product.name}</div>
 
           <div className="offer-coupon">

@@ -1,3 +1,5 @@
+import type { MouseEvent } from 'react'
+
 import { salesPageData } from '../data/salesPageData'
 
 type HeroSectionProps = {
@@ -36,6 +38,33 @@ export default function HeroSection({
     sizes: '(max-width: 767px) 100vw, 46vw',
     width: isDefaultHeroImage ? 1086 : 1448,
     height: isDefaultHeroImage ? 1448 : 1086,
+  }
+
+  function handleHeroCtaClick(event: MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault()
+
+    const targetId = 'offer-coupon-area'
+    const offsets = [0, 120, 360, 760, 1250]
+
+    offsets.forEach((delay, index) => {
+      window.setTimeout(() => {
+        const target = document.getElementById(targetId)
+
+        if (!target) {
+          window.location.hash = targetId
+          return
+        }
+
+        const top = target.getBoundingClientRect().top + window.scrollY - 12
+
+        window.scrollTo({
+          behavior: index === 0 ? 'smooth' : 'auto',
+          top,
+        })
+      }, delay)
+    })
+
+    window.history.replaceState(null, '', `#${targetId}`)
   }
 
   return (
@@ -770,7 +799,8 @@ export default function HeroSection({
           <div className="hero-actions">
             <a
               className="hero-button hero-button-primary"
-              href="#offer-checkout"
+              href="#offer-coupon-area"
+              onClick={handleHeroCtaClick}
             >
               <span className="hero-button-label">
                 {copy.buttonLabel ?? 'Inscreva-se agora'}
