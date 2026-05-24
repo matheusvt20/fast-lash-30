@@ -4,6 +4,7 @@ import AgendaCheiaHero from '../components/AgendaCheiaHero'
 import BeforeAfterSection from '../components/BeforeAfterSection'
 import LazySection from '../components/LazySection'
 import MethodSection from '../components/MethodSection'
+import OfferStack from '../components/OfferStack'
 import SectionDivider from '../components/SectionDivider'
 import TestimonialsCarousel from '../components/TestimonialsCarousel'
 import { agendaCheiaPageData } from '../data/agendaCheiaPageData'
@@ -14,7 +15,6 @@ const SocialProofBar = lazy(() => import('../components/SocialProofBar'))
 const CreatorSection = lazy(() => import('../components/CreatorSection'))
 const BenefitsGrid = lazy(() => import('../components/BenefitsGrid'))
 const ForWhoSection = lazy(() => import('../components/ForWhoSection'))
-const OfferStack = lazy(() => import('../components/OfferStack'))
 const BonusSection = lazy(() => import('../components/BonusSection'))
 const GuaranteeSection = lazy(() => import('../components/GuaranteeSection'))
 const FAQAccordion = lazy(() => import('../components/FAQAccordion'))

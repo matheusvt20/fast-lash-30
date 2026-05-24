@@ -770,7 +770,7 @@ export default function HeroSection({
           <div className="hero-actions">
             <a
               className="hero-button hero-button-primary"
-              href="#offer-stack-anchor"
+              href="#offer-checkout"
             >
               <span className="hero-button-label">
                 {copy.buttonLabel ?? 'Inscreva-se agora'}

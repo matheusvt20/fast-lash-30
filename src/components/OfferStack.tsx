@@ -226,6 +226,7 @@ export default function OfferStack({
 
         #offer-stack .offer-total {
           margin-top: 30px;
+          scroll-margin-top: 72px;
         }
 
         #offer-stack .offer-total-row {
@@ -420,7 +421,7 @@ export default function OfferStack({
             </div>
           </div>
 
-          <div className="offer-total">
+          <div className="offer-total" id="offer-checkout">
             <div className="offer-total-row">
               <span>{copy.totalLabel ?? 'Valor total:'}</span>
               <span className="offer-line-value">R$ {totalValue}</span>

@@ -1,6 +1,7 @@
 import { lazy, useEffect } from 'react'
 import HeroSection from './components/HeroSection'
 import LazySection from './components/LazySection'
+import OfferStack from './components/OfferStack'
 import SpeedMethodSection from './components/SpeedMethodSection'
 import { salesPageData } from './data/salesPageData'
 import { trackMetaEvent } from './lib/metaEvents'
@@ -16,7 +17,6 @@ const CreatorSection = lazy(() => import('./components/CreatorSection'))
 const ProductSection = lazy(() => import('./components/ProductSection'))
 const BenefitsGrid = lazy(() => import('./components/BenefitsGrid'))
 const ForWhoSection = lazy(() => import('./components/ForWhoSection'))
-const OfferStack = lazy(() => import('./components/OfferStack'))
 const BonusSection = lazy(() => import('./components/BonusSection'))
 const GuaranteeSection = lazy(() => import('./components/GuaranteeSection'))
 const FAQAccordion = lazy(() => import('./components/FAQAccordion'))
@@ -312,11 +312,7 @@ function SalesPage() {
       <LazySection minHeight={680}>
         <ForWhoSection />
       </LazySection>
-      <div id="offer-stack-anchor" style={{ scrollMarginTop: 24 }}>
-        <LazySection minHeight={720}>
-          <OfferStack />
-        </LazySection>
-      </div>
+      <OfferStack />
       <LazySection minHeight={760}>
         <BonusSection />
       </LazySection>
