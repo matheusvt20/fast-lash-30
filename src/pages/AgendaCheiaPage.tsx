@@ -6,7 +6,6 @@ import LazySection from '../components/LazySection'
 import MethodSection from '../components/MethodSection'
 import SectionDivider from '../components/SectionDivider'
 import TestimonialsCarousel from '../components/TestimonialsCarousel'
-import WhatsAppSupportButton from '../components/WhatsAppSupportButton'
 import { agendaCheiaPageData } from '../data/agendaCheiaPageData'
 import { trackMetaEvent } from '../lib/metaEvents'
 
@@ -180,7 +179,6 @@ export default function AgendaCheiaPage() {
           }}
         />
       </LazySection>
-      <WhatsAppSupportButton />
     </main>
   )
 }

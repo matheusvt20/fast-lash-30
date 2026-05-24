@@ -5,13 +5,13 @@ type ResultPhoto = {
 }
 
 const defaultPhotos: ResultPhoto[] = [
-  { src: '/images/resultado-1.webp', width: 472, height: 840 },
-  { src: '/images/resultado-2.webp', width: 630, height: 840 },
-  { src: '/images/resultado-3.webp', width: 629, height: 840 },
-  { src: '/images/resultado-4.webp', width: 472, height: 840 },
-  { src: '/images/resultado-5.webp', width: 472, height: 840 },
-  { src: '/images/resultado-6.webp', width: 628, height: 840 },
-  { src: '/images/resultado-7.webp', width: 630, height: 840 },
+  { src: '/images/resultado-1.webp', width: 1200, height: 1600 },
+  { src: '/images/resultado-2.webp', width: 1200, height: 1600 },
+  { src: '/images/resultado-3.webp', width: 1200, height: 1188 },
+  { src: '/images/resultado-4.webp', width: 1600, height: 900 },
+  { src: '/images/resultado-5.webp', width: 1600, height: 1200 },
+  { src: '/images/resultado-6.webp', width: 1600, height: 1200 },
+  { src: '/images/resultado-7.webp', width: 1280, height: 960 },
 ]
 
 type ResultsCarouselProps = {
@@ -223,7 +223,7 @@ export default function ResultsCarousel({
           </h2>
           <p className="results-subtitle">
             {copy.subtitle ??
-              'Cada par de cílios aplicado com o método Fast Lash 30+'}
+              'Cada par de cílios aplicado com o método Cílios em 53 Minutos'}
           </p>
         </div>
 

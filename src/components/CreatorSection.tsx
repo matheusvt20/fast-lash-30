@@ -100,6 +100,7 @@ export default function CreatorSection({
           border: 1px solid #D8C8B3;
           border-radius: 22px;
           box-shadow: 0 18px 40px rgba(78, 58, 33, 0.08);
+          overflow: hidden;
           padding: 14px;
         }
 
@@ -108,6 +109,7 @@ export default function CreatorSection({
           display: block;
           height: 480px;
           object-fit: cover;
+          object-position: center 26%;
           width: 100%;
         }
 

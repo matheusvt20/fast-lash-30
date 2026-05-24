@@ -10,7 +10,7 @@ type ProblemSectionProps = {
 
 export default function ProblemSection({ copy = {} }: ProblemSectionProps) {
   const pains = copy.pains ?? salesPageData.forWho.yes.slice(0, 5)
-  const portraitImage = '/images/problem-section-portrait.webp'
+  const portraitImage = '/images/evelyn-senna-lash.webp'
 
   return (
     <section id="problem-section">
@@ -78,6 +78,7 @@ export default function ProblemSection({ copy = {} }: ProblemSectionProps) {
           border: 1px solid #D8C8B3;
           border-radius: 22px;
           box-shadow: 0 18px 40px rgba(78, 58, 33, 0.08);
+          overflow: hidden;
           padding: 14px;
         }
 
@@ -87,6 +88,8 @@ export default function ProblemSection({ copy = {} }: ProblemSectionProps) {
           height: 100%;
           min-height: 640px;
           object-fit: cover;
+          object-position: center 18%;
+          transform: scale(1.06);
           width: 100%;
         }
 
@@ -106,6 +109,8 @@ export default function ProblemSection({ copy = {} }: ProblemSectionProps) {
 
           #problem-section .problem-image {
             min-height: 420px;
+            object-position: center 12%;
+            transform: scale(1.03);
           }
         }
       `}</style>
@@ -135,9 +140,9 @@ export default function ProblemSection({ copy = {} }: ProblemSectionProps) {
               <img
                 className="problem-image"
                 src={portraitImage}
-                alt="Retrato elegante de uma cliente com cílios destacados"
-                width={960}
-                height={1280}
+                alt="Retrato profissional de Evelyn Senna"
+                width={1086}
+                height={1448}
                 loading="lazy"
                 decoding="async"
               />

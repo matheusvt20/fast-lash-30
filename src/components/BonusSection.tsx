@@ -124,7 +124,7 @@ export default function BonusSection({
               <div className="bonus-name">{bonus.name}</div>
               <div className="bonus-description">{bonus.description}</div>
               <div className="bonus-value">
-                {copy.valueLabel ?? `Valor: R$ ${bonus.value}`}
+                {copy.valueLabel ?? (bonus.value > 0 ? `Valor: R$ ${bonus.value}` : 'Gratuito no acesso')}
               </div>
             </article>
           ))}

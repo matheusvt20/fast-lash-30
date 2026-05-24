@@ -174,7 +174,7 @@ export default function FinalCTA({
           href={product.checkoutUrl}
           onClick={handleCheckoutClick}
         >
-          {copy.cta ?? 'Quero o Fast Lash 30+ agora'}
+          {copy.cta ?? 'Quero o Cílios em 1 Hora agora'}
         </a>
 
         <div className="final-security">

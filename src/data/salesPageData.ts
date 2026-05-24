@@ -1,6 +1,6 @@
 export const salesPageData = {
   product: {
-    name: 'Fast Lash 30+',
+    name: 'Cílios em 1 Hora',
     headline:
       'No meu curso online eu ensino os segredos para fazer cílios em até 53 minutos.',
     subheadline:
@@ -11,14 +11,14 @@ export const salesPageData = {
   },
 
   creator: {
-    name: 'Tati Cabral',
-    role: 'Especialista em extensão de cílios · Criadora do Fast Lash 30+',
-    photoHero: '/images/tati-hero.webp',
-    photoBio: '/images/tati-bio.webp',
+    name: 'Evelyn Senna',
+    role: 'Especialista em extensão de cílios · Criadora do Cílios em 1 Hora',
+    photoHero: '/images/evelyn-senna.png',
+    photoBio: '/images/evelyn-studio.webp',
     bio: [
       'Ao longo da minha trajetória, formei centenas de profissionais e realizei atendimentos que me ensinaram mais do que qualquer teoria.',
       'Vi de perto o que separa uma lash designer que luta pra terminar um atendimento de uma que fecha a agenda com facilidade e cobra o preço que quer.',
-      'Foi dessa vivência real que nasceu o Fast Lash 30+ — um método que une sequência, técnica e velocidade para você entregar um resultado impecável em 1 hora ou menos.',
+      'Foi dessa vivência real que nasceu o Cílios em 53 Minutos — um método que une sequência, técnica e velocidade para você entregar um resultado impecável em 1 hora ou menos.',
     ],
     credentials: [
       'Centenas de profissionais formadas em cursos presenciais e online',
@@ -30,68 +30,57 @@ export const salesPageData = {
   modules: [
     {
       number: '01',
-      title: 'Boas Vindas',
+      title: 'Mentalidade',
       description:
-        'Entenda o método e prepare sua mentalidade para a evolução',
+        'Prepare sua visão profissional para atender com mais segurança, valor e controle',
     },
     {
       number: '02',
-      title: 'Teoria',
+      title: 'Organização',
       description:
-        'Base técnica sólida sobre o que realmente impacta retenção e velocidade',
+        'Estruture cada etapa do atendimento para reduzir pausas e ganhar previsibilidade',
     },
     {
       number: '03',
-      title: 'Materiais',
-      description: 'Escolha certa de insumos para resultados acima da média',
+      title: 'Materiais que Aceleram',
+      description: 'Escolha insumos que ajudam na velocidade sem comprometer acabamento e retenção',
     },
     {
       number: '04',
-      title: 'Adesivos',
-      description: 'Como dominar o adesivo, o fator que mais afeta retenção',
+      title: 'Técnicas Estratégicas',
+      description: 'Aplique técnicas que eliminam movimentos inúteis e mantêm padrão fio a fio',
     },
     {
       number: '05',
-      title: 'Higienização',
-      description: 'Protocolo correto para garantir aderência e durabilidade',
+      title: 'Aplicação Inteligente',
+      description: 'Entenda a sequência ideal para acelerar a aplicação com controle e precisão',
     },
     {
       number: '06',
-      title: 'Isolamento dos Fios Inferiores',
+      title: 'Técnicas Avançadas',
       description:
-        'Técnica que poucos ensinam e que faz toda a diferença no resultado',
+        'Ajustes técnicos para elevar retenção, acabamento e percepção de valor',
     },
     {
       number: '07',
-      title: 'Direcionamento',
-      description: 'Sequência de aplicação que dá agilidade sem perder padrão',
-    },
-    {
-      number: '08',
       title: 'Treinos',
       description: 'Exercícios práticos para fixar a técnica e ganhar velocidade',
     },
     {
+      number: '08',
+      title: 'Aulas Práticas',
+      description: 'Acompanhe a execução do método em prática para entender ritmo, ordem e acabamento',
+    },
+    {
       number: '09',
-      title: 'Remoção',
-      description: 'Remoção correta sem comprometer os fios naturais',
+      title: 'Remoção Express',
+      description: 'Faça remoções com mais agilidade e cuidado, sem comprometer os fios naturais',
     },
     {
       number: '10',
-      title: 'Prática',
-      description: 'Aplicação completa do método em atendimento real',
-    },
-    {
-      number: '11',
-      title: 'Cálculo Volumétrico',
+      title: 'Da Teoria à Velocidade',
       description:
-        'Como calcular volume com precisão para cada tipo de olho',
-    },
-    {
-      number: '12',
-      title: 'Mappings Descomplicados',
-      description:
-        'Mapeamentos simples e eficientes para valorizar o olhar de cada cliente',
+        'Una técnica, sequência e tempo para transformar o método em atendimentos mais rápidos',
     },
   ],
 
@@ -159,7 +148,7 @@ export const salesPageData = {
         width: 900,
         height: 1200,
         caption:
-          'Turma completa formada no método Fast Lash 30+. Cada uma com sua conquista.',
+          'Turma completa formada no método Cílios em 1 Hora. Cada uma com sua conquista.',
       },
       {
         image: '/images/depoimento-3.webp',
@@ -187,40 +176,28 @@ export const salesPageData = {
 
   bonuses: [
     {
-      name: 'Segredo da Retenção 30+',
+      name: 'App de Agendamento',
       description:
-        'O que a maioria dos cursos não ensina sobre fixação de longa duração — aplicado diretamente no atendimento',
-      value: 47,
+        'Organize seus horários, acompanhe atendimentos e tenha mais controle da sua rotina profissional.',
+      value: 0,
     },
     {
-      name: 'Dominando Tendências',
+      name: 'Site de Agendamento Automático',
       description:
-        'Capping Fio a Fio, Efeito U, Efeito Felina, Efeito Fox e Efeito Sirena — os 5 efeitos mais pedidos no mercado hoje',
-      value: 97,
+        'Receba agendamentos com uma presença mais profissional, sem depender apenas de conversa manual.',
+      value: 0,
     },
     {
-      name: 'Volume Beach — Y em Capping',
+      name: 'App de Controle Financeiro',
       description:
-        'Técnica de volume com acabamento natural que as clientes mais pedem',
-      value: 47,
+        'Acompanhe entradas, saídas e resultados para cobrar melhor e enxergar seu negócio com clareza.',
+      value: 0,
     },
     {
-      name: 'Edição de Fotos (Método 1 e 2)',
+      name: 'Curso de Tráfego Pago para Lash',
       description:
-        'Como fotografar e editar seus trabalhos para atrair mais clientes nas redes sociais',
-      value: 47,
-    },
-    {
-      name: 'Acoplagem por Pressão',
-      description:
-        'Técnica de fixação para aumentar a durabilidade do procedimento',
-      value: 47,
-    },
-    {
-      name: 'Acoplagem de Pertinho',
-      description:
-        'Segunda técnica de acoplagem para resultados ainda mais precisos e duradouros',
-      value: 47,
+        'Aprenda a atrair clientes certas com anúncios simples, posicionamento e ofertas mais estratégicas.',
+      value: 0,
     },
   ],
 
@@ -233,7 +210,7 @@ export const salesPageData = {
     {
       question: 'Preciso ter experiência para fazer esse curso?',
       answer:
-        'Sim. O Fast Lash 30+ é para lash designers que já realizam atendimentos e querem evoluir em velocidade, retenção e padrão. Não é um curso introdutório.',
+        'Sim. O Cílios em 53 Minutos é para lash designers que já realizam atendimentos e querem evoluir em velocidade, retenção e padrão. Não é um curso introdutório.',
     },
     {
       question: 'Em quanto tempo vou conseguir atender em 1 hora?',
