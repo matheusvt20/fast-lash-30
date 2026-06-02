@@ -1,22 +1,21 @@
 import { lazy, useEffect } from 'react'
-import HeroSection from './components/HeroSection'
-import BenefitsGrid from './components/BenefitsGrid'
-import CreatorSection from './components/CreatorSection'
-import ForWhoSection from './components/ForWhoSection'
 import LazySection from './components/LazySection'
-import OfferStack from './components/OfferStack'
-import ProblemSection from './components/ProblemSection'
-import ProductSection from './components/ProductSection'
-import ResultsCarousel from './components/ResultsCarousel'
-import SocialProofBar from './components/SocialProofBar'
-import SpeedMethodSection from './components/SpeedMethodSection'
 import { salesPageData } from './data/salesPageData'
 import { trackMetaEvent } from './lib/metaEvents'
 
+const BenefitsGrid = lazy(() => import('./components/BenefitsGrid'))
 const BonusSection = lazy(() => import('./components/BonusSection'))
-const GuaranteeSection = lazy(() => import('./components/GuaranteeSection'))
+const CreatorSection = lazy(() => import('./components/CreatorSection'))
 const FAQAccordion = lazy(() => import('./components/FAQAccordion'))
 const FinalCTA = lazy(() => import('./components/FinalCTA'))
+const ForWhoSection = lazy(() => import('./components/ForWhoSection'))
+const GuaranteeSection = lazy(() => import('./components/GuaranteeSection'))
+const OfferStack = lazy(() => import('./components/OfferStack'))
+const ProblemSection = lazy(() => import('./components/ProblemSection'))
+const ProductSection = lazy(() => import('./components/ProductSection'))
+const ResultsCarousel = lazy(() => import('./components/ResultsCarousel'))
+const SocialProofBar = lazy(() => import('./components/SocialProofBar'))
+const SpeedMethodSection = lazy(() => import('./components/SpeedMethodSection'))
 
 function SalesPageThemeOverrides() {
   return (
@@ -285,26 +284,43 @@ function SalesPage() {
 
   return (
     <main>
-      <HeroSection />
-      <SpeedMethodSection />
-      <ResultsCarousel />
-      <SocialProofBar />
-      <ProblemSection />
-      <CreatorSection />
-      <ProductSection />
-      <BenefitsGrid />
-      <ForWhoSection />
-      <OfferStack />
-      <LazySection minHeight={760}>
+      <LazySection minHeight={760} rootMargin="0px 0px">
+        <SpeedMethodSection />
+      </LazySection>
+      <LazySection minHeight={700} rootMargin="0px 0px">
+        <ResultsCarousel />
+      </LazySection>
+      <LazySection minHeight={140} rootMargin="0px 0px">
+        <SocialProofBar />
+      </LazySection>
+      <LazySection minHeight={720} rootMargin="0px 0px">
+        <ProblemSection />
+      </LazySection>
+      <LazySection minHeight={760} rootMargin="0px 0px">
+        <CreatorSection />
+      </LazySection>
+      <LazySection minHeight={780} rootMargin="0px 0px">
+        <ProductSection />
+      </LazySection>
+      <LazySection minHeight={760} rootMargin="0px 0px">
+        <BenefitsGrid />
+      </LazySection>
+      <LazySection minHeight={680} rootMargin="0px 0px">
+        <ForWhoSection />
+      </LazySection>
+      <LazySection minHeight={820} rootMargin="0px 0px">
+        <OfferStack />
+      </LazySection>
+      <LazySection minHeight={760} rootMargin="0px 0px">
         <BonusSection />
       </LazySection>
-      <LazySection minHeight={440}>
+      <LazySection minHeight={440} rootMargin="0px 0px">
         <GuaranteeSection />
       </LazySection>
-      <LazySection minHeight={620}>
+      <LazySection minHeight={620} rootMargin="0px 0px">
         <FAQAccordion />
       </LazySection>
-      <LazySection minHeight={540}>
+      <LazySection minHeight={540} rootMargin="0px 0px">
         <FinalCTA />
       </LazySection>
       <SalesPageThemeOverrides />
