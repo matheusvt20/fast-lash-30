@@ -2,9 +2,9 @@ export const salesPageData = {
   product: {
     name: 'Cílios em 1 Hora',
     headline:
-      'No meu curso online eu ensino os segredos para fazer cílios em até 53 minutos.',
+      'Aprenda a fazer cílios em até 53 minutos — sem abrir mão da qualidade.',
     subheadline:
-      'Atenda mais clientes, cobre mais caro e entregue um resultado que faz sua cliente voltar — sem perder qualidade.',
+      'Domine uma técnica mais rápida, segura e lucrativa para atender mais clientes, cobrar melhor e entregar um resultado que faz sua cliente voltar.',
     price: 47,
     originalPrice: 529,
     checkoutUrl: 'https://pay.kiwify.com.br/6hqttVr',

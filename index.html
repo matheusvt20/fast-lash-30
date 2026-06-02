@@ -15,7 +15,6 @@
     />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap"
@@ -29,22 +28,6 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <!-- Meta Pixel Code -->
-    <script>
-      (function () {
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '615875597485992');
-        fbq('init', '2565910040494373');
-      })();
-    </script>
-    <!-- End Meta Pixel Code -->
     <noscript>
       <img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=615875597485992&ev=PageView&noscript=1"/>
@@ -53,13 +36,52 @@
     </noscript>
     <script>
       (function () {
-        function runWhenIdle(callback) {
-          if ('requestIdleCallback' in window) {
-            window.requestIdleCallback(callback, { timeout: 2200 });
+        var thirdPartiesLoaded = false;
+        var metaPixelIds = ['615875597485992', '2565910040494373'];
+
+        function setupFbqQueue() {
+          if (window.fbq) {
             return;
           }
 
-          window.setTimeout(callback, 1200);
+          var fbq = function () {
+            if (fbq.callMethod) {
+              fbq.callMethod.apply(fbq, arguments);
+              return;
+            }
+
+            fbq.queue.push(arguments);
+          };
+
+          if (!window._fbq) {
+            window._fbq = fbq;
+          }
+
+          fbq.push = fbq;
+          fbq.loaded = true;
+          fbq.version = '2.0';
+          fbq.queue = [];
+          window.fbq = fbq;
+        }
+
+        function loadMetaPixel() {
+          if (document.getElementById('meta-pixel-script')) {
+            return;
+          }
+
+          setupFbqQueue();
+
+          var script = document.createElement('script');
+          script.id = 'meta-pixel-script';
+          script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+          script.async = true;
+          script.onload = function () {
+            metaPixelIds.forEach(function (pixelId) {
+              window.fbq('init', pixelId);
+            });
+            window.fbq('track', 'PageView');
+          };
+          document.head.appendChild(script);
         }
 
         function loadUtmify() {
@@ -77,18 +99,34 @@
           document.head.appendChild(script);
         }
 
-        function scheduleUtmify() {
-          runWhenIdle(loadUtmify);
+        window.loadThirdParties = function loadThirdParties() {
+          if (thirdPartiesLoaded) {
+            return;
+          }
+
+          thirdPartiesLoaded = true;
+          loadMetaPixel();
+          loadUtmify();
+        };
+
+        function scheduleThirdParties() {
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(window.loadThirdParties, { timeout: 6000 });
+            return;
+          }
+
+          window.setTimeout(window.loadThirdParties, 5000);
         }
 
         if (document.readyState === 'complete') {
-          scheduleUtmify();
+          scheduleThirdParties();
         } else {
-          window.addEventListener('load', scheduleUtmify, { once: true });
+          window.addEventListener('load', scheduleThirdParties, { once: true });
         }
 
-        window.addEventListener('pointerdown', loadUtmify, { once: true, passive: true });
-        window.addEventListener('touchstart', loadUtmify, { once: true, passive: true });
+        window.addEventListener('pointerdown', window.loadThirdParties, { once: true, passive: true });
+        window.addEventListener('keydown', window.loadThirdParties, { once: true });
+        window.addEventListener('touchstart', window.loadThirdParties, { once: true, passive: true });
       })();
     </script>
     <script>

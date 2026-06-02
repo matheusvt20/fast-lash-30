@@ -76,7 +76,7 @@ export default function HeroSection({
             <span className="hero-badge-dot" aria-hidden="true">
               ✦
             </span>
-            <span>Para lash designers</span>
+            <span>TREINAMENTO ONLINE PARA LASH DESIGNERS</span>
           </div>
 
           <h1
@@ -112,10 +112,10 @@ export default function HeroSection({
         <div className="hero-media">
           <div className="hero-meta">
             <span className="hero-pill">
-              {copy.primaryPill ?? '◷ Atendimento em 1h'}
+              {copy.primaryPill ?? '◷ ATENDIMENTO EM ATÉ 1H'}
             </span>
             <span className="hero-pill">
-              {copy.secondaryPill ?? '✦ Retenção 30+ dias'}
+              {copy.secondaryPill ?? '✦ RETENÇÃO 30+ DIAS'}
             </span>
           </div>
 
