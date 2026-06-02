@@ -1,14 +1,15 @@
 import { lazy, useEffect } from 'react'
+import HeroSection from './components/HeroSection'
+import BenefitsGrid from './components/BenefitsGrid'
+import CreatorSection from './components/CreatorSection'
+import ForWhoSection from './components/ForWhoSection'
 import LazySection from './components/LazySection'
 import { salesPageData } from './data/salesPageData'
 import { trackMetaEvent } from './lib/metaEvents'
 
-const BenefitsGrid = lazy(() => import('./components/BenefitsGrid'))
 const BonusSection = lazy(() => import('./components/BonusSection'))
-const CreatorSection = lazy(() => import('./components/CreatorSection'))
 const FAQAccordion = lazy(() => import('./components/FAQAccordion'))
 const FinalCTA = lazy(() => import('./components/FinalCTA'))
-const ForWhoSection = lazy(() => import('./components/ForWhoSection'))
 const GuaranteeSection = lazy(() => import('./components/GuaranteeSection'))
 const OfferStack = lazy(() => import('./components/OfferStack'))
 const ProblemSection = lazy(() => import('./components/ProblemSection'))
@@ -284,33 +285,30 @@ function SalesPage() {
 
   return (
     <main>
-      <LazySection minHeight={760} rootMargin="0px 0px">
+      <HeroSection />
+      <LazySection minHeight={760} rootMargin="100px 0px">
         <SpeedMethodSection />
       </LazySection>
-      <LazySection minHeight={700} rootMargin="0px 0px">
+      <LazySection minHeight={700} rootMargin="100px 0px">
         <ResultsCarousel />
       </LazySection>
-      <LazySection minHeight={140} rootMargin="0px 0px">
+      <LazySection minHeight={140} rootMargin="100px 0px">
         <SocialProofBar />
       </LazySection>
-      <LazySection minHeight={720} rootMargin="0px 0px">
+      <LazySection minHeight={720} rootMargin="100px 0px">
         <ProblemSection />
       </LazySection>
-      <LazySection minHeight={760} rootMargin="0px 0px">
-        <CreatorSection />
-      </LazySection>
-      <LazySection minHeight={780} rootMargin="0px 0px">
+      <CreatorSection />
+      <LazySection minHeight={780} rootMargin="100px 0px">
         <ProductSection />
       </LazySection>
-      <LazySection minHeight={760} rootMargin="0px 0px">
-        <BenefitsGrid />
-      </LazySection>
-      <LazySection minHeight={680} rootMargin="0px 0px">
-        <ForWhoSection />
-      </LazySection>
-      <LazySection minHeight={820} rootMargin="0px 0px">
-        <OfferStack />
-      </LazySection>
+      <BenefitsGrid />
+      <ForWhoSection />
+      <div id="offer-coupon-area" style={{ scrollMarginTop: 24 }}>
+        <LazySection minHeight={820} rootMargin="100px 0px">
+          <OfferStack />
+        </LazySection>
+      </div>
       <LazySection minHeight={760} rootMargin="0px 0px">
         <BonusSection />
       </LazySection>

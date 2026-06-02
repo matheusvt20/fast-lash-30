@@ -408,7 +408,7 @@ export default function OfferStack({
           {copy.title ?? 'Tudo que você recebe hoje'}
         </h2>
 
-        <div className="offer-card" id="offer-coupon-area">
+        <div className="offer-card" id="offer-checkout-card">
           <div className="offer-product-title">{product.name}</div>
 
           <div className="offer-coupon">
