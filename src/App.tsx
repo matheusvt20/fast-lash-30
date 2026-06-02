@@ -12,10 +12,6 @@ import SocialProofBar from './components/SocialProofBar'
 import SpeedMethodSection from './components/SpeedMethodSection'
 import { salesPageData } from './data/salesPageData'
 import { trackMetaEvent } from './lib/metaEvents'
-import AgendaCheiaPage from './pages/AgendaCheiaPage'
-import AgendaCheiaQuizPage from './pages/AgendaCheiaQuizPage'
-import FreeClassPage from './pages/FreeClassPage'
-import LashLiftingPage from './pages/LashLiftingPage'
 
 const BonusSection = lazy(() => import('./components/BonusSection'))
 const GuaranteeSection = lazy(() => import('./components/GuaranteeSection'))
@@ -317,32 +313,9 @@ function SalesPage() {
 }
 
 export default function App() {
-  const pathname = window.location.pathname.replace(/\/$/, '')
-  const isAgendaCheiaQuiz = pathname.startsWith('/agenda-cheia-quiz')
-
   useEffect(() => {
-    if (isAgendaCheiaQuiz) {
-      return
-    }
-
     trackMetaEvent('PageView')
-  }, [isAgendaCheiaQuiz, pathname])
-
-  if (isAgendaCheiaQuiz) {
-    return <AgendaCheiaQuizPage />
-  }
-
-  if (pathname === '/aula-gratuita') {
-    return <FreeClassPage />
-  }
-
-  if (pathname === '/agenda-cheia') {
-    return <AgendaCheiaPage />
-  }
-
-  if (pathname === '/lash-lifting') {
-    return <LashLiftingPage />
-  }
+  }, [])
 
   return <SalesPage />
 }

@@ -9,6 +9,15 @@ const defaultOfferBonuses = [
   'Curso de Tráfego Pago para Lash',
 ]
 
+type OfferOption = {
+  badge?: string
+  checkoutUrl?: string
+  description: string
+  installment?: string
+  name: string
+  price: number
+}
+
 type OfferStackProps = {
   data?: typeof salesPageData
   copy?: {
@@ -33,6 +42,36 @@ export default function OfferStack({
   const [secondsLeft, setSecondsLeft] = useState(9 * 60 + 39)
   const bonusItems =
     copy.items ?? (isDefaultOffer ? defaultOfferBonuses : bonuses.map((bonus) => bonus.name))
+  const offerOptions: OfferOption[] = isDefaultOffer
+    ? [
+        {
+          description: 'Curso Cílios em 1 Hora com aulas práticas.',
+          installment: '5x de R$ 10,41',
+          name: 'Acesso essencial',
+          price: 47,
+        },
+        {
+          badge: 'Mais escolhido',
+          description: 'Curso + todos os bônus liberados no acesso.',
+          installment: '5x de R$ 14,82',
+          name: 'Acesso completo',
+          price: 67,
+        },
+        {
+          description: 'Curso + bônus + acompanhamento para aplicar com mais segurança.',
+          installment: '5x de R$ 21,90',
+          name: 'Acesso premium',
+          price: 97,
+        },
+      ]
+    : [
+        {
+          description: product.headline,
+          installment: installmentText,
+          name: product.name,
+          price: finalPrice,
+        },
+      ]
 
   useEffect(() => {
     const interval = window.setInterval(() => {
@@ -47,12 +86,12 @@ export default function OfferStack({
     '0',
   )}:${String(secondsLeft % 60).padStart(2, '0')}`
 
-  function handleCheckoutClick() {
+  function handleCheckoutClick(value = finalPrice, offerName = product.name) {
     trackMetaEvent('InitiateCheckout', {
       customData: {
-        content_name: product.name,
+        content_name: offerName,
         currency: 'BRL',
-        value: finalPrice,
+        value,
       },
     })
   }
@@ -263,6 +302,97 @@ export default function OfferStack({
           margin-top: 4px;
         }
 
+        #offer-stack .offer-options {
+          display: grid;
+          gap: 12px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          margin-top: 22px;
+        }
+
+        #offer-stack .offer-option {
+          background: rgba(255, 252, 246, 0.045);
+          border: 1px solid rgba(228, 202, 136, 0.2);
+          border-radius: 10px;
+          color: #EFE4D2;
+          display: flex;
+          flex-direction: column;
+          min-height: 198px;
+          padding: 16px;
+          position: relative;
+          text-decoration: none;
+          transition:
+            background 120ms ease,
+            border-color 120ms ease,
+            transform 120ms ease;
+        }
+
+        #offer-stack .offer-option:hover {
+          background: rgba(255, 252, 246, 0.07);
+          border-color: rgba(228, 202, 136, 0.44);
+          transform: translateY(-1px);
+        }
+
+        #offer-stack .offer-option.is-featured {
+          background:
+            linear-gradient(180deg, rgba(228, 202, 136, 0.16), rgba(255, 252, 246, 0.045)),
+            rgba(255, 252, 246, 0.045);
+          border-color: rgba(228, 202, 136, 0.54);
+        }
+
+        #offer-stack .offer-option-badge {
+          align-self: flex-start;
+          background: #D4B873;
+          border-radius: 999px;
+          color: #1B1814;
+          font-size: 10px;
+          font-weight: 900;
+          letter-spacing: 0.08em;
+          margin-bottom: 12px;
+          padding: 5px 9px;
+          text-transform: uppercase;
+        }
+
+        #offer-stack .offer-option-name {
+          color: #FFF8EC;
+          font-size: 15px;
+          font-weight: 800;
+          line-height: 1.25;
+        }
+
+        #offer-stack .offer-option-description {
+          color: rgba(255, 248, 236, 0.56);
+          font-size: 12px;
+          line-height: 1.45;
+          margin-top: 8px;
+        }
+
+        #offer-stack .offer-option-price {
+          color: #D4B873;
+          font-family: var(--font-display);
+          font-size: 34px;
+          font-weight: 700;
+          line-height: 1;
+          margin-top: auto;
+          padding-top: 18px;
+        }
+
+        #offer-stack .offer-option-installment {
+          color: rgba(255, 248, 236, 0.48);
+          font-size: 11px;
+          font-weight: 700;
+          line-height: 1.35;
+          margin-top: 5px;
+        }
+
+        #offer-stack .offer-option-action {
+          color: #FFF8EC;
+          font-size: 11px;
+          font-weight: 900;
+          letter-spacing: 0.08em;
+          margin-top: 14px;
+          text-transform: uppercase;
+        }
+
         #offer-stack .offer-cta {
           align-items: center;
           background:
@@ -383,6 +513,14 @@ export default function OfferStack({
             font-size: 42px;
           }
 
+          #offer-stack .offer-options {
+            grid-template-columns: 1fr;
+          }
+
+          #offer-stack .offer-option {
+            min-height: auto;
+          }
+
           #offer-stack .offer-cta {
             font-size: 12.5px;
             line-height: 1.35;
@@ -435,10 +573,36 @@ export default function OfferStack({
               {copy.note ?? '5x de R$ 10,41 ou R$ 47,00 à vista'}
             </div>
 
+            <div className="offer-options" aria-label="Escolha sua oferta">
+              {offerOptions.map((offer) => (
+                <a
+                  className={`offer-option${offer.badge ? ' is-featured' : ''}`}
+                  href={offer.checkoutUrl ?? product.checkoutUrl}
+                  key={offer.name}
+                  onClick={() => handleCheckoutClick(offer.price, offer.name)}
+                >
+                  {offer.badge && (
+                    <span className="offer-option-badge">{offer.badge}</span>
+                  )}
+                  <span className="offer-option-name">{offer.name}</span>
+                  <span className="offer-option-description">
+                    {offer.description}
+                  </span>
+                  <span className="offer-option-price">R${offer.price},00</span>
+                  {offer.installment && (
+                    <span className="offer-option-installment">
+                      {offer.installment}
+                    </span>
+                  )}
+                  <span className="offer-option-action">Escolher oferta</span>
+                </a>
+              ))}
+            </div>
+
             <a
               className="offer-cta"
               href={product.checkoutUrl}
-              onClick={handleCheckoutClick}
+              onClick={() => handleCheckoutClick()}
             >
               {copy.cta ?? `Garantir meu acesso por R$${finalPrice},00`}
             </a>
