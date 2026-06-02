@@ -8,30 +8,23 @@
     <link
       rel="preload"
       as="image"
-      href="/images/evelyn-senna-1086.webp"
-      imagesrcset="/images/evelyn-senna-720.webp 720w, /images/evelyn-senna-1086.webp 1086w"
-      imagesizes="(max-width: 767px) 100vw, 46vw"
+      href="/images/evelyn-senna-640.webp"
+      imagesrcset="/images/evelyn-senna-640.webp 640w, /images/evelyn-senna-720.webp 720w, /images/evelyn-senna-1086.webp 1086w"
+      imagesizes="(max-width: 767px) calc(100vw - 40px), 46vw"
       type="image/webp"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
     <link
-      rel="preload"
-      as="style"
+      rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
+      media="print"
+      onload="this.media='all'"
     >
     <noscript>
       <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     </noscript>
-    <script
-      src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-      data-utmify-prevent-xcod-sck
-      data-utmify-prevent-subids
-      async
-      defer
-    ></script>
   </head>
   <body>
     <div id="root"></div>
@@ -39,16 +32,53 @@
     <!-- Meta Pixel Code -->
     <script>
       (function () {
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
+        if (!window.fbq) {
+          var fbq = window.fbq = function () {
+            fbq.callMethod
+              ? fbq.callMethod.apply(fbq, arguments)
+              : fbq.queue.push(arguments);
+          };
+          if (!window._fbq) {
+            window._fbq = fbq;
+          }
+          fbq.push = fbq;
+          fbq.loaded = true;
+          fbq.version = '2.0';
+          fbq.queue = [];
+        }
+
+        function runWhenIdle(callback) {
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(callback, { timeout: 2500 });
+            return;
+          }
+
+          window.setTimeout(callback, 1600);
+        }
+
+        function loadMetaPixel() {
+          if (document.getElementById('meta-pixel-script')) {
+            return;
+          }
+
+          var script = document.createElement('script');
+          script.id = 'meta-pixel-script';
+          script.async = true;
+          script.src = 'https://connect.facebook.net/en_US/fbevents.js';
+          document.head.appendChild(script);
+        }
+
         fbq('init', '615875597485992');
         fbq('init', '2565910040494373');
+
+        if (document.readyState === 'complete') {
+          runWhenIdle(loadMetaPixel);
+          return;
+        }
+
+        window.addEventListener('load', function () {
+          runWhenIdle(loadMetaPixel);
+        }, { once: true });
       })();
     </script>
     <!-- End Meta Pixel Code -->
@@ -58,6 +88,46 @@
       <img height="1" width="1" style="display:none"
       src="https://www.facebook.com/tr?id=2565910040494373&ev=PageView&noscript=1"/>
     </noscript>
+    <script>
+      (function () {
+        function runWhenIdle(callback) {
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(callback, { timeout: 2200 });
+            return;
+          }
+
+          window.setTimeout(callback, 1200);
+        }
+
+        function loadUtmify() {
+          if (document.getElementById('utmify-script')) {
+            return;
+          }
+
+          var script = document.createElement('script');
+          script.id = 'utmify-script';
+          script.src = 'https://cdn.utmify.com.br/scripts/utms/latest.js';
+          script.async = true;
+          script.defer = true;
+          script.setAttribute('data-utmify-prevent-xcod-sck', '');
+          script.setAttribute('data-utmify-prevent-subids', '');
+          document.head.appendChild(script);
+        }
+
+        function scheduleUtmify() {
+          runWhenIdle(loadUtmify);
+        }
+
+        if (document.readyState === 'complete') {
+          scheduleUtmify();
+        } else {
+          window.addEventListener('load', scheduleUtmify, { once: true });
+        }
+
+        window.addEventListener('pointerdown', loadUtmify, { once: true, passive: true });
+        window.addEventListener('touchstart', loadUtmify, { once: true, passive: true });
+      })();
+    </script>
     <script>
       (function () {
         var buyerNames = [
@@ -205,12 +275,23 @@
           });
         }
 
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', bootSocialProof, { once: true });
+        function runWhenIdle(callback) {
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(callback, { timeout: 3000 });
+            return;
+          }
+
+          window.setTimeout(callback, 1800);
+        }
+
+        if (document.readyState !== 'complete') {
+          window.addEventListener('load', function () {
+            runWhenIdle(bootSocialProof);
+          }, { once: true });
           return;
         }
 
-        bootSocialProof();
+        runWhenIdle(bootSocialProof);
       })();
     </script>
   </body>

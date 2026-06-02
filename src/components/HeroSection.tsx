@@ -30,9 +30,9 @@ export default function HeroSection({
   const heroImage = {
     src: creator.photoHero,
     srcSet: isDefaultHeroImage
-      ? '/images/evelyn-senna-720.webp 720w, /images/evelyn-senna-1086.webp 1086w'
+      ? '/images/evelyn-senna-640.webp 640w, /images/evelyn-senna-720.webp 720w, /images/evelyn-senna-1086.webp 1086w'
       : `${creator.photoHero} 1448w`,
-    sizes: '(max-width: 767px) 100vw, 46vw',
+    sizes: '(max-width: 767px) calc(100vw - 40px), 46vw',
     width: isDefaultHeroImage ? 1086 : 1448,
     height: isDefaultHeroImage ? 1448 : 1086,
   }
