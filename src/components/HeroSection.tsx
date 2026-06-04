@@ -38,6 +38,14 @@ export default function HeroSection({
   }
 
   function handleHeroCtaClick(event: MouseEvent<HTMLAnchorElement>) {
+    if (typeof window.fbq !== 'undefined') {
+      window.fbq('track', 'ViewContent', {
+        content_name: 'Cilios em 1 Hora',
+        value: 47.00,
+        currency: 'BRL',
+      }, { eventID: crypto.randomUUID() })
+    }
+
     event.preventDefault()
 
     const targetId = 'offer-coupon-area'
