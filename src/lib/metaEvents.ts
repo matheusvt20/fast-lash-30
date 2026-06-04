@@ -79,6 +79,20 @@ function readCookie(name: string) {
   return cookie ? decodeURIComponent(cookie.slice(name.length + 1)) : undefined
 }
 
+function getFbp() {
+  const cookies = document.cookie.split(';')
+
+  for (const cookie of cookies) {
+    const [key, value] = cookie.trim().split('=')
+
+    if (key === '_fbp') {
+      return value
+    }
+  }
+
+  return null
+}
+
 function getFbcFromUrl() {
   if (typeof window === 'undefined') {
     return undefined
@@ -136,7 +150,7 @@ export function trackMetaEvent(
   const userData = options.userData ?? {}
   const pixelMethod = options.pixelMethod ?? 'track'
   const shouldDelayServerCookieRead = eventName === 'PageView'
-  const initialFbp = shouldDelayServerCookieRead ? undefined : readCookie('_fbp')
+  const initialFbp = shouldDelayServerCookieRead ? null : getFbp()
   const fbc = readCookie('_fbc') ?? getFbcFromUrl()
   const testEventCode = getTestEventCode()
 
@@ -149,7 +163,7 @@ export function trackMetaEvent(
       await new Promise((resolve) => setTimeout(resolve, 300))
     }
 
-    const fbp = shouldDelayServerCookieRead ? readCookie('_fbp') : initialFbp
+    const fbp = shouldDelayServerCookieRead ? getFbp() : initialFbp
 
     sendCapiEvent({
       custom_data: customData,

@@ -66,7 +66,7 @@ async function buildUserData(request, body) {
     em: await sha256(userData.email ?? userData.em),
     external_id: await sha256(userData.external_id),
     fbc: body.fbc ?? userData.fbc,
-    fbp: body.fbp ?? userData.fbp,
+    fbp: body.fbp ?? userData.fbp ?? undefined,
     fn: await sha256(userData.first_name ?? userData.fn),
     ln: await sha256(userData.last_name ?? userData.ln),
     ph: await sha256(userData.phone ?? userData.ph),
