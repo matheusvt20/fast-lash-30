@@ -140,7 +140,7 @@ export function trackMetaEvent(
   const fbc = readCookie('_fbc') ?? getFbcFromUrl()
   const testEventCode = getTestEventCode()
 
-  void getServerEventId(eventName).then(async (eventId) => {
+  async function dispatchEvent(eventId: string) {
     if (typeof window.fbq === 'function') {
       window.fbq(pixelMethod, eventName, customData, { eventID: eventId })
     }
@@ -161,5 +161,12 @@ export function trackMetaEvent(
       test_event_code: testEventCode,
       user_data: userData,
     })
-  })
+  }
+
+  if (eventName === 'ViewContent') {
+    void getServerEventId(eventName).then(dispatchEvent)
+    return
+  }
+
+  void dispatchEvent(createBrowserEventId())
 }
