@@ -17,6 +17,7 @@ const ProductSection = lazy(() => import('./components/ProductSection'))
 const ResultsCarousel = lazy(() => import('./components/ResultsCarousel'))
 const SocialProofBar = lazy(() => import('./components/SocialProofBar'))
 const SpeedMethodSection = lazy(() => import('./components/SpeedMethodSection'))
+const StudentReturnsMarquee = lazy(() => import('./components/StudentReturnsMarquee'))
 
 function SalesPageThemeOverrides() {
   return (
@@ -297,6 +298,9 @@ function SalesPage() {
       </LazySection>
       <LazySection minHeight={720} rootMargin="100px 0px">
         <ProblemSection />
+      </LazySection>
+      <LazySection minHeight={760} rootMargin="100px 0px">
+        <StudentReturnsMarquee />
       </LazySection>
       <LazySection minHeight={760} rootMargin="100px 0px">
         <CreatorSection />
