@@ -221,10 +221,6 @@ export default function ResultsCarousel({
               title
             )}
           </h2>
-          <p className="results-subtitle">
-            {copy.subtitle ??
-              'Cada par de cílios aplicado com o método Cílios em 53 Minutos'}
-          </p>
         </div>
 
         <div className="results-marquee" aria-label="Galeria de resultados">

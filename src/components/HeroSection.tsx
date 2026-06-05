@@ -1,5 +1,3 @@
-import type { MouseEvent } from 'react'
-
 import { salesPageData } from '../data/salesPageData'
 
 type HeroSectionProps = {
@@ -37,41 +35,6 @@ export default function HeroSection({
     height: isDefaultHeroImage ? 1448 : 1086,
   }
 
-  function handleHeroCtaClick(event: MouseEvent<HTMLAnchorElement>) {
-    if (typeof window.fbq !== 'undefined') {
-      window.fbq('track', 'ViewContent', {
-        content_name: 'Cilios em 1 Hora',
-        value: 47.00,
-        currency: 'BRL',
-      }, { eventID: crypto.randomUUID() })
-    }
-
-    event.preventDefault()
-
-    const targetId = 'offer-coupon-area'
-    const offsets = [0, 120, 360, 760, 1250]
-
-    offsets.forEach((delay, index) => {
-      window.setTimeout(() => {
-        const target = document.getElementById(targetId)
-
-        if (!target) {
-          window.location.hash = targetId
-          return
-        }
-
-        const top = target.getBoundingClientRect().top + window.scrollY - 12
-
-        window.scrollTo({
-          behavior: index === 0 ? 'smooth' : 'auto',
-          top,
-        })
-      }, delay)
-    })
-
-    window.history.replaceState(null, '', `#${targetId}`)
-  }
-
   return (
     <section
       id="hero-section"
@@ -93,28 +56,6 @@ export default function HeroSection({
           />
           <p className="hero-subheadline">{product.subheadline}</p>
 
-          <div className="hero-actions">
-            <a
-              className="hero-button hero-button-primary"
-              href="#offer-coupon-area"
-              onClick={handleHeroCtaClick}
-            >
-              <span className="hero-button-label">
-                {copy.buttonLabel ?? 'Inscreva-se agora'}
-              </span>
-              <span className="hero-button-arrow" aria-hidden="true">
-                →
-              </span>
-            </a>
-            <span className="hero-price">
-                {copy.priceText ?? (
-                  <>
-                    5x de R$ 10,41 ou <strong>R$ 47,00 à vista</strong>
-                  </>
-                )}
-            </span>
-            <span className="hero-trust">Acesso imediato e 100% seguro</span>
-          </div>
         </div>
 
         <div className="hero-media">

@@ -1,3 +1,5 @@
+import type { MouseEvent } from 'react'
+
 type StudentReturn = {
   src: string
   width: number
@@ -40,6 +42,27 @@ const returns: StudentReturn[] = [
 
 export default function StudentReturnsMarquee() {
   const loopedReturns = [...returns, ...returns]
+
+  function handleStudentReturnsCtaClick(event: MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault()
+
+    const targetId = 'product-section'
+    const target = document.getElementById(targetId)
+
+    if (!target) {
+      window.location.hash = targetId
+      return
+    }
+
+    const top = target.getBoundingClientRect().top + window.scrollY - 12
+
+    window.scrollTo({
+      behavior: 'smooth',
+      top,
+    })
+
+    window.history.replaceState(null, '', `#${targetId}`)
+  }
 
   return (
     <section id="student-returns-section">
@@ -90,6 +113,97 @@ export default function StudentReturnsMarquee() {
 
         #student-returns-section .student-returns-marquee {
           overflow: hidden;
+        }
+
+        #student-returns-section .student-returns-actions {
+          align-items: center;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin: 34px auto 0;
+          max-width: 584px;
+          padding: 0 24px;
+        }
+
+        #student-returns-section .student-returns-cta {
+          align-items: center;
+          background:
+            linear-gradient(180deg, rgba(255, 252, 242, 0.34), rgba(255, 252, 242, 0) 52%),
+            linear-gradient(135deg, #A88445 0%, #D5BD78 48%, #9C7435 100%);
+          border: 1px solid rgba(213, 189, 120, 0.32);
+          border-radius: 12px;
+          box-shadow:
+            0 18px 34px rgba(0, 0, 0, 0.26),
+            0 0 24px rgba(213, 189, 120, 0.06),
+            inset 0 1px 0 rgba(255, 255, 255, 0.58),
+            inset 0 -1px 0 rgba(85, 54, 14, 0.14);
+          color: #211A11;
+          display: inline-flex;
+          font-size: 14px;
+          font-weight: 500;
+          gap: 10px;
+          justify-content: center;
+          min-height: 50px;
+          min-width: 292px;
+          padding: 14px 30px;
+          text-align: center;
+          text-decoration: none;
+          transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+        }
+
+        #student-returns-section .student-returns-cta:hover {
+          filter: saturate(1.04);
+          transform: translateY(-1px);
+        }
+
+        #student-returns-section .student-returns-cta-label {
+          font-size: 14.5px;
+          font-weight: 700;
+          letter-spacing: 0.02em;
+          line-height: 1.2;
+        }
+
+        #student-returns-section .student-returns-cta-arrow {
+          font-size: 16px;
+          line-height: 1;
+        }
+
+        #student-returns-section .student-returns-price {
+          align-items: center;
+          color: rgba(255, 248, 236, 0.72);
+          display: inline-flex;
+          font-size: 13px;
+          font-weight: 600;
+          gap: 8px;
+          line-height: 1.4;
+          padding-left: 4px;
+        }
+
+        #student-returns-section .student-returns-price::before {
+          align-items: center;
+          background: rgba(200, 169, 103, 0.08);
+          border: 1px solid rgba(200, 169, 103, 0.2);
+          border-radius: 999px;
+          color: #C8A967;
+          content: '✓';
+          display: inline-flex;
+          font-size: 9px;
+          height: 17px;
+          justify-content: center;
+          width: 17px;
+        }
+
+        #student-returns-section .student-returns-price strong {
+          color: #FFF8EC;
+          font-weight: 800;
+        }
+
+        #student-returns-section .student-returns-trust {
+          color: rgba(255, 248, 236, 0.54);
+          font-size: 11.5px;
+          font-weight: 500;
+          line-height: 1.4;
+          padding-left: 30px;
         }
 
         #student-returns-section .student-returns-track {
@@ -170,6 +284,22 @@ export default function StudentReturnsMarquee() {
           #student-returns-section .student-return-image {
             height: 430px;
           }
+
+          #student-returns-section .student-returns-actions {
+            align-items: stretch;
+            margin-top: 28px;
+          }
+
+          #student-returns-section .student-returns-cta {
+            min-width: 0;
+            width: 100%;
+          }
+
+          #student-returns-section .student-returns-price {
+            align-items: flex-start;
+            flex-wrap: wrap;
+            font-size: 13px;
+          }
         }
       `}</style>
 
@@ -180,10 +310,6 @@ export default function StudentReturnsMarquee() {
         <h2 className="student-returns-title">
           Antes levava quase 3 horas. Agora elas voltam contando outro tempo.
         </h2>
-        <p className="student-returns-subtitle">
-          Alunas que colocaram a sequência em prática e sentiram diferença no
-          ritmo, no cansaço e na segurança durante cada atendimento.
-        </p>
       </div>
 
       <div className="student-returns-marquee" aria-label="Conversas de alunas">
@@ -202,6 +328,25 @@ export default function StudentReturnsMarquee() {
             </figure>
           ))}
         </div>
+      </div>
+
+      <div className="student-returns-actions">
+        <a
+          className="student-returns-cta"
+          href="#product-section"
+          onClick={handleStudentReturnsCtaClick}
+        >
+          <span className="student-returns-cta-label">Inscreva-se agora</span>
+          <span className="student-returns-cta-arrow" aria-hidden="true">
+            →
+          </span>
+        </a>
+        <span className="student-returns-price">
+          5x de R$ 10,41 ou <strong>R$ 47,00 à vista</strong>
+        </span>
+        <span className="student-returns-trust">
+          Acesso imediato e 100% seguro
+        </span>
       </div>
     </section>
   )

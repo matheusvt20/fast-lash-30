@@ -302,9 +302,6 @@ function SalesPage() {
       <LazySection minHeight={760} rootMargin="100px 0px">
         <StudentReturnsMarquee />
       </LazySection>
-      <LazySection minHeight={760} rootMargin="100px 0px">
-        <CreatorSection />
-      </LazySection>
       <LazySection minHeight={780} rootMargin="100px 0px">
         <ProductSection />
       </LazySection>
@@ -319,6 +316,9 @@ function SalesPage() {
           <OfferStack />
         </LazySection>
       </div>
+      <LazySection minHeight={760} rootMargin="100px 0px">
+        <CreatorSection />
+      </LazySection>
       <LazySection minHeight={760} rootMargin="0px 0px">
         <BonusSection />
       </LazySection>
