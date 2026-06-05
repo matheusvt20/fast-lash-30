@@ -46,7 +46,7 @@ export default function StudentReturnsMarquee() {
   function handleStudentReturnsCtaClick(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault()
 
-    const targetId = 'product-section'
+    const targetId = 'offer-coupon-area'
     const target = document.getElementById(targetId)
 
     if (!target) {
@@ -170,10 +170,10 @@ export default function StudentReturnsMarquee() {
 
         #student-returns-section .student-returns-price {
           align-items: center;
-          color: rgba(255, 248, 236, 0.72);
+          color: #4F4941;
           display: inline-flex;
           font-size: 13px;
-          font-weight: 600;
+          font-weight: 700;
           gap: 8px;
           line-height: 1.4;
           padding-left: 4px;
@@ -181,10 +181,10 @@ export default function StudentReturnsMarquee() {
 
         #student-returns-section .student-returns-price::before {
           align-items: center;
-          background: rgba(200, 169, 103, 0.08);
-          border: 1px solid rgba(200, 169, 103, 0.2);
+          background: rgba(184, 141, 69, 0.12);
+          border: 1px solid rgba(184, 141, 69, 0.34);
           border-radius: 999px;
-          color: #C8A967;
+          color: #9C7435;
           content: '✓';
           display: inline-flex;
           font-size: 9px;
@@ -194,14 +194,14 @@ export default function StudentReturnsMarquee() {
         }
 
         #student-returns-section .student-returns-price strong {
-          color: #FFF8EC;
+          color: #1F1A14;
           font-weight: 800;
         }
 
         #student-returns-section .student-returns-trust {
-          color: rgba(255, 248, 236, 0.54);
+          color: #6F675E;
           font-size: 11.5px;
-          font-weight: 500;
+          font-weight: 600;
           line-height: 1.4;
           padding-left: 30px;
         }
@@ -333,7 +333,7 @@ export default function StudentReturnsMarquee() {
       <div className="student-returns-actions">
         <a
           className="student-returns-cta"
-          href="#product-section"
+          href="#offer-coupon-area"
           onClick={handleStudentReturnsCtaClick}
         >
           <span className="student-returns-cta-label">Inscreva-se agora</span>
