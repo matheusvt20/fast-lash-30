@@ -122,8 +122,7 @@ export default function ProblemSection({ copy = {} }: ProblemSectionProps) {
               {copy.badge ?? 'Você se identifica?'}
             </div>
             <h2 className="problem-title">
-              {copy.title ??
-                'Sua agenda está cheia — mas seus atendimentos ainda demoram demais.'}
+              {copy.title ?? 'Seus atendimentos ainda demoram demais?'}
             </h2>
 
             <div className="problem-list">
