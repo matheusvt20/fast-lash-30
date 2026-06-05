@@ -46,20 +46,35 @@ export default function StudentReturnsMarquee() {
   function handleStudentReturnsCtaClick(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault()
 
-    const targetId = 'offer-coupon-area'
-    const target = document.getElementById(targetId)
+    const targetId = 'offer-checkout-card'
+    const fallbackId = 'offer-coupon-area'
+    const startedAt = Date.now()
+    const maxDuration = 3600
 
-    if (!target) {
-      window.location.hash = targetId
-      return
+    function scrollToOfferCard(attempt = 0) {
+      const target =
+        document.getElementById(targetId) ??
+        document.getElementById(fallbackId)
+
+      if (!target) {
+        window.location.hash = targetId
+      } else {
+        const top = target.getBoundingClientRect().top + window.scrollY - 16
+
+        window.scrollTo({
+          behavior: attempt === 0 ? 'smooth' : 'auto',
+          top,
+        })
+      }
+
+      const isStillSettling = Date.now() - startedAt < maxDuration
+
+      if (isStillSettling) {
+        window.setTimeout(() => scrollToOfferCard(attempt + 1), 220)
+      }
     }
 
-    const top = target.getBoundingClientRect().top + window.scrollY - 12
-
-    window.scrollTo({
-      behavior: 'smooth',
-      top,
-    })
+    scrollToOfferCard()
 
     window.history.replaceState(null, '', `#${targetId}`)
   }
@@ -112,7 +127,15 @@ export default function StudentReturnsMarquee() {
         }
 
         #student-returns-section .student-returns-marquee {
-          overflow: hidden;
+          -webkit-overflow-scrolling: touch;
+          overflow-x: auto;
+          overflow-y: hidden;
+          scrollbar-width: none;
+          touch-action: pan-x;
+        }
+
+        #student-returns-section .student-returns-marquee::-webkit-scrollbar {
+          display: none;
         }
 
         #student-returns-section .student-returns-actions {
@@ -228,6 +251,7 @@ export default function StudentReturnsMarquee() {
           margin: 0;
           overflow: hidden;
           padding: 8px;
+          scroll-snap-align: start;
         }
 
         #student-returns-section .student-return-image {
@@ -235,6 +259,7 @@ export default function StudentReturnsMarquee() {
           display: block;
           height: 560px;
           object-fit: cover;
+          user-select: none;
           width: auto;
         }
 
@@ -271,9 +296,15 @@ export default function StudentReturnsMarquee() {
             font-size: 15px;
           }
 
+          #student-returns-section .student-returns-marquee {
+            scroll-padding-left: 24px;
+            scroll-snap-type: x proximity;
+          }
+
           #student-returns-section .student-returns-track {
-            animation-duration: 58s;
+            animation: none;
             gap: 12px;
+            padding: 0 24px 2px;
           }
 
           #student-returns-section .student-return-card {
@@ -333,7 +364,7 @@ export default function StudentReturnsMarquee() {
       <div className="student-returns-actions">
         <a
           className="student-returns-cta"
-          href="#offer-coupon-area"
+          href="#offer-checkout-card"
           onClick={handleStudentReturnsCtaClick}
         >
           <span className="student-returns-cta-label">Inscreva-se agora</span>
