@@ -287,48 +287,48 @@ function SalesPage() {
   return (
     <main>
       <HeroSection />
-      <LazySection minHeight={760} rootMargin="100px 0px">
+      <LazySection minHeight={760}>
         <SpeedMethodSection />
       </LazySection>
-      <LazySection minHeight={700} rootMargin="100px 0px">
+      <LazySection minHeight={700}>
         <ResultsCarousel />
       </LazySection>
-      <LazySection minHeight={140} rootMargin="100px 0px">
+      <LazySection minHeight={140}>
         <SocialProofBar />
       </LazySection>
-      <LazySection minHeight={720} rootMargin="100px 0px">
+      <LazySection minHeight={720}>
         <ProblemSection />
       </LazySection>
-      <LazySection minHeight={760} rootMargin="100px 0px">
+      <LazySection minHeight={760}>
         <StudentReturnsMarquee />
       </LazySection>
-      <LazySection minHeight={780} rootMargin="100px 0px">
+      <LazySection minHeight={780}>
         <ProductSection />
       </LazySection>
-      <LazySection minHeight={640} rootMargin="100px 0px">
+      <LazySection minHeight={640}>
         <BenefitsGrid />
       </LazySection>
-      <LazySection minHeight={720} rootMargin="100px 0px">
+      <LazySection minHeight={720}>
         <ForWhoSection />
       </LazySection>
       <div id="offer-coupon-area" style={{ scrollMarginTop: 24 }}>
-        <LazySection minHeight={820} rootMargin="100px 0px">
+        <LazySection minHeight={820}>
           <OfferStack />
         </LazySection>
       </div>
-      <LazySection minHeight={760} rootMargin="100px 0px">
+      <LazySection minHeight={760}>
         <CreatorSection />
       </LazySection>
-      <LazySection minHeight={760} rootMargin="0px 0px">
+      <LazySection minHeight={760}>
         <BonusSection />
       </LazySection>
-      <LazySection minHeight={440} rootMargin="0px 0px">
+      <LazySection minHeight={440}>
         <GuaranteeSection />
       </LazySection>
-      <LazySection minHeight={620} rootMargin="0px 0px">
+      <LazySection minHeight={620}>
         <FAQAccordion />
       </LazySection>
-      <LazySection minHeight={540} rootMargin="0px 0px">
+      <LazySection minHeight={540}>
         <FinalCTA />
       </LazySection>
       <SalesPageThemeOverrides />
