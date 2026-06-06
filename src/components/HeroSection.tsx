@@ -56,6 +56,25 @@ export default function HeroSection({
           />
           <p className="hero-subheadline">{product.subheadline}</p>
 
+          <div className="hero-actions">
+            <a className="hero-button hero-button-primary" href="#offer-checkout-card">
+              <span className="hero-button-label">
+                {copy.buttonLabel ?? 'Quero garantir meu acesso'}
+              </span>
+              <span className="hero-button-arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
+            <span className="hero-price">
+              {copy.priceText ?? (
+                <>
+                  5x de R$ 10,41 ou <strong>R$ 47,00 à vista</strong>
+                </>
+              )}
+            </span>
+            <span className="hero-trust">Acesso imediato e compra 100% segura</span>
+          </div>
+
         </div>
 
         <div className="hero-media">
