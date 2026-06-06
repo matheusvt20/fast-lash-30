@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react'
 import { salesPageData } from '../data/salesPageData'
 
 type HeroSectionProps = {
@@ -35,6 +36,39 @@ export default function HeroSection({
     height: isDefaultHeroImage ? 1448 : 1086,
   }
 
+  function handleHeroCtaClick(event: MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault()
+
+    const targetId = 'offer-checkout-card'
+    const fallbackId = 'offer-coupon-area'
+    const startedAt = Date.now()
+    const maxDuration = 3600
+
+    function scrollToOffer(attempt = 0) {
+      const target =
+        document.getElementById(targetId) ??
+        document.getElementById(fallbackId)
+
+      if (target) {
+        const top = target.getBoundingClientRect().top + window.scrollY - 16
+
+        window.scrollTo({
+          behavior: attempt === 0 ? 'smooth' : 'auto',
+          top,
+        })
+      } else {
+        window.location.hash = fallbackId
+      }
+
+      if (Date.now() - startedAt < maxDuration) {
+        window.setTimeout(() => scrollToOffer(attempt + 1), 220)
+      }
+    }
+
+    scrollToOffer()
+    window.history.replaceState(null, '', `#${targetId}`)
+  }
+
   return (
     <section
       id="hero-section"
@@ -57,7 +91,11 @@ export default function HeroSection({
           <p className="hero-subheadline">{product.subheadline}</p>
 
           <div className="hero-actions">
-            <a className="hero-button hero-button-primary" href="#offer-checkout-card">
+            <a
+              className="hero-button hero-button-primary"
+              href="#offer-coupon-area"
+              onClick={handleHeroCtaClick}
+            >
               <span className="hero-button-label">
                 {copy.buttonLabel ?? 'Quero garantir meu acesso'}
               </span>
