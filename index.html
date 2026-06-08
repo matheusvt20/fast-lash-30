@@ -24,6 +24,36 @@
     <noscript>
       <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
     </noscript>
+    <script>
+      (function () {
+        if (window.fbq) {
+          return;
+        }
+
+        var fbq = function () {
+          if (fbq.callMethod) {
+            fbq.callMethod.apply(fbq, arguments);
+            return;
+          }
+
+          fbq.queue.push(arguments);
+        };
+
+        if (!window._fbq) {
+          window._fbq = fbq;
+        }
+
+        fbq.push = fbq;
+        fbq.loaded = true;
+        fbq.version = '2.0';
+        fbq.queue = [];
+        window.fbq = fbq;
+
+        window.fbq('init', '615875597485992');
+        window.fbq('init', '2565910040494373');
+      })();
+    </script>
+    <script id="meta-pixel-script" src="https://connect.facebook.net/en_US/fbevents.js"></script>
   </head>
   <body>
     <div id="root"></div>
@@ -37,51 +67,6 @@
     <script>
       (function () {
         var thirdPartiesLoaded = false;
-        var metaPixelIds = ['615875597485992', '2565910040494373'];
-
-        function setupFbqQueue() {
-          if (window.fbq) {
-            return;
-          }
-
-          var fbq = function () {
-            if (fbq.callMethod) {
-              fbq.callMethod.apply(fbq, arguments);
-              return;
-            }
-
-            fbq.queue.push(arguments);
-          };
-
-          if (!window._fbq) {
-            window._fbq = fbq;
-          }
-
-          fbq.push = fbq;
-          fbq.loaded = true;
-          fbq.version = '2.0';
-          fbq.queue = [];
-          window.fbq = fbq;
-        }
-
-        function loadMetaPixel() {
-          if (document.getElementById('meta-pixel-script')) {
-            return;
-          }
-
-          setupFbqQueue();
-
-          var script = document.createElement('script');
-          script.id = 'meta-pixel-script';
-          script.src = 'https://connect.facebook.net/en_US/fbevents.js';
-          script.async = true;
-          script.onload = function () {
-            metaPixelIds.forEach(function (pixelId) {
-              window.fbq('init', pixelId);
-            });
-          };
-          document.head.appendChild(script);
-        }
 
         function loadUtmify() {
           if (document.getElementById('utmify-script')) {
@@ -104,7 +89,6 @@
           }
 
           thirdPartiesLoaded = true;
-          loadMetaPixel();
           loadUtmify();
         };
 
