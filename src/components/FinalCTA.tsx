@@ -1,3 +1,4 @@
+import { getCheckoutUrl } from '@/lib/checkoutUrl'
 import { salesPageData } from '../data/salesPageData'
 import { trackMetaEvent } from '../lib/metaEvents'
 
@@ -171,7 +172,7 @@ export default function FinalCTA({
 
         <a
           className="final-cta"
-          href={product.checkoutUrl}
+          href={getCheckoutUrl("https://pay.kiwify.com.br/6hqttVr")}
           onClick={handleCheckoutClick}
         >
           {copy.cta ?? 'Quero o Cílios em 1 Hora por R$47,00'}
