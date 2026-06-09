@@ -64,7 +64,7 @@ async function buildUserData(request, body) {
     country: await sha256(userData.country),
     ct: await sha256(userData.ct),
     em: await sha256(userData.email ?? userData.em),
-    external_id: await sha256(userData.external_id),
+    external_id: normalize(userData.external_id),
     fbc: body.fbc ?? userData.fbc,
     fbp: body.fbp ?? userData.fbp ?? undefined,
     fn: await sha256(userData.first_name ?? userData.fn),

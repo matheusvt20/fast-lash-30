@@ -93,6 +93,25 @@ function getFbp() {
   return null
 }
 
+async function sha256(value: string) {
+  if (typeof crypto === 'undefined' || !crypto.subtle) {
+    return undefined
+  }
+
+  const normalized = value.trim().toLowerCase()
+
+  if (!normalized) {
+    return undefined
+  }
+
+  const data = new TextEncoder().encode(normalized)
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+
+  return [...new Uint8Array(hashBuffer)]
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('')
+}
+
 function getFbcFromUrl() {
   if (typeof window === 'undefined') {
     return undefined
@@ -149,7 +168,8 @@ export function trackMetaEvent(
   const customData = options.customData ?? {}
   const userData = options.userData ?? {}
   const pixelMethod = options.pixelMethod ?? 'track'
-  const shouldDelayServerCookieRead = eventName === 'PageView'
+  const shouldDelayServerCookieRead =
+    eventName === 'PageView' || eventName === 'ViewContent'
   const initialFbp = shouldDelayServerCookieRead ? null : getFbp()
   const fbc = readCookie('_fbc') ?? getFbcFromUrl()
   const testEventCode = getTestEventCode()
@@ -164,6 +184,14 @@ export function trackMetaEvent(
     }
 
     const fbp = shouldDelayServerCookieRead ? getFbp() : initialFbp
+    const externalId = fbp ? await sha256(fbp) : undefined
+    const capiUserData = { ...userData }
+
+    delete capiUserData.external_id
+
+    if (externalId) {
+      capiUserData.external_id = externalId
+    }
 
     sendCapiEvent({
       custom_data: customData,
@@ -173,7 +201,7 @@ export function trackMetaEvent(
       fbc,
       fbp,
       test_event_code: testEventCode,
-      user_data: userData,
+      user_data: capiUserData,
     })
   }
 
