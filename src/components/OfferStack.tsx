@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { type MouseEvent, useEffect, useState } from 'react'
 import { getCheckoutUrl } from '@/lib/checkoutUrl'
 import { salesPageData } from '../data/salesPageData'
 import { trackMetaEvent } from '../lib/metaEvents'
@@ -32,6 +32,7 @@ export default function OfferStack({
   const finalPrice = product.price
   const installmentText = isDefaultOffer ? '5x de R$ 10,41' : '5x no cartão'
   const [secondsLeft, setSecondsLeft] = useState(9 * 60 + 39)
+  const checkoutBaseUrl = 'https://pay.kiwify.com.br/6hqttVr'
   const bonusItems =
     copy.items ?? (isDefaultOffer ? defaultOfferBonuses : bonuses.map((bonus) => bonus.name))
 
@@ -48,7 +49,14 @@ export default function OfferStack({
     '0',
   )}:${String(secondsLeft % 60).padStart(2, '0')}`
 
-  function handleCheckoutClick(value = finalPrice, offerName = product.name) {
+  function handleCheckoutClick(
+    event: MouseEvent<HTMLAnchorElement>,
+    value = finalPrice,
+    offerName = product.name,
+  ) {
+    event.preventDefault()
+    const checkoutUrl = getCheckoutUrl(checkoutBaseUrl)
+
     trackMetaEvent('InitiateCheckout', {
       customData: {
         content_name: offerName,
@@ -56,6 +64,10 @@ export default function OfferStack({
         value,
       },
     })
+
+    window.setTimeout(() => {
+      window.location.href = getCheckoutUrl(checkoutBaseUrl) || checkoutUrl
+    }, 300)
   }
 
   return (
@@ -438,8 +450,8 @@ export default function OfferStack({
 
             <a
               className="offer-cta"
-              href={getCheckoutUrl("https://pay.kiwify.com.br/6hqttVr")}
-              onClick={() => handleCheckoutClick()}
+              href={getCheckoutUrl(checkoutBaseUrl)}
+              onClick={handleCheckoutClick}
             >
               {copy.cta ?? `Garantir meu acesso por R$${finalPrice},00`}
             </a>

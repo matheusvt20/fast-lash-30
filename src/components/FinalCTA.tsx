@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react'
 import { getCheckoutUrl } from '@/lib/checkoutUrl'
 import { salesPageData } from '../data/salesPageData'
 import { trackMetaEvent } from '../lib/metaEvents'
@@ -17,6 +18,7 @@ export default function FinalCTA({
   copy = {},
 }: FinalCTAProps) {
   const { product } = data
+  const checkoutBaseUrl = 'https://pay.kiwify.com.br/6hqttVr'
   const bullets =
     copy.bullets ?? [
       '12 módulos + 7 bônus exclusivos',
@@ -24,7 +26,10 @@ export default function FinalCTA({
       '1 ano de acesso com pagamento anual',
     ]
 
-  function handleCheckoutClick() {
+  function handleCheckoutClick(event: MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault()
+    const checkoutUrl = getCheckoutUrl(checkoutBaseUrl)
+
     trackMetaEvent('InitiateCheckout', {
       customData: {
         content_name: product.name,
@@ -32,6 +37,10 @@ export default function FinalCTA({
         value: product.price,
       },
     })
+
+    window.setTimeout(() => {
+      window.location.href = getCheckoutUrl(checkoutBaseUrl) || checkoutUrl
+    }, 300)
   }
 
   return (
@@ -172,7 +181,7 @@ export default function FinalCTA({
 
         <a
           className="final-cta"
-          href={getCheckoutUrl("https://pay.kiwify.com.br/6hqttVr")}
+          href={getCheckoutUrl(checkoutBaseUrl)}
           onClick={handleCheckoutClick}
         >
           {copy.cta ?? 'Quero o Cílios em 1 Hora por R$47,00'}
