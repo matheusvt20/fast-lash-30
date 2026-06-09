@@ -39,7 +39,7 @@ export default function HeroSection({
   function handleHeroCtaClick(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault()
 
-    const targetId = 'offer-checkout'
+    const targetId = 'offer-checkout-card'
     const fallbackId = 'offer-coupon-area'
     const startedAt = Date.now()
     const maxDuration = 3600
@@ -104,7 +104,7 @@ export default function HeroSection({
           <div className="hero-actions">
             <a
               className="hero-button hero-button-primary"
-              href="#offer-checkout"
+              href="#offer-checkout-card"
               onClick={handleHeroCtaClick}
             >
               <span className="hero-button-label">

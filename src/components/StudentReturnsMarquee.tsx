@@ -46,7 +46,7 @@ export default function StudentReturnsMarquee() {
   function handleStudentReturnsCtaClick(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault()
 
-    const targetId = 'offer-checkout'
+    const targetId = 'offer-checkout-card'
     const fallbackId = 'offer-coupon-area'
     const startedAt = Date.now()
     const maxDuration = 3600
@@ -375,7 +375,7 @@ export default function StudentReturnsMarquee() {
       <div className="student-returns-actions">
         <a
           className="student-returns-cta"
-          href="#offer-checkout"
+          href="#offer-checkout-card"
           onClick={handleStudentReturnsCtaClick}
         >
           <span className="student-returns-cta-label">Inscreva-se agora</span>
