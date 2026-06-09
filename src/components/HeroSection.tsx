@@ -39,18 +39,29 @@ export default function HeroSection({
   function handleHeroCtaClick(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault()
 
-    const targetId = 'offer-checkout-card'
+    const targetId = 'offer-checkout'
     const fallbackId = 'offer-coupon-area'
     const startedAt = Date.now()
     const maxDuration = 3600
 
     function scrollToOffer(attempt = 0) {
-      const target =
-        document.getElementById(targetId) ??
-        document.getElementById(fallbackId)
+      const target = document.getElementById(targetId)
 
       if (target) {
         const top = target.getBoundingClientRect().top + window.scrollY - 16
+
+        window.scrollTo({
+          behavior: attempt === 0 ? 'smooth' : 'auto',
+          top,
+        })
+
+        return
+      }
+
+      const fallback = document.getElementById(fallbackId)
+
+      if (fallback) {
+        const top = fallback.getBoundingClientRect().top + window.scrollY - 16
 
         window.scrollTo({
           behavior: attempt === 0 ? 'smooth' : 'auto',
@@ -93,7 +104,7 @@ export default function HeroSection({
           <div className="hero-actions">
             <a
               className="hero-button hero-button-primary"
-              href="#offer-coupon-area"
+              href="#offer-checkout"
               onClick={handleHeroCtaClick}
             >
               <span className="hero-button-label">

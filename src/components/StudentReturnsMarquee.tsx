@@ -46,25 +46,36 @@ export default function StudentReturnsMarquee() {
   function handleStudentReturnsCtaClick(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault()
 
-    const targetId = 'offer-checkout-card'
+    const targetId = 'offer-checkout'
     const fallbackId = 'offer-coupon-area'
     const startedAt = Date.now()
     const maxDuration = 3600
 
     function scrollToOfferCard(attempt = 0) {
-      const target =
-        document.getElementById(targetId) ??
-        document.getElementById(fallbackId)
+      const target = document.getElementById(targetId)
 
-      if (!target) {
-        window.location.hash = targetId
-      } else {
+      if (target) {
         const top = target.getBoundingClientRect().top + window.scrollY - 16
 
         window.scrollTo({
           behavior: attempt === 0 ? 'smooth' : 'auto',
           top,
         })
+
+        return
+      }
+
+      const fallback = document.getElementById(fallbackId)
+
+      if (fallback) {
+        const top = fallback.getBoundingClientRect().top + window.scrollY - 16
+
+        window.scrollTo({
+          behavior: attempt === 0 ? 'smooth' : 'auto',
+          top,
+        })
+      } else {
+        window.location.hash = targetId
       }
 
       const isStillSettling = Date.now() - startedAt < maxDuration
@@ -364,7 +375,7 @@ export default function StudentReturnsMarquee() {
       <div className="student-returns-actions">
         <a
           className="student-returns-cta"
-          href="#offer-checkout-card"
+          href="#offer-checkout"
           onClick={handleStudentReturnsCtaClick}
         >
           <span className="student-returns-cta-label">Inscreva-se agora</span>
