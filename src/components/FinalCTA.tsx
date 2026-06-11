@@ -30,15 +30,15 @@ export default function FinalCTA({
     event.preventDefault()
     const checkoutUrl = getCheckoutUrl(checkoutBaseUrl)
 
-    trackMetaEvent('InitiateCheckout', {
-      customData: {
-        content_name: product.name,
-        currency: 'BRL',
-        value: product.price,
-      },
-    })
-
     window.setTimeout(() => {
+      trackMetaEvent('InitiateCheckout', {
+        customData: {
+          content_name: product.name,
+          currency: 'BRL',
+          value: product.price,
+        },
+      })
+
       window.location.href = getCheckoutUrl(checkoutBaseUrl) || checkoutUrl
     }, 300)
   }
