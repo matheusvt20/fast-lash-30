@@ -2,7 +2,7 @@ export const salesPageData = {
   product: {
     name: 'Cílios em 1 Hora',
     headline:
-      'Aprenda a fazer cílios em até 53 minutos — sem abrir mão da qualidade.',
+      'Aprenda a fazer cílios em até 53 minutos.',
     subheadline:
       'Domine uma técnica mais rápida, segura e lucrativa para atender mais clientes, cobrar melhor e entregar um resultado que faz sua cliente voltar.',
     price: 47,

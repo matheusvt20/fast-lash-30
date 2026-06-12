@@ -22,22 +22,26 @@ export default function HeroSection({
   data = salesPageData,
   copy = {},
 }: HeroSectionProps) {
-  const { product, creator } = data
+  const { product } = data
   const checkoutBaseUrl = 'https://pay.kiwify.com.br/6hqttVr'
+  const heroImages = [
+    {
+      alt: 'Resultado de extensão de cílios com aplicação em até 1 hora',
+      src: '/images/cilios-hero-1.png',
+    },
+    {
+      alt: 'Close de cílios alongados com acabamento profissional',
+      src: '/images/cilios-hero-2.png',
+    },
+    {
+      alt: 'Cílios volumosos aplicados em atendimento rápido',
+      src: '/images/cilios-hero-3.png',
+    },
+  ]
   const heroHeadline = product.headline.replace(
     'até 53 minutos',
     '<em>até 53 minutos</em>',
   )
-  const isDefaultHeroImage = creator.photoHero === salesPageData.creator.photoHero
-  const heroImage = {
-    src: creator.photoHero,
-    srcSet: isDefaultHeroImage
-      ? '/images/evelyn-senna-640.webp 640w, /images/evelyn-senna-720.webp 720w, /images/evelyn-senna-1086.webp 1086w'
-      : `${creator.photoHero} 1448w`,
-    sizes: '(max-width: 767px) calc(100vw - 40px), 46vw',
-    width: isDefaultHeroImage ? 1086 : 1448,
-    height: isDefaultHeroImage ? 1448 : 1086,
-  }
 
   function handleHeroCtaClick(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault()
@@ -64,13 +68,6 @@ export default function HeroSection({
 
       <div className="hero-layout">
         <div className="hero-copy">
-          <div className="hero-badge">
-            <span className="hero-badge-dot" aria-hidden="true">
-              ✦
-            </span>
-            <span>TREINAMENTO ONLINE PARA LASH DESIGNERS</span>
-          </div>
-
           <h1
             className="hero-headline"
             dangerouslySetInnerHTML={{ __html: heroHeadline }}
@@ -97,12 +94,29 @@ export default function HeroSection({
                 </>
               )}
             </span>
-            <span className="hero-trust">Acesso imediato e compra 100% segura</span>
           </div>
 
         </div>
 
         <div className="hero-media">
+          <div className="hero-image-frame">
+            <div className="hero-image-stack">
+              {heroImages.map((image, index) => (
+                <img
+                  className="hero-image"
+                  src={image.src}
+                  alt={index === 0 ? image.alt : ''}
+                  width={1122}
+                  height={1402}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  decoding={index === 0 ? 'sync' : 'async'}
+                  fetchPriority={index === 0 ? 'high' : 'auto'}
+                  key={`${image.src}-${index}`}
+                />
+              ))}
+            </div>
+          </div>
+
           <div className="hero-meta">
             <span className="hero-pill">
               {copy.primaryPill ?? '◷ ATENDIMENTO EM ATÉ 1H'}
@@ -110,33 +124,6 @@ export default function HeroSection({
             <span className="hero-pill">
               {copy.secondaryPill ?? '✦ RETENÇÃO 30+ DIAS'}
             </span>
-          </div>
-
-          <div className="hero-image-frame">
-            <img
-              className="hero-image"
-              src={heroImage.src}
-              srcSet={heroImage.srcSet}
-              sizes={heroImage.sizes}
-              alt={`Retrato de ${creator.name}`}
-              width={heroImage.width}
-              height={heroImage.height}
-              loading="eager"
-              decoding="sync"
-              fetchPriority="high"
-            />
-            <div className="hero-card">
-              <h2 className="hero-card-name">
-                {copy.cardName ?? creator.name}
-              </h2>
-              <div className="hero-card-product">
-                {copy.cardProduct ?? 'Cílios em 1 Hora'}
-              </div>
-              <p className="hero-card-copy">
-                {copy.cardCopy ??
-                  '+5.000 alunas formadas · Especialista em extensão de cílios'}
-              </p>
-            </div>
           </div>
         </div>
       </div>
