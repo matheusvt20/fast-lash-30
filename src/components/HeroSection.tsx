@@ -1,5 +1,7 @@
 import type { MouseEvent } from 'react'
 import { salesPageData } from '../data/salesPageData'
+import { getCheckoutUrl } from '../lib/checkoutUrl'
+import { trackMetaEvent } from '../lib/metaEvents'
 
 type HeroSectionProps = {
   data?: typeof salesPageData
@@ -21,6 +23,7 @@ export default function HeroSection({
   copy = {},
 }: HeroSectionProps) {
   const { product, creator } = data
+  const checkoutBaseUrl = 'https://pay.kiwify.com.br/6hqttVr'
   const heroHeadline = product.headline.replace(
     'até 53 minutos',
     '<em>até 53 minutos</em>',
@@ -38,46 +41,19 @@ export default function HeroSection({
 
   function handleHeroCtaClick(event: MouseEvent<HTMLAnchorElement>) {
     event.preventDefault()
+    const checkoutUrl = getCheckoutUrl(checkoutBaseUrl)
 
-    const targetId = 'offer-checkout-card'
-    const fallbackId = 'offer-coupon-area'
-    const startedAt = Date.now()
-    const maxDuration = 3600
+    trackMetaEvent('InitiateCheckout', {
+      customData: {
+        content_name: product.name,
+        currency: 'BRL',
+        value: product.price,
+      },
+    })
 
-    function scrollToOffer(attempt = 0) {
-      const target = document.getElementById(targetId)
-
-      if (target) {
-        const top = target.getBoundingClientRect().top + window.scrollY - 16
-
-        window.scrollTo({
-          behavior: attempt === 0 ? 'smooth' : 'auto',
-          top,
-        })
-
-        return
-      }
-
-      const fallback = document.getElementById(fallbackId)
-
-      if (fallback) {
-        const top = fallback.getBoundingClientRect().top + window.scrollY - 16
-
-        window.scrollTo({
-          behavior: attempt === 0 ? 'smooth' : 'auto',
-          top,
-        })
-      } else {
-        window.location.hash = fallbackId
-      }
-
-      if (Date.now() - startedAt < maxDuration) {
-        window.setTimeout(() => scrollToOffer(attempt + 1), 220)
-      }
-    }
-
-    scrollToOffer()
-    window.history.replaceState(null, '', `#${targetId}`)
+    window.setTimeout(() => {
+      window.location.href = getCheckoutUrl(checkoutBaseUrl) || checkoutUrl
+    }, 500)
   }
 
   return (
@@ -104,7 +80,7 @@ export default function HeroSection({
           <div className="hero-actions">
             <a
               className="hero-button hero-button-primary"
-              href="#offer-checkout-card"
+              href={getCheckoutUrl(checkoutBaseUrl)}
               onClick={handleHeroCtaClick}
             >
               <span className="hero-button-label">

@@ -57,17 +57,17 @@ export default function OfferStack({
     event.preventDefault()
     const checkoutUrl = getCheckoutUrl(checkoutBaseUrl)
 
-    window.setTimeout(() => {
-      trackMetaEvent('InitiateCheckout', {
-        customData: {
-          content_name: offerName,
-          currency: 'BRL',
-          value,
-        },
-      })
+    trackMetaEvent('InitiateCheckout', {
+      customData: {
+        content_name: offerName,
+        currency: 'BRL',
+        value,
+      },
+    })
 
+    window.setTimeout(() => {
       window.location.href = getCheckoutUrl(checkoutBaseUrl) || checkoutUrl
-    }, 300)
+    }, 500)
   }
 
   return (
